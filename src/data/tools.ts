@@ -1,6 +1,7 @@
 import { Item } from "./types";
 
 export const tools: Item[] = [
+  // Images
   {
     id: "image-compressor",
     title: "Image Compressor",
@@ -9,6 +10,7 @@ export const tools: Item[] = [
     href: "/tools/image/compressor",
     icon: "ImageMinus",
     isPopular: true,
+    status: "active",
   },
   {
     id: "image-resizer",
@@ -18,7 +20,28 @@ export const tools: Item[] = [
     href: "/tools/image/resizer",
     icon: "Maximize",
     isPopular: true,
+    status: "active",
   },
+  {
+    id: "image-converter",
+    title: "Image Converter",
+    description: "Convert images between JPG, PNG, and WebP.",
+    category: "Images",
+    href: "/tools/image/converter",
+    icon: "Image",
+    status: "active",
+  },
+  {
+    id: "image-cropper",
+    title: "Image Cropper",
+    description: "Crop images to preset or custom ratios.",
+    category: "Images",
+    href: "/tools/image/cropper",
+    icon: "Image",
+    status: "coming-soon",
+  },
+
+  // Text
   {
     id: "word-counter",
     title: "Word Counter",
@@ -27,6 +50,7 @@ export const tools: Item[] = [
     href: "/tools/text/word-counter",
     icon: "Type",
     isPopular: true,
+    status: "active",
   },
   {
     id: "case-converter",
@@ -36,7 +60,28 @@ export const tools: Item[] = [
     href: "/tools/text/case-converter",
     icon: "CaseSensitive",
     isPopular: true,
+    status: "active",
   },
+  {
+    id: "remove-spaces",
+    title: "Remove Extra Spaces",
+    description: "Clean up text by removing extra spaces and empty lines.",
+    category: "Text",
+    href: "/tools/text/remove-spaces",
+    icon: "Type",
+    status: "active",
+  },
+  {
+    id: "slug-generator",
+    title: "Slug Generator",
+    description: "Convert any text into a URL-friendly slug.",
+    category: "Text",
+    href: "/tools/text/slug-generator",
+    icon: "Type",
+    status: "active",
+  },
+
+  // Developer
   {
     id: "json-formatter",
     title: "JSON Formatter",
@@ -45,5 +90,62 @@ export const tools: Item[] = [
     href: "/tools/developer/json-formatter",
     icon: "Braces",
     isPopular: true,
+    status: "active",
+  },
+  {
+    id: "base64",
+    title: "Base64 Encoder/Decoder",
+    description: "Encode text to Base64 or decode Base64 back to text.",
+    category: "Developer",
+    href: "/tools/developer/base64",
+    icon: "Code",
+    status: "active",
+  },
+  {
+    id: "url-encoder",
+    title: "URL Encoder/Decoder",
+    description: "Safely encode or decode URL components.",
+    category: "Developer",
+    href: "/tools/developer/url-encoder",
+    icon: "Code",
+    status: "active",
+  },
+  {
+    id: "uuid-generator",
+    title: "UUID Generator",
+    description: "Generate completely random UUIDs (v4).",
+    category: "Developer",
+    href: "/tools/developer/uuid-generator",
+    icon: "Code",
+    status: "active",
+  },
+  {
+    id: "timestamp",
+    title: "Timestamp Converter",
+    description: "Convert between Unix timestamps and readable dates.",
+    category: "Developer",
+    href: "/tools/developer/timestamp",
+    icon: "CalendarDays",
+    status: "active",
+  },
+
+  // PDF
+  {
+    id: "pdf-merger",
+    title: "PDF Merger",
+    description: "Combine multiple PDF files into one.",
+    category: "PDF",
+    href: "/tools/pdf/merger",
+    icon: "FileText",
+    status: "coming-soon",
+  },
+  {
+    id: "pdf-splitter",
+    title: "PDF Splitter",
+    description: "Split PDF files into separate pages.",
+    category: "PDF",
+    href: "/tools/pdf/splitter",
+    icon: "FileText",
+    status: "coming-soon",
   },
 ];

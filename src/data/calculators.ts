@@ -9,6 +9,16 @@ export const calculators: Item[] = [
     href: "/calculators/percentage",
     icon: "Percent",
     isPopular: true,
+    status: "active",
+  },
+  {
+    id: "average",
+    title: "Average Calculator",
+    description: "Calculate the average of a set of numbers.",
+    category: "Math",
+    href: "/calculators/average",
+    icon: "Calculator",
+    status: "active",
   },
   {
     id: "age",
@@ -18,6 +28,7 @@ export const calculators: Item[] = [
     href: "/calculators/age",
     icon: "CalendarDays",
     isPopular: true,
+    status: "active",
   },
   {
     id: "discount",
@@ -27,6 +38,7 @@ export const calculators: Item[] = [
     href: "/calculators/discount",
     icon: "Tags",
     isPopular: true,
+    status: "active",
   },
   {
     id: "emi",
@@ -36,6 +48,7 @@ export const calculators: Item[] = [
     href: "/calculators/emi",
     icon: "Calculator",
     isPopular: true,
+    status: "active",
   },
   {
     id: "gst",
@@ -45,5 +58,24 @@ export const calculators: Item[] = [
     href: "/calculators/gst",
     icon: "Receipt",
     isPopular: true,
+    status: "active",
+  },
+  {
+    id: "gpa",
+    title: "GPA Calculator",
+    description: "Calculate your Grade Point Average.",
+    category: "Education",
+    href: "/calculators/gpa",
+    icon: "GraduationCap",
+    status: "coming-soon",
+  },
+  {
+    id: "cgpa",
+    title: "CGPA Calculator",
+    description: "Calculate Cumulative Grade Point Average.",
+    category: "Education",
+    href: "/calculators/cgpa",
+    icon: "GraduationCap",
+    status: "coming-soon",
   },
 ];
