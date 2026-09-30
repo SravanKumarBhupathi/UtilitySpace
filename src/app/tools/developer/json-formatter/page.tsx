@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ToolLayout } from "../../layout";
+import { ToolLayout } from "@/components/tool-layout";
 import { Button } from "@/components/ui/button";
 import { Copy, Trash2, CheckCircle2, AlertCircle } from "lucide-react";
 import { cn } from "@/lib/utils";

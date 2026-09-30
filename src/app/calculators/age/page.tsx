@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { CalculatorLayout } from "../layout";
+import { CalculatorLayout } from "@/components/calculator-layout";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
