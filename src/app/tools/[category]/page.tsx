@@ -5,6 +5,12 @@ import { Card, CardContent } from "@/components/ui/card";
 import { FileText, Image as ImageIcon, Type, Code, GraduationCap, Files } from "lucide-react";
 import { ChevronRight } from "lucide-react";
 
+export function generateStaticParams() {
+  return toolCategories.map((category) => ({
+    category: category.name.toLowerCase(),
+  }));
+}
+
 const getIcon = (name: string, className?: string) => {
   const icons: Record<string, React.ReactNode> = {
     FileText: <FileText className={className} />,
