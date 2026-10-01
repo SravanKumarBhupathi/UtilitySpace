@@ -19,7 +19,7 @@ export default function CaseConverter() {
   const toUpperCase = () => setText(text.toUpperCase());
   const toLowerCase = () => setText(text.toLowerCase());
   const toTitleCase = () => {
-    setText(text.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()));
+    setText(text.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substring(1).toLowerCase()));
   };
   const toSentenceCase = () => {
     setText(text.replace(/(^\w|\.\s*\w)/gi, (c) => c.toUpperCase()));
