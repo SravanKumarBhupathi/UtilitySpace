@@ -1,0 +1,13 @@
+🧪 [testing improvement] Add testing setup and ThemeToggle tests
+
+🎯 **What:** The testing gap addressed
+This PR addresses the missing test coverage for the `ThemeToggle` component, and also implements a base setup for Next.js testing with Jest and `@testing-library` components, so more tests can be seamlessly written.
+
+📊 **Coverage:** What scenarios are now tested
+- The component is correctly rendered upon mounting with standard configuration.
+- The `Moon` icon renders correctly when the light theme is used.
+- The `Sun` icon renders correctly when the dark theme is used.
+- Correct functions are triggered (`mockSetTheme`) via `fireEvent.click(button)` depending on the current active theme, matching light toggled to dark, and dark toggled to light.
+
+✨ **Result:** The improvement in test coverage
+The `ThemeToggle` component is now fully tested in isolation for rendering UI dependent on current theme props, and the interactions expected from users are mapped and verified to correctly fire with their respective arguments. A full test framework using Jest and RTL are also integrated into the Next.js setup.
