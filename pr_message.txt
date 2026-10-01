@@ -1,0 +1,11 @@
+🧪 Add tests for EMI calculation formula
+
+🎯 **What:** The testing gap for the EMI calculator formula has been addressed by adding a robust test suite for `src/app/calculators/emi/page.tsx`. Jest and React Testing Library dependencies were added to the project, and Jest was properly configured.
+
+📊 **Coverage:** The following scenarios are now tested:
+- Initial rendering of the form and inputs.
+- Successful EMI calculation using valid inputs (validating the formula returns accurate Monthly EMI, Total Interest, and Total Payment values).
+- Handling of invalid or missing inputs (ensuring the result section is not rendered).
+- Reset functionality (ensuring the form and results are cleared properly).
+
+✨ **Result:** Test coverage improved for mathematical logic and component rendering, providing a safety net against future regressions in the EMI calculation logic.
