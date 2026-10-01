@@ -4,16 +4,18 @@ import { useState } from "react";
 import { ToolLayout } from "@/components/tool-layout";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { countWords, countCharacters, countCharactersNoSpaces, countSentences, countParagraphs } from "./counter";
+
 import { Copy, Trash2 } from "lucide-react";
 
 export default function WordCounter() {
   const [text, setText] = useState("");
 
-  const words = text.trim() ? text.trim().split(/\s+/).length : 0;
-  const characters = text.length;
-  const charactersNoSpaces = text.replace(/\s+/g, '').length;
-  const sentences = text.trim() ? text.split(/[.!?]+/).filter(s => s.trim().length > 0).length : 0;
-  const paragraphs = text.trim() ? text.split(/\n+/).filter(p => p.trim().length > 0).length : 0;
+  const words = countWords(text);
+  const characters = countCharacters(text);
+  const charactersNoSpaces = countCharactersNoSpaces(text);
+  const sentences = countSentences(text);
+  const paragraphs = countParagraphs(text);
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(text);
