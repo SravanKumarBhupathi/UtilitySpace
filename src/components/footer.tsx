@@ -17,6 +17,7 @@ export function Footer() {
           </div>
           <div className="flex flex-col space-y-3">
             <h4 className="font-heading font-semibold text-foreground">Resources</h4>
+            <Link href="/exam-tools" className="text-sm text-secondary-text hover:text-primary transition-colors">Exam Tools</Link>
             <Link href="/tools" className="text-sm text-secondary-text hover:text-primary transition-colors">Tools</Link>
             <Link href="/calculators" className="text-sm text-secondary-text hover:text-primary transition-colors">Calculators</Link>
             <Link href="/guides" className="text-sm text-secondary-text hover:text-primary transition-colors">Guides</Link>

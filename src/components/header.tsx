@@ -4,6 +4,7 @@ import { MobileNavigation } from "./mobile-navigation";
 import { GlobalSearch } from "./global-search";
 
 const navLinks = [
+  { href: "/exam-tools", label: "Exam Tools" },
   { href: "/tools", label: "Tools" },
   { href: "/calculators", label: "Calculators" },
   { href: "/guides", label: "Guides" },
