@@ -6,39 +6,22 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import { calculateAge, AgeResult } from "@/lib/age-calculator";
 
 export default function AgeCalculator() {
   const [dob, setDob] = useState("");
   const [targetDate, setTargetDate] = useState(() => new Date().toISOString().split('T')[0]);
-  const [result, setResult] = useState<{ years: number; months: number; days: number } | null>(null);
+  const [result, setResult] = useState<AgeResult | null>(null);
 
   const calculate = () => {
     if (!dob) return;
 
-    const d1 = new Date(dob);
-    const d2 = new Date(targetDate);
-
-    if (d1 > d2) {
-      alert("Date of birth must be before target date");
-      return;
+    try {
+      const age = calculateAge(dob, targetDate);
+      setResult(age);
+    } catch (error: any) {
+      alert(error.message);
     }
-
-    let years = d2.getFullYear() - d1.getFullYear();
-    let months = d2.getMonth() - d1.getMonth();
-    let days = d2.getDate() - d1.getDate();
-
-    if (days < 0) {
-      months -= 1;
-      const prevMonth = new Date(d2.getFullYear(), d2.getMonth(), 0).getDate();
-      days += prevMonth;
-    }
-
-    if (months < 0) {
-      years -= 1;
-      months += 12;
-    }
-
-    setResult({ years, months, days });
   };
 
   const reset = () => {
