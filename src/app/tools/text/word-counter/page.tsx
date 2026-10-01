@@ -9,11 +9,11 @@ import { Copy, Trash2 } from "lucide-react";
 export default function WordCounter() {
   const [text, setText] = useState("");
 
-  const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+  const words = text.match(/\S+/g)?.length || 0;
   const characters = text.length;
   const charactersNoSpaces = text.replace(/\s+/g, '').length;
-  const sentences = text.trim() ? text.split(/[.!?]+/).filter(s => s.trim().length > 0).length : 0;
-  const paragraphs = text.trim() ? text.split(/\n+/).filter(p => p.trim().length > 0).length : 0;
+  const sentences = text.match(/[^.!?\s][^.!?]*/g)?.length || 0;
+  const paragraphs = text.match(/[^\n\s][^\n]*/g)?.length || 0;
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(text);
