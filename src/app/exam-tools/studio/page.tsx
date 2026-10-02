@@ -265,7 +265,7 @@ function ExamStudioContent() {
                  {processing ? 'Processing...' : 'Apply & Validate'}
                </Button>
 
-               <Button variant="outline" className="w-full mt-2" onClick={() => { setSourceUrl(null); setProcessedUrl(null); }}>
+               <Button variant="outline" className="w-full mt-2" onClick={() => { if (sourceUrl) URL.revokeObjectURL(sourceUrl); if (processedUrl) URL.revokeObjectURL(processedUrl); setSourceUrl(null); setProcessedUrl(null); }}>
                  Upload Different File
                </Button>
             </div>

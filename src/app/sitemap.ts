@@ -19,6 +19,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/tools/image/compressor',
     '/tools/image/converter',
     '/tools/image/resizer',
+    '/tools/image/cropper',
     '/tools/text/case-converter',
     '/tools/text/remove-spaces',
     '/tools/text/slug-generator',
