@@ -38,7 +38,7 @@ export const tools: Item[] = [
     category: "Images",
     href: "/tools/image/cropper",
     icon: "Image",
-    status: "coming-soon",
+    status: "active",
   },
 
   // Text
@@ -137,7 +137,7 @@ export const tools: Item[] = [
     category: "PDF",
     href: "/tools/pdf/merger",
     icon: "FileText",
-    status: "coming-soon",
+    status: "active",
   },
   {
     id: "pdf-splitter",
@@ -146,6 +146,15 @@ export const tools: Item[] = [
     category: "PDF",
     href: "/tools/pdf/splitter",
     icon: "FileText",
-    status: "coming-soon",
+    status: "active",
+  },
+  {
+    id: "pdf-compressor",
+    title: "PDF Compressor",
+    description: "Reduce PDF file size.",
+    category: "PDF",
+    href: "/tools/pdf/compressor",
+    icon: "FileDown",
+    status: "active",
   },
 ];

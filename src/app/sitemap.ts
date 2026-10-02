@@ -28,6 +28,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/tools/developer/timestamp',
     '/tools/developer/url-encoder',
     '/tools/developer/uuid-generator',
+    '/tools/pdf/merger',
+    '/tools/pdf/splitter',
+    '/tools/pdf/compressor',
     // Calculators
     '/calculators/age',
     '/calculators/average',
