@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import Link from "next/link";
 import { ChevronRight, ArrowRight, Clock, CalendarDays } from "lucide-react";
+import { SafeImage } from "@/components/safe-image";
 import { blogPosts } from "@/data/blog";
 import { blogContent } from "@/data/blog-content";
 import { Card, CardContent } from "@/components/ui/card";
@@ -92,14 +93,10 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
         </header>
 
         <div className="mb-12 relative aspect-[16/9] w-full bg-muted rounded-2xl overflow-hidden border border-border flex items-center justify-center">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <SafeImage
             src={content.heroImage}
             alt={content.imageAlt}
             className="w-full h-full object-cover"
-            onError={(e) => {
-               (e.target as HTMLImageElement).src = `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100%' height='100%'><rect width='100%' height='100%' fill='%23e2e8f0'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='20' fill='%2364748b'>Missing Asset: ${content.heroImage.split('/').pop()}</text></svg>`;
-            }}
           />
         </div>
 
