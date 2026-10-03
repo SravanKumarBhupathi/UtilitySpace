@@ -1,6 +1,7 @@
 import { MetadataRoute } from 'next'
 import { guides } from '@/data/guides'
 import { knowledge } from '@/data/knowledge'
+import { blogPosts } from '@/data/blog'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://utilityspace.online'
@@ -64,5 +65,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }))
 
-  return [...sitemapRoutes, ...guideRoutes, ...knowledgeRoutes]
+  const blogRoutes = blogPosts.map((post) => ({
+    url: `${baseUrl}${post.href}`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.7,
+  }))
+
+  return [...sitemapRoutes, ...guideRoutes, ...knowledgeRoutes, ...blogRoutes]
 }
