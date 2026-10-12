@@ -1,0 +1,4 @@
+🎯 **What:** Removed unused `Type` icon import from `lucide-react` in `src/app/exam-tools/studio/page.tsx`.
+💡 **Why:** Removes dead code, thereby improving readability and maintainability of the codebase. Unused imports also add slight overhead, though in this case it might just be cleaner to not have it.
+✅ **Verification:** Ran `npm run build` to confirm no regressions and verified there's no `Type` usage in the file using `grep`.
+✨ **Result:** Clean code with removed unused import.
