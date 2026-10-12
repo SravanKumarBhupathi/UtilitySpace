@@ -5,6 +5,7 @@ import { ChevronRight, ArrowRight, Clock, CalendarDays } from "lucide-react";
 import { SafeImage } from "@/components/safe-image";
 import { blogPosts } from "@/data/blog";
 import { blogContent } from "@/data/blog-content";
+import { sanitizeHtml } from "@/lib/sanitize";
 import { Card, CardContent } from "@/components/ui/card";
 
 export function generateStaticParams() {
@@ -101,7 +102,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
         </div>
 
         <article className="prose prose-slate dark:prose-invert prose-lg prose-headings:font-heading prose-headings:font-bold prose-a:text-primary max-w-3xl mx-auto text-foreground/90">
-          <div dangerouslySetInnerHTML={{ __html: content.html }} />
+          <div dangerouslySetInnerHTML={{ __html: sanitizeHtml(content.html) }} />
         </article>
 
         {content.relatedIds && content.relatedIds.length > 0 && (
