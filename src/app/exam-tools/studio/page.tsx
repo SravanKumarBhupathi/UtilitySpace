@@ -5,7 +5,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { getExamBySlug, EXAM_DATABASE, DocumentRequirement } from '@/lib/data/exams';
 import { compressToTargetKB, overlayTextOnImage, enhanceSignature } from '@/lib/image-utils';
-import { Upload, Download, CheckCircle2, AlertCircle, Settings, RefreshCw, ZoomIn, Contrast, Wand2, Type } from 'lucide-react';
+import { Upload, Download, CheckCircle2, AlertCircle, Settings, RefreshCw, ZoomIn, Contrast, Wand2 } from 'lucide-react';
 import ReactCrop, { Crop, PixelCrop } from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
 import { Button } from '@/components/ui/button';
