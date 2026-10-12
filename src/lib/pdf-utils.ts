@@ -25,12 +25,20 @@ export async function splitPdf(file: File): Promise<Uint8Array[]> {
   const pagesCount = pdfDoc.getPageCount();
 
   const splitFiles: Uint8Array[] = [];
+  const BATCH_SIZE = 10;
 
-  for (let i = 0; i < pagesCount; i++) {
-    const newPdf = await PDFDocument.create();
-    const [copiedPage] = await newPdf.copyPages(pdfDoc, [i]);
-    newPdf.addPage(copiedPage);
-    splitFiles.push(await newPdf.save());
+  for (let i = 0; i < pagesCount; i += BATCH_SIZE) {
+    const batchSize = Math.min(BATCH_SIZE, pagesCount - i);
+    const promises = Array.from({ length: batchSize }).map(async (_, j) => {
+      const pageIndex = i + j;
+      const newPdf = await PDFDocument.create();
+      const [copiedPage] = await newPdf.copyPages(pdfDoc, [pageIndex]);
+      newPdf.addPage(copiedPage);
+      return await newPdf.save();
+    });
+
+    const results = await Promise.all(promises);
+    splitFiles.push(...results);
   }
 
   return splitFiles;
