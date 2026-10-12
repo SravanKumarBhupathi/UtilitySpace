@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ChevronRight, ArrowRight, BookOpen } from "lucide-react";
 import { knowledge } from "@/data/knowledge";
 import { knowledgeContent } from "@/data/knowledge-content";
+import { sanitizeHtml } from "@/lib/sanitize";
 import { Card, CardContent } from "@/components/ui/card";
 
 export function generateStaticParams() {
@@ -61,7 +62,7 @@ export default function KnowledgeDetailPage({ params }: { params: { slug: string
       </header>
 
       <article className="prose prose-slate dark:prose-invert prose-headings:font-heading prose-headings:font-bold prose-a:text-primary max-w-none text-foreground/90">
-        <div dangerouslySetInnerHTML={{ __html: content.html }} />
+        <div dangerouslySetInnerHTML={{ __html: sanitizeHtml(content.html) }} />
       </article>
 
       {/* Internal Links / Related Topics */}

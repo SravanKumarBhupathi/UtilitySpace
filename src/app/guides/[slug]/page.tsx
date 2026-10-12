@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ChevronRight, ArrowRight } from "lucide-react";
 import { guides } from "@/data/guides";
 import { guideContent } from "@/data/guide-content";
+import { sanitizeHtml } from "@/lib/sanitize";
 
 export function generateStaticParams() {
   return guides.map((guide) => {
@@ -61,7 +62,7 @@ export default function GuidePage({ params }: { params: { slug: string } }) {
       </header>
 
       <article className="prose prose-slate dark:prose-invert prose-headings:font-heading prose-headings:font-bold prose-a:text-primary max-w-none text-foreground/90">
-        <div dangerouslySetInnerHTML={{ __html: content.html }} />
+        <div dangerouslySetInnerHTML={{ __html: sanitizeHtml(content.html) }} />
       </article>
 
       {content.relatedTool && (
