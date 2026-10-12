@@ -45,7 +45,7 @@ export default function RemoveSpacesTool() {
 
     if (removeDuplicateLines) {
       // Keep first occurrence of each line
-      lines = lines.filter((line, index) => lines.indexOf(line) === index);
+      lines = Array.from(new Set(lines));
     }
 
     if (sortLines) {
