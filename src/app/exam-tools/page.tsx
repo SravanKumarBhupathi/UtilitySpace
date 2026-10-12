@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { Metadata } from 'next';
-import { Search, Camera, PenTool, Settings, FileCheck2 } from 'lucide-react';
+import { Camera, PenTool, FileCheck2 } from 'lucide-react';
 import { EXAM_CATEGORIES, EXAM_DATABASE } from '@/lib/data/exams';
 
 export const metadata: Metadata = {
