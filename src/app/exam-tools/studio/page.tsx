@@ -217,16 +217,21 @@ function ExamStudioContent() {
     }
   };
 
+
   const handleDownload = () => {
     if (!processedUrl) return;
     const a = document.createElement('a');
     a.href = processedUrl;
     const ext = reqs?.format.includes('jpg') ? 'jpg' : 'png';
-    a.download = `${exam?.slug || 'custom'}-${docType || 'document'}.${ext}`;
+    // Generate clean safe filenames: e.g. SSC_CGL_Photo.jpg
+    const safeName = (exam?.name || 'Custom').replace(/[^a-zA-Z0-9]/g, '_').replace(/_+/g, '_');
+    const safeType = (docType || 'Document').charAt(0).toUpperCase() + (docType || 'Document').slice(1);
+    a.download = `${safeName}_${safeType}.${ext}`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
   };
+
 
   if (!reqs) {
     return (

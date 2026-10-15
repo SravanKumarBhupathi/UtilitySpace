@@ -19,23 +19,40 @@ function CustomRequirementsForm() {
   const [maxKB, setMaxKB] = useState('50');
   const [docType, setDocType] = useState(defaultType);
 
+const [error, setError] = useState<string | null>(null);
+
   const handleCreateCustom = () => {
+    setError(null);
+    const min = parseInt(minKB, 10);
+    const max = parseInt(maxKB, 10);
+    const w = parseInt(width, 10);
+    const h = parseInt(height, 10);
+
+    if (isNaN(min) || isNaN(max) || min >= max || max === 0) {
+      setError('Invalid file size limits. Ensure min is less than max and values are positive numbers.');
+      return;
+    }
+    if (isNaN(w) || isNaN(h) || w <= 0 || h <= 0) {
+      setError('Invalid dimensions. Width and height must be positive numbers.');
+      return;
+    }
+
     const customId = 'custom-' + Date.now();
 
     EXAM_DATABASE.push({
       id: customId,
       name: 'Custom Requirements',
-      organization: 'User Defined',
+      organization: 'User Defined (Unverified)',
       category: 'Other',
       slug: customId,
       sourceUrl: null,
       lastVerified: new Date().toISOString().split('T')[0],
-      verificationStatus: 'Verified for current cycle',
+      verificationStatus: 'Verification pending',
       recruitmentCycle: 'Custom',
       notificationNumber: null,
       applicationUrl: null,
       active: true,
-      notes: 'Custom dimensions and sizes set by you.',
+      notes: 'Custom dimensions and sizes set by you. These are not verified against any official notification.',
       requirements: {
         [docType]: {
           documentType: docType as any,
@@ -57,8 +74,15 @@ function CustomRequirementsForm() {
     router.push(`/exam-tools/studio?exam=${customId}&type=${docType}`);
   };
 
-  return (
+return (
     <div className="bg-card border border-border p-6 rounded-xl space-y-6">
+      <div className="mb-6">
+         <h2 className="font-heading text-2xl font-bold mb-2">Custom Document Studio</h2>
+         <p className="text-secondary-text text-sm">Enter dimensions and sizes provided in your application notification to generate an ephemeral processing preset. Note: These settings will not be marked as officially verified.</p>
+      </div>
+
+      {error && <div className="p-3 bg-red-500/10 border border-red-500/20 text-red-600 rounded text-sm">{error}</div>}
+
       <div className="space-y-2">
         <Label>Document Type</Label>
         <div className="flex gap-4">
