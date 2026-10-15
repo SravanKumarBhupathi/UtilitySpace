@@ -242,16 +242,16 @@ export function getExamsByCategory(category: ExamCategory): ExamRecord[] {
   return EXAM_DATABASE.filter(e => e.category === category);
 }
 
+
+export const SEARCH_INDEX = EXAM_DATABASE.map(e => ({
+  record: e,
+  searchString: `${e.name} ${e.organization} ${e.category} ${e.slug}`.toLowerCase()
+}));
+
 export function searchExams(query: string): ExamRecord[] {
   const q = query.toLowerCase();
-  return EXAM_DATABASE.filter(e =>
-    e.name.toLowerCase().includes(q) ||
-    e.organization.toLowerCase().includes(q) ||
-    e.category.toLowerCase().includes(q) ||
-    e.slug.toLowerCase().includes(q)
-  );
+  return SEARCH_INDEX.filter(item => item.searchString.includes(q)).map(item => item.record);
 }
-
 export const EXAM_CATEGORIES: ExamCategory[] = [
   'SSC', 'Railway', 'Banking', 'UPSC', 'Teaching', 'Police',
   'State PSC', 'Judiciary', 'Defence', 'Other'
