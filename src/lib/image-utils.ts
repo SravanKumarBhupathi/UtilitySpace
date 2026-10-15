@@ -50,6 +50,8 @@ export async function compressToTargetKB(
     const quality = (minQ + maxQ) / 2;
     // Yield to prevent UI blocking
     await new Promise(r => setTimeout(r, 10));
+    // Yield to prevent UI blocking
+    await new Promise(r => setTimeout(r, 10));
     currentResult = await generateResult(canvas, format, quality);
 
     // Check if we are within range

@@ -258,33 +258,34 @@ export const EXAM_CATEGORIES: ExamCategory[] = [
 ];
 
 
+
 export function validateExamDatabase(): string[] {
   const errors: string[] = [];
   const ids = new Set<string>();
 
   for (const exam of EXAM_DATABASE) {
     if (ids.has(exam.id)) {
-      errors.push(`Duplicate exam ID found: ${exam.id}`);
+      errors.push("Duplicate exam ID found: " + exam.id);
     }
     ids.add(exam.id);
 
     if (exam.verificationStatus === 'Verified for current cycle' && !exam.sourceUrl) {
-      errors.push(`Exam ${exam.id} is marked as verified but has no sourceUrl.`);
+      errors.push("Exam " + exam.id + " is marked as verified but has no sourceUrl.");
     }
 
     if (!exam.recruitmentCycle) {
-      errors.push(`Exam ${exam.id} is missing a recruitment cycle.`);
+      errors.push("Exam " + exam.id + " is missing a recruitment cycle.");
     }
 
     for (const [key, req] of Object.entries(exam.requirements)) {
       if (req.minKB >= req.maxKB) {
-        errors.push(`Exam ${exam.id} requirement ${key} has minKB >= maxKB.`);
+        errors.push("Exam " + exam.id + " requirement " + key + " has minKB >= maxKB.");
       }
       if (req.width !== null && req.width <= 0) {
-        errors.push(`Exam ${exam.id} requirement ${key} has invalid width.`);
+        errors.push("Exam " + exam.id + " requirement " + key + " has invalid width.");
       }
       if (req.height !== null && req.height <= 0) {
-        errors.push(`Exam ${exam.id} requirement ${key} has invalid height.`);
+        errors.push("Exam " + exam.id + " requirement " + key + " has invalid height.");
       }
     }
   }

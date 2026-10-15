@@ -59,6 +59,14 @@ function ExamStudioContent() {
     };
   }, [sourceUrl, processedUrl]);
 
+  // Cleanup object URLs to prevent memory leaks
+  useEffect(() => {
+    return () => {
+      if (sourceUrl) URL.revokeObjectURL(sourceUrl);
+      if (processedUrl) URL.revokeObjectURL(processedUrl);
+    };
+  }, [sourceUrl, processedUrl]);
+
   useEffect(() => {
     if (exam && docType) {
       setReqs(exam.requirements[docType] || null);
@@ -66,6 +74,10 @@ function ExamStudioContent() {
   }, [exam, docType]);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (sourceUrl) URL.revokeObjectURL(sourceUrl);
+    if (processedUrl) URL.revokeObjectURL(processedUrl);
+    setProcessedUrl(null);
+    setError(null);
     if (sourceUrl) URL.revokeObjectURL(sourceUrl);
     if (processedUrl) URL.revokeObjectURL(processedUrl);
     setProcessedUrl(null);
@@ -160,6 +172,9 @@ function ExamStudioContent() {
       // Yield to main thread to prevent UI freezing
       await new Promise(r => setTimeout(r, 50));
 
+      // Yield to main thread to prevent UI freezing
+      await new Promise(r => setTimeout(r, 50));
+
       const targetOpts = {
         minKB: reqs.minKB,
         maxKB: reqs.maxKB,
@@ -171,6 +186,7 @@ function ExamStudioContent() {
 
       const result = await compressToTargetKB(canvasToProcess, targetOpts);
 
+      if (processedUrl) URL.revokeObjectURL(processedUrl);
       if (processedUrl) URL.revokeObjectURL(processedUrl);
       setProcessedUrl(result.url);
       setFinalSizeKB(result.sizeKB);
@@ -216,17 +232,7 @@ function ExamStudioContent() {
 
       {!sourceUrl ? (
         <div className="max-w-2xl mx-auto">
-          <FileUploader
-            accept={reqs.format.map(f => `image/${f}`).join(',')}
-            maxSizeMB={20}
-            label="Upload Document"
-            description={`Supported formats: ${reqs.format.join(', ').toUpperCase()}`}
-            onFileSelect={(file) => {
-              // Synthetic event to reuse existing handleFileChange
-              const e = { target: { files: [file] } } as unknown as React.ChangeEvent<HTMLInputElement>;
-              handleFileChange(e);
-            }}
-          />
+          <FileUploader accept={reqs.format.map(f => `image/${f}`).join(',')} maxSizeMB={20} label="Upload Document" description={`Supported formats: ${reqs.format.join(', ').toUpperCase()}`} onFileSelect={(file) => { const e = { target: { files: [file] } } as unknown as React.ChangeEvent<HTMLInputElement>; handleFileChange(e); }} />
         </div>
       ) : (
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">

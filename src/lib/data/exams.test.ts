@@ -49,14 +49,11 @@ describe('Exam Database Validation', () => {
 
       mockDb = [validRecord];
 
-      // We need to override the EXAM_DATABASE used by the validate function
-      // Since it's exported as a const array, we can mutate its contents
       EXAM_DATABASE.length = 0;
       EXAM_DATABASE.push(...mockDb);
     });
 
     afterEach(() => {
-      // Restore original
       EXAM_DATABASE.length = 0;
       EXAM_DATABASE.push(...originalDb);
     });
@@ -101,7 +98,6 @@ describe('Exam Database Validation', () => {
     });
 
     it('rejects duplicate identifiers', () => {
-      // Add a duplicate
       mockDb.push({...mockDb[0]});
       EXAM_DATABASE.length = 0;
       EXAM_DATABASE.push(...mockDb);
