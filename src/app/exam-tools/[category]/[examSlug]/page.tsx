@@ -72,11 +72,11 @@ export default function ExamRequirementsPage({ params }: Props) {
 
       {/* Verification Status Banner */}
       <div className={`mb-8 p-4 rounded-lg flex items-start gap-3 border ${
-        exam.verificationStatus === 'Verified'
+        exam.verificationStatus === 'Verified for current cycle'
           ? 'bg-success/10 border-success/20 text-success-foreground'
           : 'bg-yellow-500/10 border-yellow-500/20 text-yellow-700 dark:text-yellow-400'
       }`}>
-        {exam.verificationStatus === 'Verified' ? (
+        {exam.verificationStatus === 'Verified for current cycle' ? (
           <ShieldCheck className="w-5 h-5 flex-shrink-0 mt-0.5" />
         ) : (
           <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
@@ -87,7 +87,7 @@ export default function ExamRequirementsPage({ params }: Props) {
             <span className="text-opacity-70 font-normal ml-2">(Last checked: {exam.lastVerified})</span>
           </p>
           <p className="opacity-90">
-            {exam.verificationStatus === 'Verified'
+            {exam.verificationStatus === 'Verified for current cycle'
               ? 'These requirements match the official notification.'
               : 'Please double-check these requirements with the current official notification.'}
           </p>

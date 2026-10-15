@@ -13,6 +13,8 @@ import { Input } from '@/components/ui/input';
 import { Slider } from '@/components/ui/slider';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
+import { FileUploader } from '@/components/file-uploader';
+import { ToolLayout } from '@/components/tool-layout';
 import Link from 'next/link';
 
 function ExamStudioContent() {
@@ -49,6 +51,22 @@ function ExamStudioContent() {
   const [finalWidth, setFinalWidth] = useState(0);
   const [finalHeight, setFinalHeight] = useState(0);
 
+  // Cleanup object URLs to prevent memory leaks
+  useEffect(() => {
+    return () => {
+      if (sourceUrl) URL.revokeObjectURL(sourceUrl);
+      if (processedUrl) URL.revokeObjectURL(processedUrl);
+    };
+  }, [sourceUrl, processedUrl]);
+
+  // Cleanup object URLs to prevent memory leaks
+  useEffect(() => {
+    return () => {
+      if (sourceUrl) URL.revokeObjectURL(sourceUrl);
+      if (processedUrl) URL.revokeObjectURL(processedUrl);
+    };
+  }, [sourceUrl, processedUrl]);
+
   useEffect(() => {
     if (exam && docType) {
       setReqs(exam.requirements[docType] || null);
@@ -56,6 +74,14 @@ function ExamStudioContent() {
   }, [exam, docType]);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (sourceUrl) URL.revokeObjectURL(sourceUrl);
+    if (processedUrl) URL.revokeObjectURL(processedUrl);
+    setProcessedUrl(null);
+    setError(null);
+    if (sourceUrl) URL.revokeObjectURL(sourceUrl);
+    if (processedUrl) URL.revokeObjectURL(processedUrl);
+    setProcessedUrl(null);
+    setError(null);
     if (e.target.files && e.target.files.length > 0) {
       const file = e.target.files[0];
       setSourceFile(file);
@@ -143,6 +169,12 @@ function ExamStudioContent() {
       }
 
       // 4. Target Compression & Sizing
+      // Yield to main thread to prevent UI freezing
+      await new Promise(r => setTimeout(r, 50));
+
+      // Yield to main thread to prevent UI freezing
+      await new Promise(r => setTimeout(r, 50));
+
       const targetOpts = {
         minKB: reqs.minKB,
         maxKB: reqs.maxKB,
@@ -154,6 +186,8 @@ function ExamStudioContent() {
 
       const result = await compressToTargetKB(canvasToProcess, targetOpts);
 
+      if (processedUrl) URL.revokeObjectURL(processedUrl);
+      if (processedUrl) URL.revokeObjectURL(processedUrl);
       setProcessedUrl(result.url);
       setFinalSizeKB(result.sizeKB);
       setFinalWidth(result.width);
@@ -192,26 +226,13 @@ function ExamStudioContent() {
   const isAllValid = isSizeValid && isDimensionsValid;
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-6xl">
-      <header className="mb-8 border-b border-border pb-4">
-        <h1 className="text-2xl font-bold text-foreground capitalize">
-          {exam ? `${exam.name} - ` : ''}Prepare {docType}
-        </h1>
-        <p className="text-secondary-text text-sm mt-1">
-          Target: {reqs.width}x{reqs.height}px • {reqs.minKB}-{reqs.maxKB}KB • {reqs.format.join('/').toUpperCase()}
-        </p>
-      </header>
+    <ToolLayout title={`${exam ? exam.name + ' - ' : ''}Prepare ${docType}`} description={`Target: ${reqs.width}x${reqs.height}px • ${reqs.minKB}-${reqs.maxKB}KB • ${reqs.format.join('/').toUpperCase()}`} category="Exam Tools">
+    <div className="max-w-6xl mx-auto">
+
 
       {!sourceUrl ? (
         <div className="max-w-2xl mx-auto">
-          <label className="flex flex-col items-center justify-center w-full h-64 border-2 border-dashed border-border rounded-xl cursor-pointer bg-card hover:bg-muted/50 transition-colors">
-            <div className="flex flex-col items-center justify-center pt-5 pb-6">
-              <Upload className="w-10 h-10 mb-3 text-secondary-text" />
-              <p className="mb-2 text-sm text-foreground font-medium">Click to upload or drag and drop</p>
-              <p className="text-xs text-secondary-text">Supported formats: {reqs.format.join(', ').toUpperCase()}</p>
-            </div>
-            <input type="file" className="hidden" accept={reqs.format.map(f => `image/${f}`).join(',')} onChange={handleFileChange} />
-          </label>
+          <FileUploader accept={reqs.format.map(f => `image/${f}`).join(',')} maxSizeMB={20} label="Upload Document" description={`Supported formats: ${reqs.format.join(', ').toUpperCase()}`} onFileSelect={(file) => { const e = { target: { files: [file] } } as unknown as React.ChangeEvent<HTMLInputElement>; handleFileChange(e); }} />
         </div>
       ) : (
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
@@ -368,6 +389,7 @@ function ExamStudioContent() {
         </div>
       )}
     </div>
+    </ToolLayout>
   );
 }
 
