@@ -48,6 +48,8 @@ export async function compressToTargetKB(
   // Try up to 8 iterations for binary search
   for (let i = 0; i < 8; i++) {
     const quality = (minQ + maxQ) / 2;
+    // Yield to prevent UI blocking
+    await new Promise(r => setTimeout(r, 10));
     currentResult = await generateResult(canvas, format, quality);
 
     // Check if we are within range
@@ -112,9 +114,12 @@ function applySizing(canvas: HTMLCanvasElement, options: TargetCompressionOption
   let targetWidth = canvas.width;
   let targetHeight = canvas.height;
 
+  let needsCoverCrop = false;
+
   if (options.exactWidth && options.exactHeight) {
     targetWidth = options.exactWidth;
     targetHeight = options.exactHeight;
+    needsCoverCrop = true;
   } else {
      if (options.maxWidth && canvas.width > options.maxWidth) {
        targetWidth = options.maxWidth;
@@ -142,8 +147,19 @@ function applySizing(canvas: HTMLCanvasElement, options: TargetCompressionOption
     ctx.fillRect(0, 0, outCanvas.width, outCanvas.height);
   }
 
-  // Draw image scaled (potentially squished if exactWidth/Height break aspect ratio - UI should handle cropping before this if aspect ratio matters)
-  ctx.drawImage(canvas, 0, 0, targetWidth, targetHeight);
+  if (needsCoverCrop) {
+    // Prevent squishing by doing a cover crop (center)
+    const scale = Math.max(targetWidth / canvas.width, targetHeight / canvas.height);
+    const scaledWidth = canvas.width * scale;
+    const scaledHeight = canvas.height * scale;
+    const offsetX = (targetWidth - scaledWidth) / 2;
+    const offsetY = (targetHeight - scaledHeight) / 2;
+    ctx.drawImage(canvas, offsetX, offsetY, scaledWidth, scaledHeight);
+  } else {
+    // Normal proportional scaling
+    ctx.drawImage(canvas, 0, 0, targetWidth, targetHeight);
+  }
+
   return outCanvas;
 }
 

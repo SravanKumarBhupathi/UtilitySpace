@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { EXAM_DATABASE } from '@/lib/data/exams';
+import { ToolLayout } from '@/components/tool-layout';
 
 function CustomRequirementsForm() {
   const router = useRouter();
@@ -29,7 +30,10 @@ function CustomRequirementsForm() {
       slug: customId,
       sourceUrl: null,
       lastVerified: new Date().toISOString().split('T')[0],
-      verificationStatus: 'Verified',
+      verificationStatus: 'Verified for current cycle',
+      recruitmentCycle: 'Custom',
+      notificationNumber: null,
+      applicationUrl: null,
       active: true,
       notes: 'Custom dimensions and sizes set by you.',
       requirements: {
@@ -106,15 +110,14 @@ function CustomRequirementsForm() {
 
 export default function CustomRequirementsPage() {
   return (
-    <div className="container mx-auto px-4 py-12 max-w-2xl">
-      <header className="mb-8 text-center">
-        <h1 className="text-3xl font-bold mb-2">Custom Document Requirements</h1>
-        <p className="text-secondary-text">Set your own dimensions and file size limits.</p>
-      </header>
+    <ToolLayout title="Custom Document Requirements" description="Set your own dimensions and file size limits." category="Exam Tools">
+    <div className="max-w-2xl mx-auto">
+
 
       <Suspense fallback={<div>Loading...</div>}>
         <CustomRequirementsForm />
       </Suspense>
     </div>
+    </ToolLayout>
   );
 }

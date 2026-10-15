@@ -1,5 +1,5 @@
 export type DocumentRequirement = {
-  documentType: 'photo' | 'signature' | 'thumb_impression' | 'other';
+  documentType: 'photo' | 'signature' | 'thumb_impression' | 'handwritten_declaration' | 'other';
   format: string[]; // e.g., ['jpg', 'jpeg']
   width: number | null; // px
   height: number | null; // px
@@ -10,6 +10,7 @@ export type DocumentRequirement = {
   nameRequired: boolean;
   dateRequired: boolean;
   backgroundRequirement: string | null;
+  liveCaptureRequired?: boolean;
   notes: string | null;
 };
 
@@ -25,16 +26,27 @@ export type ExamCategory =
   | 'Defence'
   | 'Other';
 
+export type VerificationStatus =
+  | 'Verified for current cycle'
+  | 'Verification pending'
+  | 'Closed recruitment'
+  | 'Historical archive'
+  | 'Source unavailable'
+  | 'Superseded by newer notification';
+
 export type ExamRecord = {
   id: string;
   name: string;
   organization: string;
   category: ExamCategory;
   slug: string;
+  recruitmentCycle: string;
+  notificationNumber: string | null;
   requirements: Record<string, DocumentRequirement>; // 'photo' | 'signature' etc
   sourceUrl: string | null;
+  applicationUrl: string | null;
   lastVerified: string;
-  verificationStatus: 'Verified' | 'Needs verification' | 'Information may have changed';
+  verificationStatus: VerificationStatus;
   notes: string | null;
   active: boolean;
 };
@@ -48,7 +60,10 @@ export const EXAM_DATABASE: ExamRecord[] = [
     slug: 'ssc-cgl',
     sourceUrl: 'https://ssc.nic.in/',
     lastVerified: '2024-01-15',
-    verificationStatus: 'Verified',
+    verificationStatus: 'Historical archive',
+    recruitmentCycle: '2023-2024',
+    notificationNumber: null,
+    applicationUrl: null,
     active: true,
     notes: 'Combined Graduate Level Examination',
     requirements: {
@@ -90,7 +105,10 @@ export const EXAM_DATABASE: ExamRecord[] = [
     slug: 'ibps-po',
     sourceUrl: 'https://www.ibps.in/',
     lastVerified: '2024-01-20',
-    verificationStatus: 'Verified',
+    verificationStatus: 'Historical archive',
+    recruitmentCycle: '2023-2024',
+    notificationNumber: null,
+    applicationUrl: null,
     active: true,
     notes: 'Probationary Officer/Management Trainee',
     requirements: {
@@ -132,7 +150,10 @@ export const EXAM_DATABASE: ExamRecord[] = [
     slug: 'upsc-civil-services',
     sourceUrl: 'https://upsc.gov.in/',
     lastVerified: '2024-02-10',
-    verificationStatus: 'Verified',
+    verificationStatus: 'Historical archive',
+    recruitmentCycle: '2023-2024',
+    notificationNumber: null,
+    applicationUrl: null,
     active: true,
     notes: 'Civil Services (Preliminary) Examination',
     requirements: {
@@ -174,7 +195,10 @@ export const EXAM_DATABASE: ExamRecord[] = [
     slug: 'rrb-ntpc',
     sourceUrl: 'https://indianrailways.gov.in/',
     lastVerified: '2024-02-05',
-    verificationStatus: 'Needs verification',
+    verificationStatus: 'Verification pending',
+    recruitmentCycle: '2023-2024',
+    notificationNumber: null,
+    applicationUrl: null,
     active: true,
     notes: 'Non Technical Popular Categories',
     requirements: {
@@ -232,3 +256,38 @@ export const EXAM_CATEGORIES: ExamCategory[] = [
   'SSC', 'Railway', 'Banking', 'UPSC', 'Teaching', 'Police',
   'State PSC', 'Judiciary', 'Defence', 'Other'
 ];
+
+
+export function validateExamDatabase(): string[] {
+  const errors: string[] = [];
+  const ids = new Set<string>();
+
+  for (const exam of EXAM_DATABASE) {
+    if (ids.has(exam.id)) {
+      errors.push(`Duplicate exam ID found: ${exam.id}`);
+    }
+    ids.add(exam.id);
+
+    if (exam.verificationStatus === 'Verified for current cycle' && !exam.sourceUrl) {
+      errors.push(`Exam ${exam.id} is marked as verified but has no sourceUrl.`);
+    }
+
+    if (!exam.recruitmentCycle) {
+      errors.push(`Exam ${exam.id} is missing a recruitment cycle.`);
+    }
+
+    for (const [key, req] of Object.entries(exam.requirements)) {
+      if (req.minKB >= req.maxKB) {
+        errors.push(`Exam ${exam.id} requirement ${key} has minKB >= maxKB.`);
+      }
+      if (req.width !== null && req.width <= 0) {
+        errors.push(`Exam ${exam.id} requirement ${key} has invalid width.`);
+      }
+      if (req.height !== null && req.height <= 0) {
+        errors.push(`Exam ${exam.id} requirement ${key} has invalid height.`);
+      }
+    }
+  }
+
+  return errors;
+}
