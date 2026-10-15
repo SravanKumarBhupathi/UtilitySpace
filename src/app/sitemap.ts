@@ -2,6 +2,8 @@ import { MetadataRoute } from 'next'
 import { guides } from '@/data/guides'
 import { knowledge } from '@/data/knowledge'
 import { blogPosts } from '@/data/blog'
+import { EXAM_DATABASE, EXAM_CATEGORIES } from '@/lib/data/exams'
+
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://utilityspace.online'
@@ -42,6 +44,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/calculators/emi',
     '/calculators/gst',
     '/calculators/percentage',
+    // Exam Tools
+    '/exam-tools',
+    '/exam-tools/custom',
   ]
 
   const sitemapRoutes = staticRoutes.map((route) => ({
@@ -72,5 +77,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }))
 
-  return [...sitemapRoutes, ...guideRoutes, ...knowledgeRoutes, ...blogRoutes]
+
+  const examCategoryRoutes = EXAM_CATEGORIES.map((category) => ({
+    url: `${baseUrl}/exam-tools/${category.toLowerCase().replace(/\\s+/g, '-')}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.7,
+  }))
+
+  const examRoutes = EXAM_DATABASE.filter(exam => exam.active).map((exam) => ({
+    url: `${baseUrl}/exam-tools/${exam.category.toLowerCase().replace(/\\s+/g, '-')}/${exam.slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.8,
+  }))
+
+  return [...sitemapRoutes, ...guideRoutes, ...knowledgeRoutes, ...blogRoutes, ...examCategoryRoutes, ...examRoutes]
 }

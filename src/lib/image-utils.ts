@@ -45,14 +45,17 @@ export async function compressToTargetKB(
   let bestResult: CompressionResult | null = null;
   let currentResult: CompressionResult | null = null;
 
-  // Try up to 8 iterations for binary search
-  for (let i = 0; i < 8; i++) {
+
+  // Try up to 15 iterations for binary search to be more precise but bounded
+  for (let i = 0; i < 15; i++) {
     const quality = (minQ + maxQ) / 2;
     // Yield to prevent UI blocking
     await new Promise(r => setTimeout(r, 10));
-    // Yield to prevent UI blocking
-    await new Promise(r => setTimeout(r, 10));
-    currentResult = await generateResult(canvas, format, quality);
+    try {
+        currentResult = await generateResult(canvas, format, quality);
+    } catch(e) {
+        break; // If blob generation fails, stop search
+    }
 
     // Check if we are within range
     if (currentResult.sizeKB >= minKB && currentResult.sizeKB <= maxKB) {
@@ -67,6 +70,7 @@ export async function compressToTargetKB(
       minQ = quality; // Need higher quality to increase file size
     }
   }
+
 
   // If we couldn't get in range, return the closest valid one (usually the one right under maxKB)
   // Or fallback to maxQ = 0.1 if it's still too big.
