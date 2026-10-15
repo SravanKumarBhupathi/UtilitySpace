@@ -18,9 +18,13 @@ export function generateMetadata({ params }: Props): Metadata {
     return { title: 'Exam Not Found' };
   }
 
+  const reqs = exam.requirements.photo || exam.requirements.signature;
+  const dims = reqs && reqs.width && reqs.height ? `${reqs.width}x${reqs.height}px` : 'exact dimensions';
+  const size = reqs ? `${reqs.minKB}-${reqs.maxKB}KB` : 'required size';
+
   return {
     title: `${exam.name} Photo & Signature Resizer | UtilitySpace`,
-    description: `Prepare your photo and signature for ${exam.name} (${exam.organization}). Get exact ${exam.requirements.photo.width}x${exam.requirements.photo.height}px and ${exam.requirements.photo.minKB}-${exam.requirements.photo.maxKB}KB files.`,
+    description: `Prepare your application documents for ${exam.name} ${exam.recruitmentCycle} (${exam.organization}). Resize to ${dims} and compress to ${size} as per the official notification.`,
   };
 }
 
@@ -52,9 +56,10 @@ export default function ExamRequirementsPage({ params }: Props) {
         <span className="text-foreground font-medium truncate">{exam.name}</span>
       </nav>
 
-      <header className="mb-10 pb-6 border-b border-border">
+<header className="mb-10 pb-6 border-b border-border">
         <div className="flex items-center gap-3 mb-2 text-primary">
           <span className="text-sm font-semibold uppercase tracking-wider">{exam.category}</span>
+          <span className="text-sm bg-primary/10 px-2 py-0.5 rounded font-medium">{exam.recruitmentCycle}</span>
         </div>
         <h1 className="font-heading text-3xl md:text-4xl font-bold tracking-tight text-foreground mb-3">
           {exam.name} Document Requirements
@@ -64,44 +69,40 @@ export default function ExamRequirementsPage({ params }: Props) {
         </p>
 
         {exam.notes && (
-          <div className="mt-4 p-4 bg-muted/50 rounded-lg text-sm text-secondary-text border border-border">
-            {exam.notes}
+          <div className="mt-4 p-4 bg-muted/50 rounded-lg text-sm text-secondary-text border border-border flex items-start gap-3">
+             <Info className="w-5 h-5 flex-shrink-0 mt-0.5 text-primary" />
+             <p>{exam.notes}</p>
           </div>
         )}
       </header>
 
       {/* Verification Status Banner */}
-      <div className={`mb-8 p-4 rounded-lg flex items-start gap-3 border ${
+      <div className={`mb-8 p-4 rounded-lg flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border ${
         exam.verificationStatus === 'Verified for current cycle'
-          ? 'bg-success/10 border-success/20 text-success-foreground'
-          : 'bg-yellow-500/10 border-yellow-500/20 text-yellow-700 dark:text-yellow-400'
+          ? 'bg-green-500/10 border-green-500/20 text-green-800 dark:text-green-300'
+          : 'bg-amber-500/10 border-amber-500/20 text-amber-800 dark:text-amber-300'
       }`}>
-        {exam.verificationStatus === 'Verified for current cycle' ? (
-          <ShieldCheck className="w-5 h-5 flex-shrink-0 mt-0.5" />
-        ) : (
-          <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
-        )}
-        <div className="text-sm">
-          <p className="font-semibold mb-1">
-            Status: {exam.verificationStatus}
-            <span className="text-opacity-70 font-normal ml-2">(Last checked: {exam.lastVerified})</span>
-          </p>
-          <p className="opacity-90">
-            {exam.verificationStatus === 'Verified for current cycle'
-              ? 'These requirements match the official notification.'
-              : 'Please double-check these requirements with the current official notification.'}
-          </p>
-          {exam.sourceUrl && (
-            <a
-              href={exam.sourceUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 mt-2 text-primary hover:underline font-medium"
-            >
-              Official Website <ExternalLink className="w-3 h-3" />
-            </a>
+        <div className="flex items-start gap-3">
+          {exam.verificationStatus === 'Verified for current cycle' ? (
+            <ShieldCheck className="w-5 h-5 shrink-0 mt-0.5" />
+          ) : (
+            <AlertCircle className="w-5 h-5 shrink-0 mt-0.5" />
           )}
+          <div>
+            <p className="font-semibold">{exam.verificationStatus}</p>
+            <p className="text-sm opacity-80">Last verified: {new Date(exam.lastVerified).toLocaleDateString()}</p>
+          </div>
         </div>
+        {exam.sourceUrl && (
+          <a
+            href={exam.sourceUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center text-sm font-medium hover:underline shrink-0"
+          >
+            Official Source <ExternalLink className="w-4 h-4 ml-1" />
+          </a>
+        )}
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

@@ -70,13 +70,28 @@ export default function ExamCategoryPage({ params }: Props) {
             <Link
               key={exam.id}
               href={`/exam-tools/${params.category}/${exam.slug}`}
-              className="p-6 rounded-lg border border-border bg-card hover:border-primary/50 transition-all flex flex-col group"
+              className="block group"
             >
-              <h3 className="font-heading text-lg font-semibold mb-2 group-hover:text-primary transition-colors">{exam.name}</h3>
-              <p className="text-sm text-secondary-text mb-4 flex-grow">{exam.organization}</p>
+              <div className="bg-card hover:bg-card/90 border border-border rounded-xl p-6 transition-all duration-200 h-full flex flex-col hover:border-primary/50 hover:shadow-sm">
+                <div className="flex items-start justify-between mb-2">
+                   <h3 className="font-semibold text-lg group-hover:text-primary transition-colors line-clamp-1">{exam.name}</h3>
+                   <span className="text-xs bg-muted px-2 py-1 rounded-md whitespace-nowrap">{exam.recruitmentCycle}</span>
+                </div>
+                <p className="text-sm text-secondary-text mb-4 line-clamp-2 flex-grow">{exam.organization}</p>
 
-              <div className="text-xs font-medium text-secondary-text bg-secondary/30 self-start px-2 py-1 rounded">
-                View Requirements →
+                <div className="flex flex-wrap gap-2 mb-4">
+                   {exam.verificationStatus === 'Verified for current cycle' ? (
+                     <span className="text-[10px] uppercase font-bold tracking-wider bg-green-500/10 text-green-600 px-2 py-1 rounded">Verified Active</span>
+                   ) : exam.verificationStatus === 'Historical archive' ? (
+                     <span className="text-[10px] uppercase font-bold tracking-wider bg-amber-500/10 text-amber-600 px-2 py-1 rounded">Historical</span>
+                   ) : (
+                     <span className="text-[10px] uppercase font-bold tracking-wider bg-muted text-secondary-text px-2 py-1 rounded">Pending</span>
+                   )}
+                </div>
+
+                <div className="flex items-center text-sm font-medium text-primary">
+                  Prepare Documents <ChevronRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                </div>
               </div>
             </Link>
           ))}
