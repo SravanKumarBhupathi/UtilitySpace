@@ -73,18 +73,29 @@ function ExamStudioContent() {
     }
   }, [exam, docType]);
 
+
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (sourceUrl) URL.revokeObjectURL(sourceUrl);
     if (processedUrl) URL.revokeObjectURL(processedUrl);
     setProcessedUrl(null);
     setError(null);
-    if (sourceUrl) URL.revokeObjectURL(sourceUrl);
-    if (processedUrl) URL.revokeObjectURL(processedUrl);
-    setProcessedUrl(null);
-    setError(null);
+
+
     if (e.target.files && e.target.files.length > 0) {
       const file = e.target.files[0];
+
+      // Basic validation
+      if (file.size > 15 * 1024 * 1024) {
+        setError('File is too large. Please upload an image under 15MB.');
+        return;
+      }
+      if (!file.type.startsWith('image/')) {
+        setError('Unsupported file type. Please upload a valid image file (JPG, PNG).');
+        return;
+      }
+
       setSourceFile(file);
+
       const url = URL.createObjectURL(file);
       setSourceUrl(url);
       setProcessedUrl(null);
@@ -103,6 +114,7 @@ function ExamStudioContent() {
     }
   };
 
+
   const processImage = async () => {
     if (!sourceUrl || !reqs) return;
     setProcessing(true);
@@ -111,6 +123,7 @@ function ExamStudioContent() {
     try {
       // 1. Get cropped image if crop exists
       let canvasToProcess: HTMLCanvasElement;
+
 
       if (completedCrop && completedCrop.width > 0 && completedCrop.height > 0 && imgRef.current) {
         const image = imgRef.current;
@@ -184,18 +197,22 @@ function ExamStudioContent() {
         fillBackground: '#ffffff'
       };
 
+
       const result = await compressToTargetKB(canvasToProcess, targetOpts);
 
-      if (processedUrl) URL.revokeObjectURL(processedUrl);
-      if (processedUrl) URL.revokeObjectURL(processedUrl);
+      if (processedUrl && processedUrl !== result.url) URL.revokeObjectURL(processedUrl);
       setProcessedUrl(result.url);
+
       setFinalSizeKB(result.sizeKB);
       setFinalWidth(result.width);
       setFinalHeight(result.height);
 
+
     } catch (err: any) {
+      console.error(err);
       setError(err.message || 'An error occurred during processing.');
     } finally {
+
       setProcessing(false);
     }
   };
