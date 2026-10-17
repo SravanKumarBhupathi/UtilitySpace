@@ -3,6 +3,7 @@ import { guides } from '@/data/guides'
 import { knowledge } from '@/data/knowledge'
 import { blogPosts } from '@/data/blog'
 import { EXAM_DATABASE, EXAM_CATEGORIES } from '@/lib/data/exams'
+import { JOB_DATABASE, JOB_CATEGORIES } from '@/lib/data/jobs'
 
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -94,5 +95,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }))
 
-  return [...sitemapRoutes, ...guideRoutes, ...knowledgeRoutes, ...blogRoutes, ...examCategoryRoutes, ...examRoutes]
+const jobCategoryRoutes = JOB_CATEGORIES.map((category) => ({
+    url: `${baseUrl}/government-jobs?category=${encodeURIComponent(category)}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.7,
+  }))
+
+  const jobRoutes = JOB_DATABASE.filter(job => job.applicationStatus !== 'unverified').map((job) => ({
+    url: `${baseUrl}/government-jobs/${job.slug}`,
+    lastModified: new Date(job.lastUpdated || new Date()),
+    changeFrequency: 'weekly' as const,
+    priority: 0.8,
+  }))
+
+  return [...sitemapRoutes, ...guideRoutes, ...knowledgeRoutes, ...blogRoutes, ...examCategoryRoutes, ...examRoutes, ...jobCategoryRoutes, ...jobRoutes]
 }
