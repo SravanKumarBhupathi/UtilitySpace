@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { getJobBySlug, JOB_DATABASE } from '@/lib/data/jobs';
-import { ChevronRight, ExternalLink, FileText, ShieldCheck, AlertCircle, Calendar, MapPin, Users, BriefcaseBusiness, CheckCircle2, Clock, Info } from 'lucide-react';
+import { ChevronRight, Share2, ExternalLink, FileText, ShieldCheck, AlertCircle, Calendar, MapPin, Users, BriefcaseBusiness, CheckCircle2, Clock, Info } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 interface Props {
@@ -48,6 +48,43 @@ export default function JobDetailPage({ params }: Props) {
 
   const isVerified = job.verificationStatus === 'Verified for current cycle';
   const isClosed = job.applicationStatus === 'closed' || job.applicationStatus === 'archived';
+
+const eligibilitySummary = job.qualificationSummary.length > 0
+    ? job.qualificationSummary.join(', ')
+    : 'See official notification';
+
+  const vacancyCount = job.vacancyCount !== null
+    ? job.vacancyCount.toLocaleString()
+    : 'See official notification';
+
+  const deadline = job.applicationDeadline
+    ? new Date(job.applicationDeadline).toLocaleDateString()
+    : 'Check official notification';
+
+  const applyLinkText = job.applicationPortalUrl
+    ? `
+
+📝 Apply Link:
+${job.applicationPortalUrl}`
+    : '';
+
+  const message = `📢 ${job.title}
+
+🏢 Organization: ${job.organization}
+
+🎓 Eligibility: ${eligibilitySummary}
+
+📌 Vacancies: ${vacancyCount}
+
+📅 Last Date to Apply: ${deadline}
+
+🔗 Full Job Details:
+https://utilityspace.online/government-jobs/${job.slug}${applyLinkText}
+
+Please verify eligibility and important dates in the official notification before applying.`;
+
+  const encodedMessage = encodeURIComponent(message);
+  const whatsappUrl = `https://wa.me/?text=${encodedMessage}`;
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-5xl">
@@ -116,7 +153,13 @@ export default function JobDetailPage({ params }: Props) {
             </div>
           </div>
 
-          <div className="flex gap-3 shrink-0 w-full sm:w-auto">
+<div className="flex gap-3 shrink-0 w-full sm:w-auto mt-4 sm:mt-0 flex-col sm:flex-row">
+            <Button
+              variant="outline"
+              className="w-full sm:w-auto bg-[#25D366]/10 text-[#25D366] border-[#25D366]/20 hover:bg-[#25D366]/20"
+            >
+              <Share2 className="w-4 h-4 mr-2" /> Share via WhatsApp
+            </Button>
             {job.officialNotificationUrl && (
               <a href={job.officialNotificationUrl} target="_blank" rel="noopener noreferrer" className="flex-1 sm:flex-none">
                 <Button variant="outline" className="w-full">

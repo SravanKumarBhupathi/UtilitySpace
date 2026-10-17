@@ -23,7 +23,7 @@ export default function GovernmentJobsLandingPage() {
   const availableCategories = useMemo(() => Array.from(new Set(JOB_DATABASE.map(j => j.category))), []);
   const availableStates = useMemo(() => Array.from(new Set(JOB_DATABASE.map(j => j.stateOrRegion))), []);
 
-  const filteredJobs = useMemo(() => {
+const filteredJobs = useMemo(() => {
     return JOB_DATABASE.filter(job => {
       const matchSearch = !searchQuery ||
         job.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -32,9 +32,33 @@ export default function GovernmentJobsLandingPage() {
 
       const matchCategory = !filters.category || job.category === filters.category;
       const matchState = !filters.state || job.stateOrRegion === filters.state;
-      const matchStatus = !filters.status || job.applicationStatus === filters.status;
+
+      // Default to hiding archived/closed jobs from the primary active list unless directly requested
+      // or if searching for a specific term where the user might want historical context.
+      let matchStatus = true;
+      if (filters.status) {
+        matchStatus = job.applicationStatus === filters.status;
+      } else if (!searchQuery) {
+        // No specific status filter AND no search query: hide old stuff by default to prioritize current opportunities.
+        matchStatus = job.applicationStatus !== 'archived' && job.applicationStatus !== 'closed';
+      }
 
       return matchSearch && matchCategory && matchState && matchStatus;
+    })
+    // Sort logic to prioritize Open -> Upcoming -> Closing Soon (Historical falls to bottom if queried)
+    .sort((a, b) => {
+       const statusPriority: Record<string, number> = { 'closing_soon': 1, 'open': 2, 'upcoming': 3, 'closed': 4, 'archived': 5, 'unverified': 6 };
+       const priorityA = statusPriority[a.applicationStatus] || 99;
+       const priorityB = statusPriority[b.applicationStatus] || 99;
+
+       if (priorityA !== priorityB) {
+           return priorityA - priorityB;
+       }
+       // If same status, sort by deadline (closest first)
+       if (a.applicationDeadline && b.applicationDeadline) {
+           return new Date(a.applicationDeadline).getTime() - new Date(b.applicationDeadline).getTime();
+       }
+       return 0;
     });
   }, [searchQuery, filters]);
 

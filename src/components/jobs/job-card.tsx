@@ -1,12 +1,55 @@
 import React from 'react';
 import Link from 'next/link';
 import { JobRecord } from '@/lib/data/jobs';
-import { ShieldCheck, AlertCircle, MapPin, Calendar, Users, GraduationCap, ChevronRight } from 'lucide-react';
+import { ShieldCheck, Share2, AlertCircle, MapPin, Calendar, Users, GraduationCap, ChevronRight } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/card';
 
 export function JobCard({ job }: { job: JobRecord }) {
   const isClosingSoon = job.applicationStatus === 'closing_soon';
   const isOpen = job.applicationStatus === 'open';
+
+  const handleWhatsAppShare = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const eligibilitySummary = job.qualificationSummary.length > 0
+      ? job.qualificationSummary.join(', ')
+      : 'See official notification';
+
+    const vacancyCount = job.vacancyCount !== null
+      ? job.vacancyCount.toLocaleString()
+      : 'See official notification';
+
+    const deadline = job.applicationDeadline
+      ? new Date(job.applicationDeadline).toLocaleDateString()
+      : 'Check official notification';
+
+    const applyLinkText = job.applicationPortalUrl
+      ? `
+
+📝 Apply Link:
+${job.applicationPortalUrl}`
+      : '';
+
+    const message = `📢 ${job.title}
+
+🏢 Organization: ${job.organization}
+
+🎓 Eligibility: ${eligibilitySummary}
+
+📌 Vacancies: ${vacancyCount}
+
+📅 Last Date to Apply: ${deadline}
+
+🔗 Full Job Details:
+https://utilityspace.online/government-jobs/${job.slug}${applyLinkText}
+
+Please verify eligibility and important dates in the official notification before applying.`;
+
+    const encodedMessage = encodeURIComponent(message);
+    window.open(`https://wa.me/?text=${encodedMessage}`, '_blank');
+  };
 
   return (
     <Card className="flex flex-col h-full hover:border-primary/50 transition-colors group">
@@ -52,24 +95,36 @@ export function JobCard({ job }: { job: JobRecord }) {
         )}
       </CardContent>
 
-      <CardFooter className="pt-4 pb-4 border-t border-border/50 flex items-center justify-between bg-muted/10">
-        <div className="flex items-center gap-1.5 text-xs text-secondary-text">
-          {job.verificationStatus === 'Verified for current cycle' ? (
-             <ShieldCheck className="w-4 h-4 text-green-500" />
-          ) : (
-             <AlertCircle className="w-4 h-4 text-amber-500" />
-          )}
-          <span className="truncate max-w-[120px]" title={job.verificationStatus}>
-             {job.verificationStatus === 'Verified for current cycle' ? 'Verified' : 'Unverified'}
-          </span>
+<CardFooter className="pt-4 pb-4 border-t border-border/50 flex flex-col items-stretch gap-3 bg-muted/10">
+        <div className="flex items-center justify-between w-full">
+          <div className="flex items-center gap-1.5 text-xs text-secondary-text">
+            {job.verificationStatus === 'Verified for current cycle' ? (
+               <ShieldCheck className="w-4 h-4 text-green-500" />
+            ) : (
+               <AlertCircle className="w-4 h-4 text-amber-500" />
+            )}
+            <span className="truncate max-w-[120px]" title={job.verificationStatus}>
+               {job.verificationStatus === 'Verified for current cycle' ? 'Verified' : 'Unverified'}
+            </span>
+          </div>
+
+          <Link
+            href={`/government-jobs/${job.id}`}
+            className="text-sm font-medium text-primary flex items-center hover:underline"
+          >
+            View Details <ChevronRight className="w-4 h-4 ml-0.5 group-hover:translate-x-1 transition-transform" />
+          </Link>
         </div>
 
-        <Link
-          href={`/government-jobs/${job.id}`}
-          className="text-sm font-medium text-primary flex items-center hover:underline"
+        <Button
+          variant="outline"
+          size="sm"
+          className="w-full bg-[#25D366]/10 text-[#25D366] border-[#25D366]/20 hover:bg-[#25D366]/20 hover:text-[#25D366] transition-colors"
+          onClick={handleWhatsAppShare}
+          aria-label="Share on WhatsApp"
         >
-          View Details <ChevronRight className="w-4 h-4 ml-0.5 group-hover:translate-x-1 transition-transform" />
-        </Link>
+          <Share2 className="w-4 h-4 mr-2" /> Share on WhatsApp
+        </Button>
       </CardFooter>
     </Card>
   );
