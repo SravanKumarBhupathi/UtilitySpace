@@ -157,13 +157,13 @@ export function PDFMergerTool() {
           <div className="mt-6 p-6 border border-success/30 bg-success/5 rounded-xl text-center">
             <h3 className="text-xl font-bold text-success mb-2">PDF Merged Successfully!</h3>
             <p className="text-sm text-secondary-text mb-6">Your combined document is ready.</p>
-            <div className="flex gap-4 justify-center">
-              <a href={resultUrl} download="merged_document.pdf">
-                <Button size="lg" className="bg-success hover:bg-success/90 text-white">
-                  <Download className="w-4 h-4 mr-2" /> Download Merged PDF
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a href={resultUrl} download="merged_document.pdf" className="w-full sm:w-auto">
+                <Button size="lg" className="w-full sm:w-auto bg-success hover:bg-success/90 text-white">
+                  <Download className="w-4 h-4 mr-2 shrink-0" /> Download Merged PDF
                 </Button>
               </a>
-              <Button variant="outline" size="lg" onClick={reset}>
+              <Button variant="outline" size="lg" onClick={reset} className="w-full sm:w-auto">
                 Merge More Files
               </Button>
             </div>
