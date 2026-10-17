@@ -4,7 +4,7 @@ import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
 import { Filter, X, BriefcaseBusiness, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { JOB_DATABASE, JobRecord } from '@/lib/data/jobs';
+import { JOB_DATABASE, JOB_CATEGORIES } from '@/lib/data/jobs';
 import { JobCard } from '@/components/jobs/job-card';
 import { JobSearchBar } from '@/components/jobs/job-search-bar';
 import { JobFilterPanel, JobFilterState } from '@/components/jobs/job-filter-panel';
@@ -27,7 +27,8 @@ export default function GovernmentJobsLandingPage() {
     return JOB_DATABASE.filter(job => {
       const matchSearch = !searchQuery ||
         job.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        job.organization.toLowerCase().includes(searchQuery.toLowerCase());
+        job.organization.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        job.qualificationSummary.some(q => q.toLowerCase().includes(searchQuery.toLowerCase()));
 
       const matchCategory = !filters.category || job.category === filters.category;
       const matchState = !filters.state || job.stateOrRegion === filters.state;
@@ -41,7 +42,7 @@ export default function GovernmentJobsLandingPage() {
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-7xl">
-      {/* Header */}
+      {/* Header Section */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
         <div className="max-w-2xl">
           <nav className="flex items-center space-x-1 text-sm text-secondary-text mb-4">
@@ -51,14 +52,55 @@ export default function GovernmentJobsLandingPage() {
           </nav>
           <h1 className="font-heading text-3xl md:text-5xl font-bold tracking-tight mb-4 flex items-center gap-3">
              <BriefcaseBusiness className="w-8 h-8 md:w-10 md:h-10 text-primary" />
-             Government Jobs
+             Government Jobs & Recruitment Notifications
           </h1>
           <p className="text-lg text-secondary-text">
-            Discover latest verified government recruitments, track application deadlines, and prepare your documents instantly.
+            Find government recruitment notifications, eligibility requirements, important dates, exam patterns, application fees, and official application links in one place.
           </p>
         </div>
-        <div className="w-full md:w-96 shrink-0">
-           <JobSearchBar value={searchQuery} onChange={setSearchQuery} />
+        <div className="w-full md:w-96 shrink-0 flex items-center gap-2">
+           <JobSearchBar
+             value={searchQuery}
+             onChange={setSearchQuery}
+             placeholder="Search jobs, exams, departments or qualifications..."
+           />
+        </div>
+      </div>
+
+      {/* Status Navigation & Category Links */}
+      <div className="mb-10 space-y-6">
+        {/* Status Navigation */}
+        <div className="flex flex-wrap gap-2">
+           <Button variant={filters.status === null ? 'default' : 'outline'} size="sm" onClick={() => setFilters({...filters, status: null})}>
+             All Jobs
+           </Button>
+           <Button variant={filters.status === 'open' ? 'default' : 'outline'} size="sm" onClick={() => setFilters({...filters, status: 'open'})}>
+             Applications Open
+           </Button>
+           <Button variant={filters.status === 'upcoming' ? 'default' : 'outline'} size="sm" onClick={() => setFilters({...filters, status: 'upcoming'})}>
+             Upcoming
+           </Button>
+           <Button variant={filters.status === 'closing_soon' ? 'default' : 'outline'} size="sm" onClick={() => setFilters({...filters, status: 'closing_soon'})}>
+             Closing Soon
+           </Button>
+        </div>
+
+        {/* Category Navigation */}
+        <div className="flex gap-3 overflow-x-auto pb-2 hide-scrollbar">
+           {JOB_CATEGORIES.map(category => (
+             <Button
+               key={category}
+               variant="secondary"
+               size="sm"
+               className="whitespace-nowrap rounded-full font-medium"
+               onClick={() => {
+                  setFilters({...filters, category});
+                  setSearchQuery('');
+               }}
+             >
+               {category}
+             </Button>
+           ))}
         </div>
       </div>
 
@@ -101,9 +143,14 @@ export default function GovernmentJobsLandingPage() {
           </div>
 
           {isMobileFilterOpen && (
-            <Button className="w-full mt-8 lg:hidden" onClick={() => setIsMobileFilterOpen(false)}>
-              Show {filteredJobs.length} Results
-            </Button>
+            <div className="mt-8 space-y-4 lg:hidden">
+              <Button className="w-full" onClick={() => setIsMobileFilterOpen(false)}>
+                Show {filteredJobs.length} Results
+              </Button>
+              <Button variant="outline" className="w-full" onClick={() => setFilters({category: null, state: null, status: null})}>
+                Clear All Filters
+              </Button>
+            </div>
           )}
         </div>
 
@@ -111,7 +158,7 @@ export default function GovernmentJobsLandingPage() {
         <div className="lg:col-span-3">
           <div className="hidden lg:flex items-center justify-between mb-6 pb-2 border-b border-border/50">
             <h2 className="text-xl font-semibold font-heading text-foreground">
-              {searchQuery || activeFilterCount > 0 ? 'Search Results' : 'Latest Notifications'}
+              {searchQuery || activeFilterCount > 0 ? 'Search Results' : 'Latest Government Job Notifications'}
             </h2>
             <span className="text-sm font-medium text-secondary-text bg-muted px-3 py-1 rounded-full">
               {filteredJobs.length} {filteredJobs.length === 1 ? 'Job' : 'Jobs'}

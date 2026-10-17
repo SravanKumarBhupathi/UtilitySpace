@@ -5,8 +5,8 @@ import { ShieldCheck, AlertCircle, MapPin, Calendar, Users, GraduationCap, Chevr
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/card';
 
 export function JobCard({ job }: { job: JobRecord }) {
-  const isClosingSoon = job.applicationStatus === 'Closing Soon';
-  const isOpen = job.applicationStatus === 'Applications Open';
+  const isClosingSoon = job.applicationStatus === 'closing_soon';
+  const isOpen = job.applicationStatus === 'open';
 
   return (
     <Card className="flex flex-col h-full hover:border-primary/50 transition-colors group">

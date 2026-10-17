@@ -1,6 +1,7 @@
 import React from 'react';
-import { SearchX, FileText } from 'lucide-react';
+import { SearchX, FileText, BriefcaseBusiness } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 export function JobEmptyState({ onClear }: { onClear?: () => void }) {
   return (
@@ -22,11 +23,14 @@ export function JobEmptyState({ onClear }: { onClear?: () => void }) {
 export function JobNoDataState() {
   return (
     <div className="flex flex-col items-center justify-center py-20 px-4 text-center border border-border rounded-xl bg-card">
-      <FileText className="w-16 h-16 text-primary mb-4 opacity-80" />
+      <BriefcaseBusiness className="w-16 h-16 text-primary mb-4 opacity-80" />
       <h3 className="text-2xl font-heading font-bold mb-3">Recruitment Database Updates</h3>
       <p className="text-secondary-text max-w-lg mx-auto mb-6">
-        We are currently verifying official government recruitment notifications. Only verified data is published to ensure you receive accurate and trustworthy application requirements.
+        We&apos;re preparing verified recruitment notifications. Please check back soon.
       </p>
+      <Link href="/">
+         <Button>Browse Job Categories</Button>
+      </Link>
     </div>
   );
 }

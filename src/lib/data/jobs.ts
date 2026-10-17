@@ -1,26 +1,39 @@
-import { ExamCategory, VerificationStatus } from "./exams";
+import { VerificationStatus } from "./exams";
 
 export type ApplicationStatus =
-  | 'Applications Open'
-  | 'Upcoming'
-  | 'Closing Soon'
-  | 'Closed';
+  | 'upcoming'
+  | 'open'
+  | 'closing_soon'
+  | 'closed'
+  | 'archived'
+  | 'unverified';
+
+export type JobCategory =
+  | 'SSC'
+  | 'Railway'
+  | 'Banking & Insurance'
+  | 'State Government'
+  | 'Teaching'
+  | 'Police & Defence'
+  | 'Public Service Commission'
+  | 'Other Government Jobs';
 
 export type JobRecord = {
   id: string;
+  slug: string;
   title: string;
-  organization: string;
-  category: ExamCategory;
+  organization: string; // Recruiting authority
+  category: JobCategory;
   stateOrRegion: string | 'All India';
   qualificationSummary: string[];
   vacancyCount: number | null;
   applicationStatus: ApplicationStatus;
 
   // Important Dates
-  notificationDate: string | null; // ISO YYYY-MM-DD
+  notificationReleaseDate: string | null; // ISO YYYY-MM-DD
   applicationStartDate: string | null;
   applicationDeadline: string | null;
-  lastUpdated: string;
+  lastUpdated: string; // Last substantive update date
 
   // Verification Data
   verificationStatus: VerificationStatus;
@@ -28,9 +41,27 @@ export type JobRecord = {
   officialNotificationUrl: string | null;
   applicationPortalUrl: string | null;
 
+  // Details
+  eligibility: string | null;
+  examPattern: string | null;
+  applicationFees: string | null;
+  selectionProcess: string | null;
+  salaryInformation: string | null;
+
   // Relation to Exam Tools
   linkedExamId: string | null;
 };
+
+export const JOB_CATEGORIES: JobCategory[] = [
+  'SSC',
+  'Railway',
+  'Banking & Insurance',
+  'State Government',
+  'Teaching',
+  'Police & Defence',
+  'Public Service Commission',
+  'Other Government Jobs'
+];
 
 // Start with an empty but typed array to fulfill the contract without inventing data
 export const JOB_DATABASE: JobRecord[] = [];
