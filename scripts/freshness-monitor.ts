@@ -42,6 +42,7 @@ function checkFreshness(jobs: JobRecord[]) {
   return report;
 }
 
+
 const runScan = () => {
    console.log("Starting Freshness Scan...");
    const results = checkFreshness(JOB_DATABASE);
@@ -49,6 +50,11 @@ const runScan = () => {
    console.log("Expired Deadlines to Archive/Close:", results.expired.length > 0 ? results.expired : "None");
    console.log("Closing Soon Alerts:", results.closingSoon.length > 0 ? results.closingSoon : "None");
    console.log("Requires Manual Web Verification:", results.requiresManualVerification.length > 0 ? results.requiresManualVerification : "None");
+
+   // In a real environment, this script would optionally send an alert to Slack/Email
+   // and exit cleanly.
+   process.exit(0);
 }
+
 
 runScan();
