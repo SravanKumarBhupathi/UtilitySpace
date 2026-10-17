@@ -47,6 +47,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Exam Tools
     '/exam-tools',
     '/exam-tools/custom',
+    // Government Jobs
+    '/government-jobs',
   ]
 
   const sitemapRoutes = staticRoutes.map((route) => ({
