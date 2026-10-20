@@ -318,17 +318,18 @@ function ExamStudioContent() {
           <div className="lg:col-span-6 flex flex-col">
             <div className="bg-muted/30 border border-border rounded-xl p-2 flex-grow flex items-center justify-center min-h-[400px] overflow-hidden">
               {!processedUrl ? (
-                <ReactCrop
+<ReactCrop
                   crop={crop}
                   onChange={c => setCrop(c)}
                   onComplete={c => setCompletedCrop(c)}
                   aspect={reqs.aspectRatio || undefined}
+                  className="max-w-full overflow-hidden"
                 >
                   <img
                     ref={imgRef}
                     src={sourceUrl}
                     alt="Upload preview"
-                    className="max-h-[500px] w-auto object-contain"
+                    className="max-h-[60vh] md:max-h-[500px] w-auto object-contain"
                   />
                 </ReactCrop>
               ) : (

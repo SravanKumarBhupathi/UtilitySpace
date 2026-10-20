@@ -31,3 +31,20 @@ body {
     font-family: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
   }
 }
+
+/* ReactCrop overrides for better mobile touch targets */
+.ReactCrop__drag-handle {
+  width: 20px !important;
+  height: 20px !important;
+  border-radius: 50% !important;
+  background-color: var(--primary) !important;
+  border: 2px solid white !important;
+  opacity: 0.9 !important;
+}
+
+@media (max-width: 640px) {
+  .ReactCrop__drag-handle {
+    width: 28px !important;
+    height: 28px !important;
+  }
+}

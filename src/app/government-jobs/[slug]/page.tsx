@@ -254,7 +254,7 @@ Please verify eligibility and important dates in the official notification befor
                 {job.eligibility}
               </div>
             ) : (
-              <p className="text-secondary-text italic">Eligibility conditions are not yet provided in the official notification.</p>
+              <p className="text-secondary-text italic">See official notification for details.</p>
             )}
           </section>
 
