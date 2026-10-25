@@ -2,6 +2,40 @@ import { Item } from "./types";
 
 export const tools: Item[] = [
   {
+    id: "extract-pdf-pages",
+    title: "Extract PDF Pages",
+    description: "Extract specific pages from a PDF document to create a new file.",
+    category: "PDF",
+    href: "/tools/pdf/extract-pages",
+    icon: "Files",
+  },
+
+  {
+    id: "remove-blank-lines",
+    title: "Remove Blank Lines",
+    description: "Clean up text by automatically removing all empty or whitespace-only lines.",
+    category: "Text",
+    href: "/tools/text/remove-blank-lines",
+    icon: "ListMinus",
+  },
+  {
+    id: "sort-lines",
+    title: "Sort Lines",
+    description: "Sort text lines alphabetically.",
+    category: "Text",
+    href: "/tools/text/sort-lines",
+    icon: "FileText",
+  },
+  {
+    id: "jwt-decoder",
+    title: "JWT Decoder",
+    description: "Decode JSON Web Tokens (JWT) instantly in your browser.",
+    category: "Developer",
+    href: "/tools/developer/jwt-decoder",
+    icon: "Braces",
+  },
+
+  {
     id: "remove-duplicate-lines",
     title: "Remove Duplicate Lines",
     description: "Quickly identify and remove duplicate lines from lists or text blocks.",

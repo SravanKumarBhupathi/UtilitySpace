@@ -2,6 +2,14 @@ import { Item } from "./types";
 
 export const calculators: Item[] = [
   {
+    id: "compound-interest-calculator",
+    title: "Compound Interest",
+    description: "Determine the future value of an investment or loan where interest is compounded.",
+    category: "Finance",
+    href: "/calculators/compound-interest",
+  },
+
+  {
     id: "simple-interest-calculator",
     title: "Simple Interest",
     description: "Quickly determine the interest and total value of an investment or loan.",

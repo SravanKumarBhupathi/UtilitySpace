@@ -35,9 +35,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/tools/developer/json-formatter',
     '/tools/developer/timestamp',
     '/tools/developer/url-encoder',
-    '/tools/developer/uuid-generator',
+        '/tools/developer/uuid-generator',
+    '/tools/developer/jwt-decoder',
+    '/tools/text/remove-blank-lines',
+    '/tools/text/sort-lines',
     '/tools/pdf/merger',
     '/tools/pdf/splitter',
+    '/tools/pdf/extract-pages',
     '/tools/pdf/compressor',
     // Calculators
     '/calculators/age',
@@ -47,6 +51,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/calculators/gst',
     '/calculators/percentage',
     '/calculators/simple-interest',
+    '/calculators/compound-interest',
     '/calculators/date-difference',
     // Exam Tools
     '/exam-tools',
