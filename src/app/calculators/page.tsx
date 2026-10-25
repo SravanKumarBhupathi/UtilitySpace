@@ -15,9 +15,9 @@ const getIcon = (name: string, className?: string) => {
   return icons[name] || <CalcIcon className={className} />;
 };
 
-export default function CalculatorsIndex() {
-  const categories = Array.from(new Set(calculators.map(c => c.category)));
+const categories = Array.from(new Set(calculators.map(c => c.category)));
 
+export default function CalculatorsIndex() {
   return (
     <div className="container mx-auto max-w-7xl px-4 py-12 md:py-16 bg-background">
       <header className="mb-12">
