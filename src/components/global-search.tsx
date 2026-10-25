@@ -17,6 +17,14 @@ type SearchResult = {
   score: number;
 };
 
+const allItems: Omit<SearchResult, "score">[] = [
+  ...tools.map(t => ({ ...t, type: "Tools" as const })),
+  ...calculators.map(t => ({ ...t, type: "Calculators" as const })),
+  ...guides.map(t => ({ ...t, type: "Guides" as const })),
+  ...knowledge.map(t => ({ ...t, type: "Knowledge" as const })),
+  ...blogPosts.map(t => ({ ...t, type: "Blog" as const })),
+];
+
 export function GlobalSearch() {
   const [isOpen, setIsOpen] = React.useState(false);
   const [query, setQuery] = React.useState("");
@@ -71,14 +79,6 @@ export function GlobalSearch() {
 
   const searchResults = React.useMemo(() => {
     if (!query) return [];
-
-    const allItems: Omit<SearchResult, "score">[] = [
-      ...tools.map(t => ({ ...t, type: "Tools" as const })),
-      ...calculators.map(t => ({ ...t, type: "Calculators" as const })),
-      ...guides.map(t => ({ ...t, type: "Guides" as const })),
-      ...knowledge.map(t => ({ ...t, type: "Knowledge" as const })),
-      ...blogPosts.map(t => ({ ...t, type: "Blog" as const })),
-    ];
 
     const results = allItems
       .map(item => ({
