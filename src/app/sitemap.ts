@@ -45,6 +45,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/calculators/emi',
     '/calculators/gst',
     '/calculators/percentage',
+    '/calculators/date-difference',
     // Exam Tools
     '/exam-tools',
     '/exam-tools/custom',

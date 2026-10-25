@@ -6,20 +6,32 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import { AlertCircle } from "lucide-react";
 
 export default function AgeCalculator() {
   const [dob, setDob] = useState("");
   const [targetDate, setTargetDate] = useState(() => new Date().toISOString().split('T')[0]);
+  const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<{ years: number; months: number; days: number } | null>(null);
 
-  const calculate = () => {
-    if (!dob) return;
+const calculate = () => {
+    setError(null);
+    if (!dob) {
+      setError("Please select a date of birth.");
+      return;
+    }
 
     const d1 = new Date(dob);
     const d2 = new Date(targetDate);
 
+    if (isNaN(d1.getTime()) || isNaN(d2.getTime())) {
+      setError("Please enter valid dates.");
+      return;
+    }
+
     if (d1 > d2) {
-      alert("Date of birth must be before target date");
+      setError("Date of birth cannot be after the target date.");
+      setResult(null);
       return;
     }
 
@@ -41,10 +53,11 @@ export default function AgeCalculator() {
     setResult({ years, months, days });
   };
 
-  const reset = () => {
+const reset = () => {
     setDob("");
     setTargetDate(new Date().toISOString().split('T')[0]);
     setResult(null);
+    setError(null);
   };
 
   return (
@@ -75,6 +88,12 @@ export default function AgeCalculator() {
                 />
               </div>
             </div>
+
+            {error && (
+              <div className="flex items-center text-sm font-medium text-red-500 bg-red-500/10 p-3 rounded-md border border-red-500/20">
+                 <AlertCircle className="w-4 h-4 mr-2" /> {error}
+              </div>
+            )}
 
             <Button onClick={calculate} className="w-full md:w-auto">Calculate Age</Button>
 

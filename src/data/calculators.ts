@@ -2,6 +2,14 @@ import { Item } from "./types";
 
 export const calculators: Item[] = [
   {
+    id: "date-difference-calculator",
+    title: "Date Difference",
+    description: "Calculate the exact duration between two dates in years, months, and days.",
+    category: "Time & Date",
+    href: "/calculators/date-difference",
+  },
+
+  {
     id: "percentage",
     title: "Percentage Calculator",
     description: "Calculate percentages quickly and accurately.",
