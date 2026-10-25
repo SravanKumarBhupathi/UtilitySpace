@@ -35,14 +35,21 @@ const calculate = () => {
       return;
     }
 
-    let years = d2.getFullYear() - d1.getFullYear();
+let years = d2.getFullYear() - d1.getFullYear();
     let months = d2.getMonth() - d1.getMonth();
     let days = d2.getDate() - d1.getDate();
 
     if (days < 0) {
       months -= 1;
-      const prevMonth = new Date(d2.getFullYear(), d2.getMonth(), 0).getDate();
-      days += prevMonth;
+      // Get the number of days in the previous month of the end date
+      let prevMonth = d2.getMonth() - 1;
+      let yearOfPrevMonth = d2.getFullYear();
+      if (prevMonth < 0) {
+        prevMonth = 11;
+        yearOfPrevMonth -= 1;
+      }
+      const daysInPrevMonth = new Date(yearOfPrevMonth, prevMonth + 1, 0).getDate();
+      days += daysInPrevMonth;
     }
 
     if (months < 0) {

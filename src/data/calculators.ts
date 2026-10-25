@@ -2,6 +2,14 @@ import { Item } from "./types";
 
 export const calculators: Item[] = [
   {
+    id: "simple-interest-calculator",
+    title: "Simple Interest",
+    description: "Quickly determine the interest and total value of an investment or loan.",
+    category: "Finance",
+    href: "/calculators/simple-interest",
+  },
+
+  {
     id: "date-difference-calculator",
     title: "Date Difference",
     description: "Calculate the exact duration between two dates in years, months, and days.",

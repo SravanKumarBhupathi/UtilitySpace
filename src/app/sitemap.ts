@@ -30,6 +30,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/tools/text/remove-spaces',
     '/tools/text/slug-generator',
     '/tools/text/word-counter',
+    '/tools/text/remove-duplicate-lines',
     '/tools/developer/base64',
     '/tools/developer/json-formatter',
     '/tools/developer/timestamp',
@@ -45,6 +46,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/calculators/emi',
     '/calculators/gst',
     '/calculators/percentage',
+    '/calculators/simple-interest',
     '/calculators/date-difference',
     // Exam Tools
     '/exam-tools',

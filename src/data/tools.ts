@@ -1,6 +1,15 @@
 import { Item } from "./types";
 
 export const tools: Item[] = [
+  {
+    id: "remove-duplicate-lines",
+    title: "Remove Duplicate Lines",
+    description: "Quickly identify and remove duplicate lines from lists or text blocks.",
+    category: "Text",
+    href: "/tools/text/remove-duplicate-lines",
+    icon: "ListMinus",
+  },
+
   // Images
   {
     id: "image-compressor",
