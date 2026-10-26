@@ -102,4 +102,38 @@ export const calculators: Item[] = [
     icon: "GraduationCap",
     status: "coming-soon",
   },
+
+  {
+    id: "percentage-change",
+    title: "Percentage Change",
+    description: "Calculate percentage increase or decrease.",
+    category: "Math",
+    href: "/calculators/percentage-change",
+    icon: "Percent",
+  },
+  {
+    id: "profit-loss",
+    title: "Profit and Loss",
+    description: "Calculate profit, loss, and margin percentage.",
+    category: "Finance",
+    href: "/calculators/profit-loss",
+    icon: "Calculator",
+  },
+  {
+    id: "attendance-calculator",
+    title: "Attendance Calculator",
+    description: "Calculate classes needed to hit attendance targets.",
+    category: "Education",
+    href: "/calculators/attendance",
+    icon: "GraduationCap",
+  },
+  {
+    id: "exam-percentage",
+    title: "Exam Percentage",
+    description: "Convert test scores and exam marks into a percentage.",
+    category: "Education",
+    href: "/calculators/exam-percentage",
+    icon: "GraduationCap",
+  },
+
 ];

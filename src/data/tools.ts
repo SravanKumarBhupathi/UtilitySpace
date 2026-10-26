@@ -46,6 +46,22 @@ export const tools: Item[] = [
 
   // Images
   {
+    id: "rotate-flip-image",
+    title: "Rotate & Flip Image",
+    description: "Rotate images left or right, and flip them horizontally or vertically.",
+    category: "Images",
+    href: "/tools/image/rotate-flip",
+    icon: "RotateCw",
+  },
+  {
+    id: "image-inspector",
+    title: "Image Inspector",
+    description: "View detailed dimensions, file size, and metadata for any image.",
+    category: "Images",
+    href: "/tools/image/inspector",
+    icon: "Info",
+  },
+  {
     id: "image-compressor",
     title: "Image Compressor",
     description: "Reduce image file size without losing quality.",
@@ -86,6 +102,38 @@ export const tools: Item[] = [
 
   // Text
   {
+    id: "reverse-text",
+    title: "Reverse Text",
+    description: "Reverse text by characters, words, or lines.",
+    category: "Text",
+    href: "/tools/text/reverse-text",
+    icon: "ArrowLeftRight",
+  },
+  {
+    id: "character-analyzer",
+    title: "Character Analyzer",
+    description: "Analyze text to find character counts, word density, and letter frequencies.",
+    category: "Text",
+    href: "/tools/text/character-analyzer",
+    icon: "Type",
+  },
+  {
+    id: "find-replace",
+    title: "Find and Replace",
+    description: "Find and replace text efficiently using regex or match case.",
+    category: "Text",
+    href: "/tools/text/find-replace",
+    icon: "Replace",
+  },
+  {
+    id: "text-compare",
+    title: "Text Compare",
+    description: "Check if two pieces of text are identical.",
+    category: "Text",
+    href: "/tools/text/text-compare",
+    icon: "FileText",
+  },
+  {
     id: "word-counter",
     title: "Word Counter",
     description: "Count words, characters, and sentences in your text.",
@@ -125,6 +173,38 @@ export const tools: Item[] = [
   },
 
   // Developer
+  {
+    id: "html-entities",
+    title: "HTML Entity Encoder",
+    description: "Safely encode special characters to HTML entities, or decode them.",
+    category: "Developer",
+    href: "/tools/developer/html-entities",
+    icon: "Code",
+  },
+  {
+    id: "regex-tester",
+    title: "Regex Tester",
+    description: "Test and debug JavaScript regular expressions.",
+    category: "Developer",
+    href: "/tools/developer/regex-tester",
+    icon: "Code2",
+  },
+  {
+    id: "hash-generator",
+    title: "Hash Generator",
+    description: "Generate cryptographic hashes (SHA-1, SHA-256) for any text.",
+    category: "Developer",
+    href: "/tools/developer/hash-generator",
+    icon: "Hash",
+  },
+  {
+    id: "xml-formatter",
+    title: "XML Formatter",
+    description: "Beautify, format, or minify XML code.",
+    category: "Developer",
+    href: "/tools/developer/xml-formatter",
+    icon: "Code2",
+  },
   {
     id: "json-formatter",
     title: "JSON Formatter",
@@ -173,6 +253,30 @@ export const tools: Item[] = [
   },
 
   // PDF
+  {
+    id: "add-pdf-page-numbers",
+    title: "Add Page Numbers",
+    description: "Easily insert page numbers into your PDF documents.",
+    category: "PDF",
+    href: "/tools/pdf/add-page-numbers",
+    icon: "PlusSquare",
+  },
+  {
+    id: "delete-pdf-pages",
+    title: "Delete PDF Pages",
+    description: "Remove specific pages from a PDF document.",
+    category: "PDF",
+    href: "/tools/pdf/delete-pages",
+    icon: "Trash2",
+  },
+  {
+    id: "rotate-pdf-pages",
+    title: "Rotate PDF Pages",
+    description: "Rotate all pages in a PDF document by 90, 180, or 270 degrees.",
+    category: "PDF",
+    href: "/tools/pdf/rotate-pages",
+    icon: "RotateCw",
+  },
   {
     id: "pdf-merger",
     title: "PDF Merger",
