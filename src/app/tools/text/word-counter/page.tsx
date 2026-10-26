@@ -20,10 +20,12 @@ export default function WordCounter() {
   const charactersNoSpaces = Array.from(text.replace(/\s+/g, '')).length;
 
   // Sentences handling more edge cases
-  const sentences = text.trim() ? (text.match(/[^.!?]+[.!?]+/g) || []).filter(s => s.trim().length > 0).length : 0;
+  // Bolt Optimization: Using single regex match is faster than match+filter
+  const sentences = text.trim() ? (text.match(/[^\s.!?][^.!?]*[.!?]+/g) || []).length : 0;
 
   // Paragraphs
-  const paragraphs = text.trim() ? text.split(/\n+/).filter(p => p.trim().length > 0).length : 0;
+  // Bolt Optimization: Using single regex match is faster than split+filter and reduces GC pressure
+  const paragraphs = text.trim() ? (text.match(/[^\r\n\s][^\r\n]*/g) || []).length : 0;
 
   const copyToClipboard = async () => {
     if (!text) return;
