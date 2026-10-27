@@ -4,12 +4,12 @@ import { MobileNavigation } from "./mobile-navigation";
 import { GlobalSearch } from "./global-search";
 
 const navLinks = [
-  { href: "/government-jobs", label: "Govt Jobs" },
-  { href: "/exam-tools", label: "Exam Tools" },
+
+
   { href: "/tools", label: "Tools" },
   { href: "/calculators", label: "Calculators" },
   { href: "/guides", label: "Guides" },
-  { href: "/knowledge", label: "Knowledge" },
+
   { href: "/blog", label: "Blog" },
 ];
 

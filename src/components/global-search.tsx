@@ -6,28 +6,16 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import commandScore from "command-score";
-import { tools, calculators, guides, knowledge, blogPosts } from "@/data";
+import { tools, calculators, guides, blogPosts } from "@/data";
 
 type SearchResult = {
   id: string;
   title: string;
   description: string;
   href: string;
-  type: "Tools" | "Calculators" | "Guides" | "Knowledge" | "Blog";
+  type: "Tools" | "Calculators" | "Guides" | "Blog";
   score: number;
 };
-
-// Bolt Optimization: Pre-compute search items outside component
-// Why: Prevents concatenating and mapping 5 separate arrays on every render/keystroke
-// Impact: Changes O(N) allocation + mapping to O(1) during search execution.
-//         Eliminates massive GC pressure when typing fast.
-const ALL_ITEMS: Omit<SearchResult, "score">[] = [
-  ...tools.map(t => ({ ...t, type: "Tools" as const })),
-  ...calculators.map(t => ({ ...t, type: "Calculators" as const })),
-  ...guides.map(t => ({ ...t, type: "Guides" as const })),
-  ...knowledge.map(t => ({ ...t, type: "Knowledge" as const })),
-  ...blogPosts.map(t => ({ ...t, type: "Blog" as const })),
-];
 
 export function GlobalSearch() {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -84,7 +72,14 @@ export function GlobalSearch() {
   const searchResults = React.useMemo(() => {
     if (!query) return [];
 
-    const results = ALL_ITEMS
+    const allItems: Omit<SearchResult, "score">[] = [
+      ...tools.map(t => ({ ...t, type: "Tools" as const })),
+      ...calculators.map(t => ({ ...t, type: "Calculators" as const })),
+      ...guides.map(t => ({ ...t, type: "Guides" as const })),
+      ...blogPosts.map(t => ({ ...t, type: "Blog" as const })),
+    ];
+
+    const results = allItems
       .map(item => ({
         ...item,
         score: commandScore(item.title, query)

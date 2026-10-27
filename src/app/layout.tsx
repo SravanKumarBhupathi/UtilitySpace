@@ -18,7 +18,7 @@ const manrope = Manrope({
 export const metadata: Metadata = {
   title: {
     template: "%s | UtilitySpace",
-    default: "UtilitySpace — Free Online Tools, Calculators & Practical Guides",
+    default: "UtilitySpace — Blog, Tools, Calculators & Practical Guides",
   },
   description: "Useful online tools, calculators and practical guides for everyday digital tasks. Convert, calculate, organize and learn with UtilitySpace.",
   metadataBase: new URL("https://utilityspace.online"),
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     canonical: '/',
   },
   openGraph: {
-    title: "UtilitySpace — Free Online Tools, Calculators & Practical Guides",
+    title: "UtilitySpace — Blog, Tools, Calculators & Practical Guides",
     description: "Useful online tools, calculators and practical guides for everyday digital tasks. Convert, calculate, organize and learn with UtilitySpace.",
     url: "https://utilityspace.online",
     siteName: "UtilitySpace",
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "UtilitySpace — Free Online Tools, Calculators & Practical Guides",
+    title: "UtilitySpace — Blog, Tools, Calculators & Practical Guides",
     description: "Useful online tools, calculators and practical guides for everyday digital tasks. Convert, calculate, organize and learn with UtilitySpace.",
   },
 };

@@ -1,10 +1,6 @@
 import { MetadataRoute } from 'next'
 import { guides } from '@/data/guides'
-import { knowledge } from '@/data/knowledge'
 import { blogPosts } from '@/data/blog'
-import { EXAM_DATABASE, EXAM_CATEGORIES } from '@/lib/data/exams'
-import { JOB_DATABASE, JOB_CATEGORIES } from '@/lib/data/jobs'
-
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://utilityspace.online'
@@ -14,8 +10,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/tools',
     '/calculators',
     '/guides',
-    '/knowledge',
-    '/blog',
     '/about',
     '/contact',
     '/privacy',
@@ -35,7 +29,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/tools/developer/json-formatter',
     '/tools/developer/timestamp',
     '/tools/developer/url-encoder',
-        '/tools/developer/uuid-generator',
+    '/tools/developer/uuid-generator',
     '/tools/developer/jwt-decoder',
     '/tools/text/remove-blank-lines',
     '/tools/text/sort-lines',
@@ -70,11 +64,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/calculators/profit-loss',
     '/calculators/attendance',
     '/calculators/exam-percentage',
-    // Exam Tools
-    '/exam-tools',
-    '/exam-tools/custom',
-    // Government Jobs
-    '/government-jobs',
   ]
 
   const sitemapRoutes = staticRoutes.map((route) => ({
@@ -91,13 +80,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }))
 
-  const knowledgeRoutes = knowledge.map((item) => ({
-    url: `${baseUrl}${item.href}`,
-    lastModified: new Date(),
-    changeFrequency: 'monthly' as const,
-    priority: 0.6,
-  }))
-
   const blogRoutes = blogPosts.map((post) => ({
     url: `${baseUrl}${post.href}`,
     lastModified: new Date(),
@@ -106,33 +88,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }))
 
 
-  const examCategoryRoutes = EXAM_CATEGORIES.map((category) => ({
-    url: `${baseUrl}/exam-tools/${category.toLowerCase().replace(/\\s+/g, '-')}`,
-    lastModified: new Date(),
-    changeFrequency: 'weekly' as const,
-    priority: 0.7,
-  }))
-
-  const examRoutes = EXAM_DATABASE.filter(exam => exam.active).map((exam) => ({
-    url: `${baseUrl}/exam-tools/${exam.category.toLowerCase().replace(/\\s+/g, '-')}/${exam.slug}`,
-    lastModified: new Date(),
-    changeFrequency: 'weekly' as const,
-    priority: 0.8,
-  }))
-
-const jobCategoryRoutes = JOB_CATEGORIES.map((category) => ({
-    url: `${baseUrl}/government-jobs?category=${encodeURIComponent(category)}`,
-    lastModified: new Date(),
-    changeFrequency: 'weekly' as const,
-    priority: 0.7,
-  }))
-
-  const jobRoutes = JOB_DATABASE.filter(job => job.applicationStatus !== 'unverified').map((job) => ({
-    url: `${baseUrl}/government-jobs/${job.slug}`,
-    lastModified: new Date(job.lastUpdated || new Date()),
-    changeFrequency: 'weekly' as const,
-    priority: 0.8,
-  }))
-
-  return [...sitemapRoutes, ...guideRoutes, ...knowledgeRoutes, ...blogRoutes, ...examCategoryRoutes, ...examRoutes, ...jobCategoryRoutes, ...jobRoutes]
+  return [...sitemapRoutes, ...guideRoutes, ...blogRoutes]
 }

@@ -6,7 +6,6 @@ import { SafeImage } from "@/components/safe-image";
 import { blogPosts } from "@/data/blog";
 import { blogContent } from "@/data/blog-content";
 import { Card, CardContent } from "@/components/ui/card";
-import DOMPurify from 'isomorphic-dompurify';
 
 export function generateStaticParams() {
   return blogPosts.map((post) => {
@@ -102,7 +101,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
         </div>
 
         <article className="prose prose-slate dark:prose-invert prose-lg prose-headings:font-heading prose-headings:font-bold prose-a:text-primary max-w-3xl mx-auto text-foreground/90">
-          <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(content.html) }} />
+          <div dangerouslySetInnerHTML={{ __html: content.html }} />
         </article>
 
         {content.relatedIds && content.relatedIds.length > 0 && (
