@@ -1,19 +1,11 @@
 import Link from "next/link";
-import { calculators } from "@/data";
+import { calculators } from "@/data/calculators";
+import { getIcon } from "@/lib/icons";
 import { Card, CardContent } from "@/components/ui/card";
-import { Percent, CalendarDays, Tags, Calculator as CalcIcon, Receipt, GraduationCap } from "lucide-react";
 
-const getIcon = (name: string, className?: string) => {
-  const icons: Record<string, React.ReactNode> = {
-    Percent: <Percent className={className} />,
-    CalendarDays: <CalendarDays className={className} />,
-    Tags: <Tags className={className} />,
-    Calculator: <CalcIcon className={className} />,
-    Receipt: <Receipt className={className} />,
-    GraduationCap: <GraduationCap className={className} />,
-  };
-  return icons[name] || <CalcIcon className={className} />;
-};
+
+
+
 
 export default function CalculatorsIndex() {
   const categories = Array.from(new Set(calculators.map(c => c.category)));

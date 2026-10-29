@@ -1,24 +1,12 @@
 import Link from "next/link";
-import { tools, toolCategories } from "@/data";
+import { tools } from "@/data/tools";
+import { toolCategories } from "@/data/categories";
+import { getIcon } from "@/lib/icons";
 import { Card, CardContent } from "@/components/ui/card";
-import { FileText, Image as ImageIcon, Type, Code, GraduationCap, Files } from "lucide-react";
 
-const getIcon = (name: string, className?: string) => {
-  const icons: Record<string, React.ReactNode> = {
-    FileText: <FileText className={className} />,
-    Image: <ImageIcon className={className} />,
-    ImageMinus: <ImageIcon className={className} />,
-    Maximize: <ImageIcon className={className} />,
-    Type: <Type className={className} />,
-    CaseSensitive: <Type className={className} />,
-    Code: <Code className={className} />,
-    Braces: <Code className={className} />,
-    GraduationCap: <GraduationCap className={className} />,
-    Files: <Files className={className} />,
-    Minimize: <FileText className={className} />
-  };
-  return icons[name] || <FileText className={className} />;
-};
+
+
+
 
 export default function ToolsIndex() {
   return (

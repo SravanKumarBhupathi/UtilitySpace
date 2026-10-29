@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { guides } from "@/data";
+import { guides } from "@/data/guides";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight } from "lucide-react";
 
