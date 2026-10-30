@@ -1,13 +1,15 @@
-1. **Homepage Search Bar (Task 1)**
-   - The issue arises because `src/app/page.tsx` dispatches `open-global-search`, which is caught by `src/components/global-search.tsx` causing it to open its separate modal overlay.
-   - Fix: Move the actual search logic into a reusable hook or directly implement an inline combobox (or independent search input with dropdown) inside the Hero section of `src/app/page.tsx`. This avoids invoking the global header modal.
-   - Adjust dimensions to 56-60px height, ~680px max-width, single line input with absolute positioned suggestions directly beneath it. Make sure keyboard navigation works internally.
-
-2. **About Page Improvement (Task 2 & 3)**
-   - Overhaul `src/app/about/page.tsx`. Implement the requested sections: What is UtilitySpace, Explore Our Tools, Online Calculators, Guides, Our Approach, Explore CTA, Final Navigation.
-   - Setup SEO correctly using Next.js Metadata API for `title`, `description`, `alternates.canonical` pointing to `https://utilityspace.online/about`. Ensure natural wording without keyword stuffing.
-
-3. **Design Consistency & Validation (Task 4, 5 & 6)**
-   - Ensure components use standard UI primitives (`text-primary`, `bg-card`, etc.).
-   - Verify layout spacing and responsiveness.
-   - Run tests and static build. Update FINAL_REPORT.md.
+1. **Remove Redirect (Root Cause)**: Remove the client-side redirect logic in `src/app/blog/page.tsx` which causes `/blog` to redirect to `/`.
+2. **Create Blog Listing Page (`src/app/blog/page.tsx`)**:
+   - Implement "Explore Our Blog" hero section.
+   - Implement "Featured Article" section (Section A) dynamically fetching the first/featured item from `src/data/blog.ts`.
+   - Implement "Latest Articles" grid (Section B) mapping over the remaining blog articles.
+   - Implement Blog-specific search/filter (Section C) client-side.
+   - Use established UI components (Card, Button, inputs) matching the UtilitySpace theme.
+3. **Blog SEO Metadata (Task 5)**:
+   - Use Next.js Metadata API for `src/app/blog/page.tsx` since we need to remove `"use client"` from the layout level or split the page into a server-side metadata component and client-side list component.
+4. **Navigation & Article Validation (Task 3 & 4)**:
+   - Verify `src/components/header.tsx`, `src/components/footer.tsx`, and homepage links correctly point to `/blog`.
+   - Verify individual blog articles navigate to `/blog/[slug]`.
+5. **Technical Validation & Report (Task 7 & 8)**:
+   - Run tests, builds, and linting.
+   - Update `FINAL_REPORT.md` comprehensively covering root cause, implementations, and validations.

@@ -88,5 +88,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }))
 
 
-  return [...sitemapRoutes, ...guideRoutes, ...blogRoutes]
+  return [
+    {
+      url: `${baseUrl}/blog`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },...sitemapRoutes, ...guideRoutes, ...blogRoutes]
 }
