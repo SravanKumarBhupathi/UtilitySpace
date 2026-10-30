@@ -1,12 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Clock, ShieldCheck, Zap, Lock, HardDrive } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
 import { tools } from "@/data/tools";
 import { calculators } from "@/data/calculators";
+import { guides } from "@/data/guides";
+import { blogPosts } from "@/data/blog";
 import { toolCategories } from "@/data/categories";
 import { getIcon } from "@/lib/icons";
 
@@ -33,13 +35,22 @@ export default function Home() {
     "profit-loss"
   ].map(id => calculators.find(c => c.id === id)).filter(Boolean);
 
-  // We are asked to use 4 specific categories based on the requirements
+  const featuredGuides = [
+    "how-to-compress-a-pdf",
+    "how-to-resize-an-image",
+    "how-to-convert-images",
+    "how-to-calculate-percentages"
+  ].map(id => guides.find(g => g.id === id)).filter(Boolean);
+
+  const recentPosts = blogPosts.slice(0, 3);
+
   const targetCategories = [
     { name: "PDF", desc: "Compress, merge, split, and manage PDF files.", href: "/tools/pdf" },
     { name: "Images", desc: "Resize, compress, convert, and edit images.", href: "/tools/images" },
     { name: "Text", desc: "Count words, convert text cases, compare and clean text.", href: "/tools/text" },
     { name: "Developer", desc: "Format JSON, encode URLs, generate hashes, and use development utilities.", href: "/tools/developer" }
   ];
+
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -191,15 +202,123 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Trust Banner */}
-      <section className="py-16 bg-primary text-white px-4 text-center mt-auto">
-        <div className="container mx-auto max-w-3xl space-y-4">
-          <h2 className="font-heading text-2xl md:text-3xl font-bold tracking-tight">
-            Privacy first, always.
-          </h2>
-          <p className="text-white/80 max-w-2xl mx-auto">
-            Most of our tools process files entirely in your browser. No hidden tracking, no unnecessary accounts.
-          </p>
+
+      {/* Helpful Guides */}
+      <section className="py-16 bg-background px-4 border-b border-border">
+        <div className="container mx-auto max-w-7xl">
+          <div className="mb-10 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+            <div>
+              <h2 className="font-heading text-3xl font-bold tracking-tight text-foreground">Helpful Guides</h2>
+              <p className="text-secondary-text mt-2">Simple guides to help you get things done faster.</p>
+            </div>
+            <Button variant="outline" asChild className="group shrink-0">
+              <Link href="/guides">Explore All Guides <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" /></Link>
+            </Button>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {featuredGuides.map(guide => guide && (
+              <Link key={guide.id} href={guide.href} className="group block">
+                <Card className="h-full hover:border-primary/50 transition-all bg-card">
+                  <CardContent className="p-6 flex flex-col h-full justify-between">
+                    <div>
+                      <p className="text-xs font-semibold text-primary uppercase tracking-wider mb-2">{guide.category}</p>
+                      <h3 className="font-heading font-bold text-xl text-foreground mb-2 group-hover:text-primary transition-colors">
+                        {guide.title}
+                      </h3>
+                      <p className="text-sm text-secondary-text leading-relaxed line-clamp-2 mb-4">
+                        {guide.description}
+                      </p>
+                    </div>
+                    <div className="flex items-center justify-between text-sm mt-auto pt-4 border-t border-border">
+                      <span className="font-medium text-secondary-text flex items-center">
+                        <Clock className="w-4 h-4 mr-1.5" /> {'readingTime' in guide ? String(guide.readingTime) : ''}
+                      </span>
+                      <span className="font-medium text-primary flex items-center group-hover:underline">
+                        Read Guide <ArrowRight className="ml-1 w-4 h-4" />
+                      </span>
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Latest Insights & Articles */}
+      <section className="py-16 bg-card px-4 border-b border-border">
+        <div className="container mx-auto max-w-7xl">
+          <div className="mb-10 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+            <div>
+              <h2 className="font-heading text-3xl font-bold tracking-tight text-foreground">Latest Insights & Articles</h2>
+              <p className="text-secondary-text mt-2">Thoughts, tips, and updates on making digital tasks easier.</p>
+            </div>
+            <Button variant="outline" asChild className="group shrink-0">
+              <Link href="/blog">Explore All Articles <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" /></Link>
+            </Button>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {recentPosts.map(post => (
+              <Link key={post.id} href={post.href} className="group block">
+                <Card className="h-full hover:border-primary/50 transition-all bg-background">
+                  <CardContent className="p-6 flex flex-col h-full">
+                    <div className="flex items-center gap-3 mb-4 text-sm text-secondary-text">
+                      <span className="font-medium text-primary bg-primary/10 px-2 py-0.5 rounded text-xs">{post.category}</span>
+                      <span>{post.date}</span>
+                    </div>
+                    <h3 className="font-heading font-bold text-lg text-foreground mb-3 group-hover:text-primary transition-colors line-clamp-2">
+                       {post.title}
+                    </h3>
+                    <p className="text-secondary-text leading-relaxed text-sm mb-6 flex-1 line-clamp-3">{post.description}</p>
+                    <div className="flex items-center text-sm font-medium text-primary group-hover:underline mt-auto pt-4 border-t border-border">
+                       Read article <ArrowRight className="ml-1 w-4 h-4" />
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Trust & Privacy Benefits */}
+      <section className="py-16 bg-background px-4">
+        <div className="container mx-auto max-w-7xl">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="flex flex-col items-center text-center p-4">
+               <div className="w-12 h-12 bg-primary/10 text-primary rounded-full flex items-center justify-center mb-4">
+                 <Zap className="w-6 h-6" />
+               </div>
+               <h3 className="font-heading font-semibold text-lg text-foreground mb-2">Free online tools</h3>
+               <p className="text-sm text-secondary-text">Access our complete collection of utilities without paying a dime.</p>
+            </div>
+
+            <div className="flex flex-col items-center text-center p-4">
+               <div className="w-12 h-12 bg-primary/10 text-primary rounded-full flex items-center justify-center mb-4">
+                 <ShieldCheck className="w-6 h-6" />
+               </div>
+               <h3 className="font-heading font-semibold text-lg text-foreground mb-2">Simple and easy-to-use</h3>
+               <p className="text-sm text-secondary-text">Clean interfaces designed to get your tasks done instantly.</p>
+            </div>
+
+            <div className="flex flex-col items-center text-center p-4">
+               <div className="w-12 h-12 bg-primary/10 text-primary rounded-full flex items-center justify-center mb-4">
+                 <Lock className="w-6 h-6" />
+               </div>
+               <h3 className="font-heading font-semibold text-lg text-foreground mb-2">No account required</h3>
+               <p className="text-secondary-text text-sm">Jump right in. We don&apos;t ask you to sign up before using our tools.</p>
+            </div>
+
+            <div className="flex flex-col items-center text-center p-4">
+               <div className="w-12 h-12 bg-primary/10 text-primary rounded-full flex items-center justify-center mb-4">
+                 <HardDrive className="w-6 h-6" />
+               </div>
+               <h3 className="font-heading font-semibold text-lg text-foreground mb-2">Browser-based processing</h3>
+               <p className="text-secondary-text text-sm">Files stay on your device for verified client-side tools.</p>
+            </div>
+          </div>
         </div>
       </section>
 
