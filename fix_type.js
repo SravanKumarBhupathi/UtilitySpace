@@ -1,5 +1,10 @@
 const fs = require('fs');
-let code = fs.readFileSync('src/app/page.tsx', 'utf8');
-code = code.replace("{guide.readingTime}", "{'readingTime' in guide ? String(guide.readingTime) : ''}");
-fs.writeFileSync('src/app/page.tsx', code);
+
+let heroSearch = fs.readFileSync('src/components/hero-search.tsx', 'utf8');
+heroSearch = heroSearch.replace(
+    "document.querySelector('input[placeholder=\"Search tools, calculators, and guides...\"]')?.focus();",
+    "(document.querySelector('input[placeholder=\"Search tools, calculators, and guides...\"]') as HTMLInputElement)?.focus();"
+);
+
+fs.writeFileSync('src/components/hero-search.tsx', heroSearch);
 console.log("Fixed type error");

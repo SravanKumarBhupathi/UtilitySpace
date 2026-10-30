@@ -60,3 +60,10 @@
 - Implemented robust focus states and maintained dark/light support out of the box using `bg-background` and `bg-card`.
 - Removed obsolete test files.
 - Functional validation verified standard destinations routing internally.
+
+## Phase 4 & Task Polish
+- Resolved global search overlap by instantiating an independent, completely isolated `HeroSearch` component (`src/components/hero-search.tsx`) for the homepage, keeping the header navigation unpolluted.
+- Adjusted homepage hero search container to match dimensions: single-line max width ~680px, with absolute positioned drop-downs directly underneath it.
+- Integrated custom internal state management mapping exact query keywords, preventing unwanted navigation state propagation.
+- Overhauled `src/app/about/page.tsx` entirely adding correct `Next.js Metadata` schema, mapping exact tool descriptions, listing calculators, creating clear CTAs mapping back to homepage/subcategories.
+- Verified visual alignments and functional grid responsiveness using Next.js build and layout rules. Playwright check ran cleanly on previous tests.

@@ -11,6 +11,7 @@ import { guides } from "@/data/guides";
 import { blogPosts } from "@/data/blog";
 import { toolCategories } from "@/data/categories";
 import { getIcon } from "@/lib/icons";
+import { HeroSearch } from "@/components/hero-search";
 
 export default function Home() {
   const popularTools = [
@@ -65,25 +66,14 @@ export default function Home() {
           </p>
 
           <div className="max-w-2xl mx-auto mt-8">
-            <div
-              className="flex items-center space-x-2 border-2 border-primary/20 rounded-full px-6 py-4 bg-card hover:border-primary/50 transition-colors cursor-pointer shadow-sm"
-              onClick={() => {
-                window.dispatchEvent(new CustomEvent('open-global-search'));
-              }}
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-secondary-text"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-              <span className="text-lg text-secondary-text flex-1 text-left">Search tools, calculators, and guides...</span>
-              <kbd className="hidden sm:inline-flex h-6 items-center gap-1 rounded border border-border bg-muted px-2 font-mono text-sm font-medium text-secondary-text">
-                <span className="text-xs">⌘</span>K
-              </kbd>
-            </div>
+            <HeroSearch />
 
             <div className="mt-6 flex flex-wrap justify-center gap-2">
               {['PDF Compressor', 'Image Compressor', 'Word Counter', 'JSON Formatter', 'Percentage Calculator'].map(term => (
                  <button
                    key={term}
                    onClick={() => {
-                      window.dispatchEvent(new CustomEvent('open-global-search', { detail: { query: term } }));
+                      window.dispatchEvent(new CustomEvent('open-hero-search', { detail: { query: term } }));
                    }}
                    className="text-sm px-4 py-2 rounded-full bg-muted border border-border text-secondary-foreground hover:bg-primary/10 hover:text-primary hover:border-primary/30 transition-colors"
                  >

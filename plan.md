@@ -1,13 +1,13 @@
-1. **Verify Homepage Order (Section 1)**
-   - The hierarchy is already largely correct (`src/app/page.tsx`). Global header -> Hero -> Categories -> Popular Tools -> Calculators -> Guides -> Blog -> Trust -> Footer.
-2. **Responsive and Accessibility Testing (Section 2 & 4)**
-   - Add Playwright tests to verify standard layout boundaries and visible focus states. Add any missing `aria-label` or role attributes where appropriate (e.g., search icon buttons, mobile navigation).
-3. **Theme Testing (Section 3)**
-   - Ensure the theme toggle operates efficiently and the classes used (e.g., `bg-background`, `text-foreground`, `bg-card`, `border-border`) apply uniformly.
-4. **Functional Testing (Section 5)**
-   - Ensure all links rendered point to existing routes. The data relies on standard IDs resolving successfully. Use `fs` to manually check if corresponding files exist inside `src/app/`.
-5. **Technical Validation (Section 6)**
-   - Ensure `npm run build` is warning-free. Address unescaped entities, broken Image usage (if applicable from the `<img>` warnings earlier), and ensure type integrity.
-6. **Cleanup and Final Report (Section 7 & 8)**
-   - Clean up old obsolete files if we created redundant ones. Update `FINAL_REPORT.md` comprehensively covering all phases.
-7. Complete pre-commit verifications, review, and reflection.
+1. **Homepage Search Bar (Task 1)**
+   - The issue arises because `src/app/page.tsx` dispatches `open-global-search`, which is caught by `src/components/global-search.tsx` causing it to open its separate modal overlay.
+   - Fix: Move the actual search logic into a reusable hook or directly implement an inline combobox (or independent search input with dropdown) inside the Hero section of `src/app/page.tsx`. This avoids invoking the global header modal.
+   - Adjust dimensions to 56-60px height, ~680px max-width, single line input with absolute positioned suggestions directly beneath it. Make sure keyboard navigation works internally.
+
+2. **About Page Improvement (Task 2 & 3)**
+   - Overhaul `src/app/about/page.tsx`. Implement the requested sections: What is UtilitySpace, Explore Our Tools, Online Calculators, Guides, Our Approach, Explore CTA, Final Navigation.
+   - Setup SEO correctly using Next.js Metadata API for `title`, `description`, `alternates.canonical` pointing to `https://utilityspace.online/about`. Ensure natural wording without keyword stuffing.
+
+3. **Design Consistency & Validation (Task 4, 5 & 6)**
+   - Ensure components use standard UI primitives (`text-primary`, `bg-card`, etc.).
+   - Verify layout spacing and responsiveness.
+   - Run tests and static build. Update FINAL_REPORT.md.

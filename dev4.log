@@ -1,0 +1,14 @@
+
+> utilityspace@0.1.0 dev
+> next dev
+
+   ▲ Next.js 14.1.4
+   - Local:        http://localhost:3000
+
+ ✓ Ready in 2.3s
+ ○ Compiling / ...
+ ✓ Compiled / in 7.8s (3486 modules)
+ ✓ Compiled in 1346ms (1733 modules)
+ ○ Compiling /about ...
+ ✓ Compiled /about in 1650ms (3483 modules)
+[?25h
