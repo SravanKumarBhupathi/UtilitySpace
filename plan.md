@@ -1,16 +1,13 @@
-1. **Helpful Guides (Section 1)**
-   - Add a new section in `src/app/page.tsx` titled "Helpful Guides" right below the Calculators section.
-   - Fetch 4 specific existing guides from `src/data/guides.ts` based on title or ID.
-   - Design matching Phase 2 UI specs. Add an "Explore All Guides" button.
-2. **Blog Articles (Section 2)**
-   - Add a new section "Latest Insights & Articles" below Guides.
-   - Map top 3-4 posts from `src/data/blog.ts` displaying category, date, title, description, and link.
-   - Add "Explore All Articles" button.
-3. **Trust & Privacy (Section 3)**
-   - Replace the old "Trust Banner" block with a modern "Compact benefits" block.
-   - Use the text requested: Free online tools, Simple interface, No account required, Browser-based processing.
-4. **Footer Redesign (Section 4)**
-   - Edit `src/components/footer.tsx` to match the exact link structure requested in the prompt. Replace 'UtilitySpace' with 'UtilitySpace.online'.
-   - Ensure dynamic year and correct categorizations (Tools with subset tools, Calculators, Content, Information).
-5. **Validation (Section 6)**
-   - Run tests, builds, linting, visual Playwright script.
+1. **Verify Homepage Order (Section 1)**
+   - The hierarchy is already largely correct (`src/app/page.tsx`). Global header -> Hero -> Categories -> Popular Tools -> Calculators -> Guides -> Blog -> Trust -> Footer.
+2. **Responsive and Accessibility Testing (Section 2 & 4)**
+   - Add Playwright tests to verify standard layout boundaries and visible focus states. Add any missing `aria-label` or role attributes where appropriate (e.g., search icon buttons, mobile navigation).
+3. **Theme Testing (Section 3)**
+   - Ensure the theme toggle operates efficiently and the classes used (e.g., `bg-background`, `text-foreground`, `bg-card`, `border-border`) apply uniformly.
+4. **Functional Testing (Section 5)**
+   - Ensure all links rendered point to existing routes. The data relies on standard IDs resolving successfully. Use `fs` to manually check if corresponding files exist inside `src/app/`.
+5. **Technical Validation (Section 6)**
+   - Ensure `npm run build` is warning-free. Address unescaped entities, broken Image usage (if applicable from the `<img>` warnings earlier), and ensure type integrity.
+6. **Cleanup and Final Report (Section 7 & 8)**
+   - Clean up old obsolete files if we created redundant ones. Update `FINAL_REPORT.md` comprehensively covering all phases.
+7. Complete pre-commit verifications, review, and reflection.
