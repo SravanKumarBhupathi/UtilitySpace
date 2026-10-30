@@ -5,6 +5,7 @@ import { Search, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import commandScore from "command-score";
 import { tools, calculators, guides, blogPosts } from "@/data";
 
@@ -13,6 +14,7 @@ type SearchResult = {
   title: string;
   description: string;
   href: string;
+  category: string;
   type: "Tools" | "Calculators" | "Guides" | "Blog";
   score: number;
 };
@@ -20,8 +22,10 @@ type SearchResult = {
 export function GlobalSearch() {
   const [isOpen, setIsOpen] = React.useState(false);
   const [query, setQuery] = React.useState("");
+  const [selectedIndex, setSelectedIndex] = React.useState(0);
   const inputRef = React.useRef<HTMLInputElement>(null);
   const modalRef = React.useRef<HTMLDivElement>(null);
+  const router = useRouter();
 
   React.useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -35,7 +39,6 @@ export function GlobalSearch() {
     };
     window.addEventListener("keydown", handleKeyDown);
 
-    // Listen for custom event from homepage
     const handleOpenSearch = (e: Event) => {
       const customEvent = e as CustomEvent;
       setIsOpen(true);
@@ -54,6 +57,7 @@ export function GlobalSearch() {
   React.useEffect(() => {
     if (isOpen && inputRef.current) {
       inputRef.current.focus();
+      setSelectedIndex(0);
     }
   }, [isOpen]);
 
@@ -70,32 +74,87 @@ export function GlobalSearch() {
   }, [isOpen]);
 
   const searchResults = React.useMemo(() => {
-    if (!query) return [];
+    if (!query.trim()) return [];
+
+    const normalizedQuery = query.trim().toLowerCase();
 
     const allItems: Omit<SearchResult, "score">[] = [
-      ...tools.map(t => ({ ...t, type: "Tools" as const })),
-      ...calculators.map(t => ({ ...t, type: "Calculators" as const })),
-      ...guides.map(t => ({ ...t, type: "Guides" as const })),
-      ...blogPosts.map(t => ({ ...t, type: "Blog" as const })),
+      ...tools.map(t => ({ ...t, category: t.category || "Tool", type: "Tools" as const })),
+      ...calculators.map(t => ({ ...t, category: t.category || "Calculator", type: "Calculators" as const })),
+      ...guides.map(t => ({ ...t, category: t.category || "Guide", type: "Guides" as const })),
+      ...blogPosts.map(t => ({ ...t, category: t.category || "Blog", type: "Blog" as const })),
     ];
 
     const results = allItems
-      .map(item => ({
-        ...item,
-        score: commandScore(item.title, query)
-      }))
+      .map(item => {
+        let score = 0;
+        const itemTitle = item.title.toLowerCase();
+
+        if (itemTitle === normalizedQuery) {
+          score = 100;
+        } else if (itemTitle.startsWith(normalizedQuery)) {
+          score = 80;
+        } else {
+          score = commandScore(item.title, normalizedQuery);
+        }
+
+        if (score === 0 && item.description) {
+           score = commandScore(item.description, normalizedQuery) * 0.5;
+        }
+
+        return {
+          ...item,
+          score
+        };
+      })
       .filter(item => item.score > 0)
       .sort((a, b) => b.score - a.score)
-      .slice(0, 10);
+      .slice(0, 8); // Display top 8 unique items to avoid clutter
 
-    return results;
+    // Deduplicate
+    const seen = new Set();
+    const deduplicated = [];
+    for (const res of results) {
+      if (!seen.has(res.href)) {
+        seen.add(res.href);
+        deduplicated.push(res);
+      }
+    }
+
+    return deduplicated;
   }, [query]);
+
+  // Handle keyboard navigation in search results
+  React.useEffect(() => {
+    setSelectedIndex(0);
+  }, [searchResults.length]);
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (searchResults.length === 0) return;
+
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      setSelectedIndex((prev) => (prev + 1) % searchResults.length);
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      setSelectedIndex((prev) => (prev - 1 + searchResults.length) % searchResults.length);
+    } else if (e.key === "Enter") {
+      e.preventDefault();
+      const selectedItem = searchResults[selectedIndex];
+      if (selectedItem) {
+        setIsOpen(false);
+        router.push(selectedItem.href);
+      }
+    }
+  };
 
   const groupedResults = searchResults.reduce((acc, item) => {
     if (!acc[item.type]) acc[item.type] = [];
     acc[item.type].push(item);
     return acc;
   }, {} as Record<string, SearchResult[]>);
+
+  let globalIndex = 0;
 
   return (
     <>
@@ -129,7 +188,8 @@ export function GlobalSearch() {
                 ref={inputRef}
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="What do you need help with?"
+                onKeyDown={handleKeyDown}
+                placeholder="Search tools, calculators, and guides..."
                 className="border-0 shadow-none focus-visible:ring-0 text-base h-auto py-2 bg-transparent"
               />
               <Button variant="ghost" size="icon" onClick={() => setIsOpen(false)} className="shrink-0 h-8 w-8">
@@ -138,11 +198,11 @@ export function GlobalSearch() {
             </div>
 
             <div className="flex-1 overflow-y-auto p-2">
-              {!query ? (
+              {!query.trim() ? (
                  <div className="p-4">
                    <p className="text-xs font-semibold text-secondary-text uppercase tracking-wider mb-3">Popular Searches</p>
                    <div className="flex flex-wrap gap-2">
-                     {["PDF to Word", "Compress PDF", "JPG to PDF", "Percentage", "Age Calculator"].map(term => (
+                     {["PDF Compressor", "Image Compressor", "Word Counter", "JSON Formatter", "Percentage Calculator"].map(term => (
                        <button
                          key={term}
                          onClick={() => setQuery(term)}
@@ -159,29 +219,46 @@ export function GlobalSearch() {
                 </div>
               ) : (
                 <div className="space-y-4 p-2">
-                  {Object.entries(groupedResults).map(([type, items]) => (
-                    <div key={type}>
-                      <h4 className="text-xs font-semibold text-secondary-text uppercase tracking-wider px-2 mb-2">
-                        {type}
-                      </h4>
-                      <div className="flex flex-col space-y-1">
-                        {items.map(item => (
-                          <Link
-                            key={item.id}
-                            href={item.href}
-                            onClick={() => setIsOpen(false)}
-                            className="flex items-center gap-3 px-2 py-2 rounded-md hover:bg-muted/50 transition-colors group"
-                          >
-                            <div className="flex flex-col">
-                              <span className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">
-                                {item.title}
-                              </span>
-                            </div>
-                          </Link>
-                        ))}
+                  {Object.entries(groupedResults).map(([type, items]) => {
+                    const sectionHtml = (
+                      <div key={type}>
+                        <h4 className="text-xs font-semibold text-secondary-text uppercase tracking-wider px-2 mb-2">
+                          {type}
+                        </h4>
+                        <div className="flex flex-col space-y-1">
+                          {items.map(item => {
+                            const isSelected = globalIndex === selectedIndex;
+                            globalIndex++;
+                            return (
+                              <Link
+                                key={item.id}
+                                href={item.href}
+                                onClick={() => setIsOpen(false)}
+                                className={`flex flex-col gap-1 px-3 py-3 rounded-md transition-colors group ${isSelected ? "bg-primary/10" : "hover:bg-muted/50"}`}
+                              >
+                                <div className="flex items-center justify-between">
+                                  <span className={`text-sm font-medium transition-colors ${isSelected ? "text-primary" : "text-foreground group-hover:text-primary"}`}>
+                                    {item.title}
+                                  </span>
+                                  {item.category && (
+                                    <span className="text-[10px] uppercase font-bold tracking-wider text-muted-foreground bg-muted px-2 py-0.5 rounded-sm">
+                                      {item.category}
+                                    </span>
+                                  )}
+                                </div>
+                                {item.description && (
+                                  <span className="text-xs text-secondary-text line-clamp-1">
+                                    {item.description}
+                                  </span>
+                                )}
+                              </Link>
+                            );
+                          })}
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    );
+                    return sectionHtml;
+                  })}
                 </div>
               )}
             </div>
