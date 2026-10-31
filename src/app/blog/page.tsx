@@ -1,10 +1,85 @@
-"use client";
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
-export default function RedirectBlog() {
-  const router = useRouter();
-  useEffect(() => {
-    router.replace("/");
-  }, [router]);
-  return null;
+import { Metadata } from "next";
+import Link from "next/link";
+import { ArrowRight, Search, Clock } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { blogPosts } from "@/data/blog";
+import { BlogListClient } from "./client-list";
+
+export const metadata: Metadata = {
+  title: "Blog | Helpful Articles, Tips & Insights - UtilitySpace",
+  description: "Explore useful articles, practical tips, and informative guides on UtilitySpace.",
+  alternates: {
+    canonical: "https://utilityspace.online/blog"
+  }
+};
+
+export default function BlogPage() {
+  const featuredPost = blogPosts[0];
+  const remainingPosts = blogPosts.slice(1);
+
+  return (
+    <div className="flex flex-col min-h-screen bg-background">
+
+      {/* Page Hero */}
+      <section className="pt-20 pb-16 px-4 border-b border-border bg-card text-center">
+        <div className="container mx-auto max-w-4xl space-y-6">
+          <h1 className="font-heading text-4xl md:text-5xl font-extrabold tracking-tight text-foreground">
+            Explore Our Blog
+          </h1>
+          <p className="text-lg md:text-xl text-secondary-text leading-relaxed max-w-3xl mx-auto">
+            Discover helpful articles, practical tips, digital tools, and useful insights to make everyday tasks easier.
+          </p>
+        </div>
+      </section>
+
+      {/* Featured Article */}
+      {featuredPost && (
+        <section className="py-16 px-4 border-b border-border bg-background">
+          <div className="container mx-auto max-w-5xl">
+            <h2 className="font-heading text-2xl font-bold tracking-tight text-foreground mb-8">Featured Article</h2>
+            <Link href={featuredPost.href} className="group block">
+              <div className="flex flex-col md:flex-row bg-card border border-border rounded-2xl overflow-hidden hover:border-primary/50 hover:shadow-lg transition-all">
+                {/* Fallback image block since we dont have explicit featured images yet */}
+                <div className="w-full md:w-1/2 bg-muted p-12 flex flex-col justify-center items-center border-b md:border-b-0 md:border-r border-border text-center">
+                   <div className="w-20 h-20 bg-primary/10 text-primary rounded-2xl flex items-center justify-center mb-6">
+                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                   </div>
+                   <span className="font-bold text-lg text-foreground group-hover:text-primary transition-colors">
+                     {featuredPost.category}
+                   </span>
+                </div>
+
+                <div className="w-full md:w-1/2 p-8 md:p-10 flex flex-col justify-center">
+                  <div className="flex items-center gap-3 mb-4 text-sm text-secondary-text font-medium">
+                    <span className="bg-primary/10 text-primary px-3 py-1 rounded-full text-xs uppercase tracking-wider">{featuredPost.category}</span>
+                    <span>{featuredPost.date}</span>
+                    <span className="flex items-center"><Clock className="w-4 h-4 mr-1.5" /> {featuredPost.readingTime}</span>
+                  </div>
+                  <h3 className="font-heading font-bold text-3xl text-foreground mb-4 group-hover:text-primary transition-colors line-clamp-2">
+                    {featuredPost.title}
+                  </h3>
+                  <p className="text-lg text-secondary-text leading-relaxed mb-8 line-clamp-3">
+                    {featuredPost.description}
+                  </p>
+                  <div className="mt-auto">
+                    <span className="inline-flex items-center font-bold text-primary group-hover:underline">
+                      Read Article <ArrowRight className="ml-2 w-5 h-5" />
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </Link>
+          </div>
+        </section>
+      )}
+
+      {/* Latest Articles + Client Side Search */}
+      <section className="py-16 px-4 bg-card">
+         <div className="container mx-auto max-w-7xl">
+           <BlogListClient initialPosts={remainingPosts} />
+         </div>
+      </section>
+
+    </div>
+  );
 }

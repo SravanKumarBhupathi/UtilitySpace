@@ -1,4 +1,4 @@
-export type Category = "Finance" | "Math" | "Time & Date" | "Education" | "PDF" | "Images" | "Text" | "Developer" | "Student" | "Files" | "Everyday Technology" | "Computer Basics" | "Internet" | "Android" | "Windows" | "AI" | "Technology" | "Productivity" | "STORAGE" | "COMPUTER BASICS" | "INTERNET" | "DEVELOPER BASICS";
+export type Category = string;
 
 export type ToolStatus = "active" | "coming-soon" | "beta";
 

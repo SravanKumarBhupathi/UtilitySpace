@@ -2,21 +2,20 @@
 
 import * as React from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const links = [
-
-
   { href: "/tools", label: "Tools" },
   { href: "/calculators", label: "Calculators" },
   { href: "/guides", label: "Guides" },
-
   { href: "/blog", label: "Blog" },
 ];
 
 export function MobileNavigation() {
   const [isOpen, setIsOpen] = React.useState(false);
+  const pathname = usePathname();
 
   React.useEffect(() => {
     const handleRouteChange = () => setIsOpen(false);
@@ -39,16 +38,21 @@ export function MobileNavigation() {
       {isOpen && (
         <div className="absolute top-16 left-0 right-0 bg-background border-b border-border shadow-lg p-4 z-50 flex flex-col space-y-4">
           <nav className="flex flex-col space-y-3">
-            {links.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="text-sm font-medium text-foreground hover:text-primary transition-colors py-2"
-                onClick={() => setIsOpen(false)}
-              >
-                {link.label}
-              </Link>
-            ))}
+            {links.map((link) => {
+              const isActive = pathname.startsWith(link.href);
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`text-sm font-medium transition-colors py-2 hover:text-primary ${
+                    isActive ? "text-primary" : "text-foreground"
+                  }`}
+                  onClick={() => setIsOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
           </nav>
         </div>
       )}

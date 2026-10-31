@@ -88,5 +88,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }))
 
 
-  return [...sitemapRoutes, ...guideRoutes, ...blogRoutes]
+
+  const blogUrls = blogPosts.map(post => ({
+    url: `${baseUrl}${post.href}`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.6,
+  }));
+
+  return [
+    ...blogUrls,
+    {
+      url: `${baseUrl}/blog`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },...sitemapRoutes, ...guideRoutes, ...blogRoutes]
 }

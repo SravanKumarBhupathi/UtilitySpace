@@ -38,3 +38,14 @@ export const toolCategories: CategoryInfo[] = [
     icon: "Files",
   },
 ];
+
+export const blogCategories = [
+  { name: "AI & Technology", slug: "ai-technology" },
+  { name: "Career & Skills", slug: "career-skills" },
+  { name: "Personal Finance", slug: "personal-finance" },
+  { name: "Psychology & Productivity", slug: "psychology-productivity" },
+  { name: "Digital Safety", slug: "digital-safety" },
+  { name: "Education & Learning", slug: "education-learning" },
+  { name: "Lifestyle & Personal Development", slug: "lifestyle" },
+  { name: "General Knowledge", slug: "general-knowledge" }
+];
