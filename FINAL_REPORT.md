@@ -73,3 +73,11 @@
 - Verified `/blog` uses `Next.js Metadata` strictly for indexing ("Blog | Helpful Articles, Tips & Insights - UtilitySpace"). Added it to `sitemap.ts`.
 - Validated individual articles dynamically route out through standard `blog/[slug]` links flawlessly resolving via static build.
 - Integrated a live Client-Side filter for blogs.
+
+## Blog Expansion
+- Redesigned `/blog` as an independent landing page strictly for blog content separated from the main root page.
+- Added 10 high-value full articles on varying topics from digital safety, tech skills, finance, to productivity directly into `src/data/blog.ts` and `src/data/blog-content.ts` with accurate metadata.
+- Embedded a real-time, purely client-side search overlay mapped across title, categories, and descriptions nested inside the blog listing layout.
+- Upgraded the sitemap dynamic compiler (`src/app/sitemap.ts`) to scrape and export all actual article routes.
+- Adjusted strict typings across the unified Category interface logic (`src/data/types.ts`) preventing compilation faults.
+- Static Next.js export generated correctly across all 93 routes.

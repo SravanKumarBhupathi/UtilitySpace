@@ -17,16 +17,24 @@ type BlogPost = {
 
 export function BlogListClient({ initialPosts }: { initialPosts: BlogPost[] }) {
   const [query, setQuery] = React.useState("");
+  const [selectedCategory, setSelectedCategory] = React.useState<string | null>(null);
+
+  // Extract unique categories from actual posts
+  const availableCategories = React.useMemo(() => Array.from(new Set(initialPosts.map(p => p.category))), [initialPosts]);
 
   const filteredPosts = React.useMemo(() => {
-    if (!query.trim()) return initialPosts;
+    let filtered = initialPosts;
+    if (selectedCategory) {
+      filtered = filtered.filter(p => p.category === selectedCategory);
+    }
+    if (!query.trim()) return filtered;
     const lowerQuery = query.toLowerCase();
-    return initialPosts.filter(post =>
+    return filtered.filter(post =>
       post.title.toLowerCase().includes(lowerQuery) ||
       post.description.toLowerCase().includes(lowerQuery) ||
       post.category.toLowerCase().includes(lowerQuery)
     );
-  }, [query, initialPosts]);
+  }, [query, initialPosts, selectedCategory]);
 
   return (
     <div>
@@ -44,6 +52,25 @@ export function BlogListClient({ initialPosts }: { initialPosts: BlogPost[] }) {
             onChange={(e) => setQuery(e.target.value)}
           />
         </div>
+      </div>
+
+
+      <div className="flex flex-wrap gap-2 mb-8">
+        <button
+          onClick={() => setSelectedCategory(null)}
+          className={`text-sm px-4 py-2 rounded-full border transition-colors ${!selectedCategory ? 'bg-primary text-white border-primary' : 'bg-card border-border text-secondary-text hover:border-primary/50'}`}
+        >
+          All Articles
+        </button>
+        {availableCategories.map(cat => (
+          <button
+            key={cat}
+            onClick={() => setSelectedCategory(cat)}
+            className={`text-sm px-4 py-2 rounded-full border transition-colors ${selectedCategory === cat ? 'bg-primary text-white border-primary' : 'bg-card border-border text-secondary-text hover:border-primary/50'}`}
+          >
+            {cat}
+          </button>
+        ))}
       </div>
 
       {filteredPosts.length === 0 ? (

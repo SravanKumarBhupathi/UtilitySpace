@@ -1,15 +1,15 @@
-1. **Remove Redirect (Root Cause)**: Remove the client-side redirect logic in `src/app/blog/page.tsx` which causes `/blog` to redirect to `/`.
-2. **Create Blog Listing Page (`src/app/blog/page.tsx`)**:
-   - Implement "Explore Our Blog" hero section.
-   - Implement "Featured Article" section (Section A) dynamically fetching the first/featured item from `src/data/blog.ts`.
-   - Implement "Latest Articles" grid (Section B) mapping over the remaining blog articles.
-   - Implement Blog-specific search/filter (Section C) client-side.
-   - Use established UI components (Card, Button, inputs) matching the UtilitySpace theme.
-3. **Blog SEO Metadata (Task 5)**:
-   - Use Next.js Metadata API for `src/app/blog/page.tsx` since we need to remove `"use client"` from the layout level or split the page into a server-side metadata component and client-side list component.
-4. **Navigation & Article Validation (Task 3 & 4)**:
-   - Verify `src/components/header.tsx`, `src/components/footer.tsx`, and homepage links correctly point to `/blog`.
-   - Verify individual blog articles navigate to `/blog/[slug]`.
-5. **Technical Validation & Report (Task 7 & 8)**:
-   - Run tests, builds, and linting.
-   - Update `FINAL_REPORT.md` comprehensively covering root cause, implementations, and validations.
+1. **Define Blog Categories (Task 1)**
+   - Update `src/data/blog.ts` with the new categories structure (AI & Technology, Career & Skills, etc.). Make sure categories map to URL-friendly slugs for filtering.
+
+2. **Add the 10 Complete Blog Articles (Task 3)**
+   - Update `src/data/blog.ts` and `src/data/blog-content.ts` (if applicable) to include the new 10 articles along with their full content, slugs, exact reading times, and categories. Preserve existing articles.
+
+3. **Update Blog Listing Page (Task 2)**
+   - Edit `src/app/blog/client-list.tsx` to add category filters alongside the search bar. Update the hero in `src/app/blog/page.tsx` as requested. Ensure the list has pagination/load-more if items > a reasonable number.
+
+4. **Enhance Content Presentation (Task 4 & 6)**
+   - Ensure `src/app/blog/[slug]/page.tsx` renders the article cleanly, with updated reading-time calculations, dynamic metadata injection, H2/H3 typography utilizing Tailwind's `@tailwindcss/typography` (prose), and Breadcrumb navigation mapping back to `/blog`.
+
+5. **Update Sitemap & Validation (Task 8 & 9)**
+   - Modify `src/app/sitemap.ts` to iterate all active blog slugs.
+   - Run type-checks, tests, and visual verifications. Update FINAL_REPORT.md.
