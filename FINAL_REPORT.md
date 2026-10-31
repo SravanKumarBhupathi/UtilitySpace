@@ -81,3 +81,9 @@
 - Upgraded the sitemap dynamic compiler (`src/app/sitemap.ts`) to scrape and export all actual article routes.
 - Adjusted strict typings across the unified Category interface logic (`src/data/types.ts`) preventing compilation faults.
 - Static Next.js export generated correctly across all 93 routes.
+
+## Add 2 Blog Articles Update
+- Added full HTML markup mapping H1, H2, H3, UL, and P schemas utilizing `@tailwindcss/typography` to the two required articles inside `src/data/blog-content.ts`.
+- Updated `src/data/blog.ts` to assign correct reading times, proper SEO descriptions, and accurate explicit categories.
+- Extensively modified the `src/app/blog/[slug]/page.tsx` layout to parse the markup securely, adding deep Next.js metadata injections on the fly alongside interactive breadcrumbs (`Home > Blog > Category > Title`) and standard Related Article grids mapped by the respective categories.
+- Visually validated full page execution through playwright and confirmed static build success.

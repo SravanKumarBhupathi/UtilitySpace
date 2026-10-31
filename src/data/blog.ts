@@ -5,20 +5,20 @@ export const blogPosts: Article[] = [
   {
     id: "ai-skills-everyone-should-learn-2026",
     title: "10 AI Skills Everyone Should Learn in 2026",
-    description: "Artificial intelligence is changing how people study, work, and solve everyday problems. Discover ten practical AI skills that beginners can start learning to stay adaptable in 2026.",
+    description: "Discover 10 practical AI skills worth learning in 2026, from effective prompting and fact-checking to automation, data analysis and responsible AI use.",
     category: "AI & Technology",
     href: "/blog/ai-skills-everyone-should-learn-2026",
-    readingTime: "3 min read",
+    readingTime: "5 min read",
     date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
   },
 
   {
     id: "identify-ai-generated-scams-and-deepfake-videos",
     title: "How to Identify AI-Generated Scams and Deepfake Videos",
-    description: "AI-generated voices, images, and videos can make online scams more convincing. Learn the warning signs and practical steps to verify suspicious messages and requests.",
+    description: "Learn how AI-generated scams, voice cloning and deepfake videos work. Discover warning signs and practical steps to protect yourself online.",
     category: "Digital Safety",
     href: "/blog/identify-ai-generated-scams-and-deepfake-videos",
-    readingTime: "2 min read",
+    readingTime: "5 min read",
     date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
   },
 
