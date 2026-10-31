@@ -84,7 +84,7 @@ export default function BlogPostPage({ params }: PageProps) {
           <div className="p-8 md:p-12">
             <div
               className="prose prose-slate dark:prose-invert prose-lg max-w-none prose-headings:font-heading prose-headings:font-bold prose-a:text-primary hover:prose-a:underline prose-img:rounded-xl"
-              dangerouslySetInnerHTML={{ __html: content }}
+              dangerouslySetInnerHTML={{ __html: typeof content === "string" ? content : content.html }}
             />
           </div>
 

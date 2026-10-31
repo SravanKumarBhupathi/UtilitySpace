@@ -1,15 +1,11 @@
-1. **Article 1 Update**
-   - We already have an article with id "ai-skills-everyone-should-learn-2026", but we must overwrite it with the newly requested full-length Markdown/HTML content containing proper H1, H2, H3 tags, FAQs, and references.
-   - Inject dynamic reading time and precise SEO title/metadata.
-2. **Article 2 Update**
-   - We already have an article with id "identify-ai-generated-scams-and-deepfake-videos". We must overwrite it with the newly requested full-length content containing proper headers, structure, and FAQs.
-   - Inject SEO metadata appropriately.
-3. **Article UI Design Adjustments**
-   - Ensure the `src/app/blog/[slug]/page.tsx` renders Markdown or HTML correctly using Tailwind's `prose` formatting.
-   - Include Breadcrumb navigation (`Home > Blog > Category > Article`).
-   - Add Related Articles (linking these two articles together).
-4. **Validation**
-   - Run tests, static builds, and verify sitemap generation logic.
-   - Verify visually via a quick Playwright check if layout breaks on mobile width.
-5. **Final Reporting**
-   - Document the two articles written, modifications, and testing output into `FINAL_REPORT.md`.
+1. **Investigate the 404 (Step 1)**
+   - The issue causing the 404 is that `blogContent[params.slug]` returns undefined in `src/app/blog/[slug]/page.tsx` because the structure of `blog-content.ts` is actually `Record<string, { html: string, heroImage: string, imageAlt: string, relatedIds: string[] }>`, but we accidentally overrode it to `Record<string, string>` containing just raw HTML strings during the previous insertion step.
+2. **Fix the Blog Routing & Data Structure (Step 2 & 3)**
+   - Correct `src/data/blog-content.ts` so the newly injected articles follow the proper object structure: `{ html: "...", heroImage: "", imageAlt: "", relatedIds: [] }`.
+   - Correct the `dangerouslySetInnerHTML` call in `page.tsx` to read from `content.html` instead of just `content` if it's an object, or gracefully fallback.
+3. **Verify Links & Content (Step 4 & 5)**
+   - Ensure the "Read More" links dynamically generated map securely to `href`.
+   - Run tests for individual URL access via Playwright screenshotting `/blog/ai-skills-everyone-should-learn-2026`.
+4. **Build & Report (Step 6)**
+   - Re-run `npm run build`. Note findings in `FINAL_REPORT.md`.
+5. Pre-commit instructions.
