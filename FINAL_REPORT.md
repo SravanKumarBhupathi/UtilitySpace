@@ -109,3 +109,9 @@
 - Updated metadata schema within `src/data/blog.ts` representing accurate titles, descriptions, categories, and dynamically calculated reading lengths based natively on raw payload lengths to improve SEO representations.
 - Ensured strict object insertion rules mapped flawlessly (`{ html: string, heroImage: string, imageAlt: string, relatedIds: string[] }`) resolving old undefined extraction failures.
 - Visuals verified natively locally by a suite of Playwright rendering traces targeting specific mobile + desktop layouts.
+
+## Articles 9 & 10 Update
+- Added full HTML markup mapped strictly through Tailwind `@tailwindcss/typography` schemas directly to `src/data/blog-content.ts` for "practical-ways-to-save-money-low-salary" and "essential-skills-that-make-you-more-employable-2026".
+- Added dynamic calculation of accurate reading lengths (estimated word count division) and unique SEO payloads mapped natively within `src/data/blog.ts`.
+- Verified strict object insertion rules were correctly applied (`{ html: string, heroImage: string, imageAlt: string, relatedIds: string[] }`) to prevent the 404 regressions identified previously.
+- Ran static builder to complete deployment verification successfully across all updated 95 routes.

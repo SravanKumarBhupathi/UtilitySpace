@@ -1,6 +1,24 @@
 import { Article } from "./types";
 
 export const blogPosts: Article[] = [
+  {
+    id: "essential-skills-that-make-you-more-employable-2026",
+    title: "10 Essential Skills That Make You More Employable in 2026",
+    description: "Discover 10 important skills that can improve your employability in 2026, from communication and problem-solving to digital literacy and adaptability.",
+    category: "Career & Skills",
+    href: "/blog/essential-skills-that-make-you-more-employable-2026",
+    readingTime: "4 min read",
+    date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
+  },
+  {
+    id: "practical-ways-to-save-money-low-salary",
+    title: "10 Practical Ways to Save Money Even on a Low Salary",
+    description: "Learn 10 practical ways to save money on a low salary, control unnecessary spending and build better financial habits without feeling restricted.",
+    category: "Personal Finance",
+    href: "/blog/practical-ways-to-save-money-low-salary",
+    readingTime: "4 min read",
+    date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
+  },
 
   {
     id: "ai-skills-everyone-should-learn-2026",
