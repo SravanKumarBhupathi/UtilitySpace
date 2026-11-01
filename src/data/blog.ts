@@ -75,20 +75,20 @@ export const blogPosts: Article[] = [
   {
     id: "why-brain-prefers-short-videos-over-studying",
     title: "Why Your Brain Prefers Short Videos Over Studying",
-    description: "Short videos provide quick entertainment and require little effort to start. Understand why they can become distracting and how to rebuild a healthier study routine.",
+    description: "Discover why short videos feel more attractive than studying and learn simple ways to improve your focus and reduce distractions.",
     category: "Psychology & Productivity",
     href: "/blog/why-brain-prefers-short-videos-over-studying",
-    readingTime: "2 min read",
+    readingTime: "3 min read",
     date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
   },
 
   {
     id: "learn-new-skills-faster-80-20-rule",
     title: "How to Learn Any New Skill Faster Using the 80/20 Rule",
-    description: "Learning everything at once can slow you down. Use the 80/20 principle to identify high-value skills, practice effectively, and make faster progress.",
+    description: "Learn how to use the 80/20 rule to focus on important activities, avoid wasting time and develop new skills more efficiently.",
     category: "Education & Learning",
     href: "/blog/learn-new-skills-faster-80-20-rule",
-    readingTime: "2 min read",
+    readingTime: "3 min read",
     date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
   },
 

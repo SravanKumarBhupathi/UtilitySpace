@@ -103,3 +103,9 @@
 - Added full HTML markup mapped strictly through Tailwind `@tailwindcss/typography` schemas directly to `src/data/blog-content.ts` for "build-resume-with-no-work-experience" and "protect-personal-data-online".
 - Added dynamic calculation of accurate reading lengths to `src/data/blog.ts` representing SEO correctly in meta layers.
 - Assured correct object insertion rules preventing `notFound()` 404 faults, allowing generation across statically exported SSG Next endpoints without issues. Playwright validation successful.
+
+## Articles 7 & 8 Update
+- Added full HTML markup mapped strictly through Tailwind `@tailwindcss/typography` schemas directly to `src/data/blog-content.ts` for "why-brain-prefers-short-videos-over-studying" and "learn-new-skills-faster-80-20-rule".
+- Updated metadata schema within `src/data/blog.ts` representing accurate titles, descriptions, categories, and dynamically calculated reading lengths based natively on raw payload lengths to improve SEO representations.
+- Ensured strict object insertion rules mapped flawlessly (`{ html: string, heroImage: string, imageAlt: string, relatedIds: string[] }`) resolving old undefined extraction failures.
+- Visuals verified natively locally by a suite of Playwright rendering traces targeting specific mobile + desktop layouts.
