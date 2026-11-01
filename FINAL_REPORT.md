@@ -98,3 +98,8 @@
 - Updated `src/data/blog.ts` to assign correct reading times, proper SEO descriptions, and accurate explicit categories for those two articles.
 - Confirmed that the new HTML injection utilized the `{ html: "...", heroImage: "", imageAlt: "", relatedIds: [] }` correct object shape previously established, meaning no 404 behavior was reintroduced.
 - Checked strict build types mapping directly to the static generation boundaries safely.
+
+## Articles 5 & 6 Update
+- Added full HTML markup mapped strictly through Tailwind `@tailwindcss/typography` schemas directly to `src/data/blog-content.ts` for "build-resume-with-no-work-experience" and "protect-personal-data-online".
+- Added dynamic calculation of accurate reading lengths to `src/data/blog.ts` representing SEO correctly in meta layers.
+- Assured correct object insertion rules preventing `notFound()` 404 faults, allowing generation across statically exported SSG Next endpoints without issues. Playwright validation successful.

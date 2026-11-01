@@ -55,20 +55,20 @@ export const blogPosts: Article[] = [
   {
     id: "build-resume-with-no-work-experience",
     title: "How to Build a Strong Resume With No Work Experience",
-    description: "No full-time job experience does not mean you have nothing valuable to show. Learn how to present your education, projects, internships, and practical skills effectively.",
+    description: "Are you a fresher with no work experience? Learn how to create a professional resume using your education, projects, internships, skills and achievements.",
     category: "Career & Skills",
     href: "/blog/build-resume-with-no-work-experience",
-    readingTime: "2 min read",
+    readingTime: "5 min read",
     date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
   },
 
   {
     id: "protect-personal-data-online",
     title: "10 Simple Ways to Protect Your Personal Data Online",
-    description: "Your personal information is valuable. Learn practical habits that can reduce the risk of account theft, phishing, identity misuse, and accidental data exposure.",
+    description: "Learn 10 practical ways to protect your personal information online, secure your accounts, avoid phishing scams and improve your everyday digital safety.",
     category: "Digital Safety",
     href: "/blog/protect-personal-data-online",
-    readingTime: "2 min read",
+    readingTime: "6 min read",
     date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
   },
 
