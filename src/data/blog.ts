@@ -35,20 +35,20 @@ export const blogPosts: Article[] = [
   {
     id: "why-you-feel-busy-but-accomplish-nothing",
     title: "Why You Feel Busy All Day but Accomplish Nothing",
-    description: "You can spend an entire day switching between tasks, checking notifications, and planning without completing anything important. Understand why this happens and how to regain control.",
+    description: "Always busy but still feel unproductive? Discover why task switching, distractions, poor planning and procrastination affect your productivity, and how to fix them.",
     category: "Psychology & Productivity",
     href: "/blog/why-you-feel-busy-but-accomplish-nothing",
-    readingTime: "2 min read",
+    readingTime: "4 min read",
     date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
   },
 
   {
     id: "emergency-fund-how-much-to-save",
     title: "Emergency Fund Explained: How Much Money Should You Save?",
-    description: "Unexpected expenses can disturb even a carefully planned budget. Understand what an emergency fund is, how to estimate your target, and how to build one gradually.",
+    description: "Learn what an emergency fund is, how much you may need, where to keep it and how to build one gradually without putting unnecessary pressure on your budget.",
     category: "Personal Finance",
     href: "/blog/emergency-fund-how-much-to-save",
-    readingTime: "2 min read",
+    readingTime: "5 min read",
     date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
   },
 

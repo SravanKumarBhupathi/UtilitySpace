@@ -1,11 +1,11 @@
-1. **Investigate the 404 (Step 1)**
-   - The issue causing the 404 is that `blogContent[params.slug]` returns undefined in `src/app/blog/[slug]/page.tsx` because the structure of `blog-content.ts` is actually `Record<string, { html: string, heroImage: string, imageAlt: string, relatedIds: string[] }>`, but we accidentally overrode it to `Record<string, string>` containing just raw HTML strings during the previous insertion step.
-2. **Fix the Blog Routing & Data Structure (Step 2 & 3)**
-   - Correct `src/data/blog-content.ts` so the newly injected articles follow the proper object structure: `{ html: "...", heroImage: "", imageAlt: "", relatedIds: [] }`.
-   - Correct the `dangerouslySetInnerHTML` call in `page.tsx` to read from `content.html` instead of just `content` if it's an object, or gracefully fallback.
-3. **Verify Links & Content (Step 4 & 5)**
-   - Ensure the "Read More" links dynamically generated map securely to `href`.
-   - Run tests for individual URL access via Playwright screenshotting `/blog/ai-skills-everyone-should-learn-2026`.
-4. **Build & Report (Step 6)**
-   - Re-run `npm run build`. Note findings in `FINAL_REPORT.md`.
-5. Pre-commit instructions.
+1. **Article 3 (Why You Feel Busy All Day but Accomplish Nothing)**
+   - We already have the blog data entry for `why-you-feel-busy-but-accomplish-nothing`.
+   - I need to update `src/data/blog-content.ts` with the new markdown/HTML mapping structure `{ html, heroImage, imageAlt, relatedIds }` for this article.
+   - Update `src/data/blog.ts` to sync the reading time and SEO metadata for it.
+2. **Article 4 (Emergency Fund Explained: How Much Money Should You Save?)**
+   - Similarly, overwrite the object for `emergency-fund-how-much-to-save` inside `src/data/blog-content.ts` with the full HTML representation required.
+   - Adjust `src/data/blog.ts` with reading time and matching SEO schema.
+3. **Verify Existing Functionality & Validate (Steps 3-5)**
+   - Run a node playwright verification script fetching the pages locally to guarantee their compilation and absence of the previous 404 issue.
+   - Run `npm run build` static generator to finalize.
+   - Update `FINAL_REPORT.md`

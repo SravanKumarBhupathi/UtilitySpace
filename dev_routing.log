@@ -1,0 +1,13 @@
+
+> utilityspace@0.1.0 dev
+> next dev
+
+   ▲ Next.js 14.1.4
+   - Local:        http://localhost:3000
+
+ ✓ Ready in 5.3s
+ ○ Compiling /blog/[slug] ...
+ ✓ Compiled /blog/[slug] in 5s (607 modules)
+ ✓ Compiled in 594ms (282 modules)
+ ✓ Compiled in 388ms (268 modules)
+[?25h
