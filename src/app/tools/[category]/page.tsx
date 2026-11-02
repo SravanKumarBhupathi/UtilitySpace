@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { tools, toolCategories } from "@/data";
 import { notFound } from "next/navigation";
 import Link from "next/link";
@@ -9,6 +10,31 @@ export function generateStaticParams() {
   return toolCategories.map((category) => ({
     category: category.name.toLowerCase(),
   }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { category: string } | Promise<{ category: string }>;
+}): Promise<Metadata> {
+  const resolved = await params;
+  const categoryInfo = toolCategories.find(
+    (c) => c.name.toLowerCase() === resolved.category.toLowerCase()
+  );
+
+  if (!categoryInfo) {
+    return {
+      title: "Category Not Found",
+    };
+  }
+
+  return {
+    title: `${categoryInfo.name} Tools — Free Online Utilities | UtilitySpace`,
+    description: `${categoryInfo.description} Fast, secure, and client-side browser tools on UtilitySpace.`,
+    alternates: {
+      canonical: `https://utilityspace.online/tools/${resolved.category.toLowerCase()}`,
+    },
+  };
 }
 
 const getIcon = (name: string, className?: string) => {
@@ -23,21 +49,29 @@ const getIcon = (name: string, className?: string) => {
     Braces: <Code className={className} />,
     GraduationCap: <GraduationCap className={className} />,
     Files: <Files className={className} />,
-    Minimize: <FileText className={className} />
+    Minimize: <FileText className={className} />,
   };
   return icons[name] || <FileText className={className} />;
 };
 
-export default async function CategoryPage({ params }: { params: Promise<{ category: string }> }) {
+export default async function CategoryPage({
+  params,
+}: {
+  params: { category: string } | Promise<{ category: string }>;
+}) {
   const resolvedParams = await params;
   const categoryParam = resolvedParams.category;
-  const categoryInfo = toolCategories.find(c => c.name.toLowerCase() === categoryParam.toLowerCase());
+  const categoryInfo = toolCategories.find(
+    (c) => c.name.toLowerCase() === categoryParam.toLowerCase()
+  );
 
   if (!categoryInfo) {
     notFound();
   }
 
-  const categoryTools = tools.filter(t => t.category.toLowerCase() === categoryParam.toLowerCase());
+  const categoryTools = tools.filter(
+    (t) => t.category.toLowerCase() === categoryParam.toLowerCase()
+  );
 
   return (
     <div className="container mx-auto max-w-7xl px-4 py-12 md:py-16 min-h-[calc(100vh-theme(spacing.16)-theme(spacing.40))] bg-background">
@@ -66,17 +100,19 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
       {categoryTools.length > 0 ? (
         <section>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {categoryTools.map(tool => (
+            {categoryTools.map((tool) => (
               <Link key={tool.id} href={tool.href} className="group block">
                 <Card className="h-full hover:border-primary/50 hover:shadow-md transition-all flex flex-col">
                   <CardContent className="p-6 flex flex-col h-full">
-                     <div className="mb-4 text-secondary-text group-hover:text-primary transition-colors">
-                        {getIcon(tool.icon || "", "w-8 h-8")}
-                     </div>
-                     <h3 className="font-heading font-semibold text-lg text-foreground mb-2 group-hover:text-primary transition-colors">
-                        {tool.title}
-                     </h3>
-                     <p className="text-sm text-secondary-text flex-1">{tool.description}</p>
+                    <div className="mb-4 text-secondary-text group-hover:text-primary transition-colors">
+                      {getIcon(tool.icon || "", "w-8 h-8")}
+                    </div>
+                    <h3 className="font-heading font-semibold text-lg text-foreground mb-2 group-hover:text-primary transition-colors">
+                      {tool.title}
+                    </h3>
+                    <p className="text-sm text-secondary-text flex-1">
+                      {tool.description}
+                    </p>
                   </CardContent>
                 </Card>
               </Link>

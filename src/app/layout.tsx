@@ -18,16 +18,13 @@ const manrope = Manrope({
 export const metadata: Metadata = {
   title: {
     template: "%s | UtilitySpace",
-    default: "UtilitySpace — Blog, Tools, Calculators & Practical Guides",
+    default: "UtilitySpace — Free Online Tools, Calculators & Practical Guides",
   },
-  description: "Useful online tools, calculators and practical guides for everyday digital tasks. Convert, calculate, organize and learn with UtilitySpace.",
+  description: "Free, private, and fast online tools, calculators, and practical guides for everyday digital tasks. Run calculations, convert files, format text, and optimize workflows.",
   metadataBase: new URL("https://utilityspace.online"),
-  alternates: {
-    canonical: '/',
-  },
   openGraph: {
-    title: "UtilitySpace — Blog, Tools, Calculators & Practical Guides",
-    description: "Useful online tools, calculators and practical guides for everyday digital tasks. Convert, calculate, organize and learn with UtilitySpace.",
+    title: "UtilitySpace — Free Online Tools, Calculators & Practical Guides",
+    description: "Free, private, and fast online tools, calculators, and practical guides for everyday digital tasks. Run calculations, convert files, format text, and optimize workflows.",
     url: "https://utilityspace.online",
     siteName: "UtilitySpace",
     locale: "en_US",
@@ -35,8 +32,19 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "UtilitySpace — Blog, Tools, Calculators & Practical Guides",
-    description: "Useful online tools, calculators and practical guides for everyday digital tasks. Convert, calculate, organize and learn with UtilitySpace.",
+    title: "UtilitySpace — Free Online Tools, Calculators & Practical Guides",
+    description: "Free, private, and fast online tools, calculators, and practical guides for everyday digital tasks.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
 };
 

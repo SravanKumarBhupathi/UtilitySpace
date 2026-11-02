@@ -8,7 +8,7 @@ export const blogPosts: Article[] = [
     category: "Career & Skills",
     href: "/blog/essential-skills-that-make-you-more-employable-2026",
     readingTime: "4 min read",
-    date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
+    date: "Oct 28, 2026",
   },
   {
     id: "practical-ways-to-save-money-low-salary",
@@ -17,9 +17,8 @@ export const blogPosts: Article[] = [
     category: "Personal Finance",
     href: "/blog/practical-ways-to-save-money-low-salary",
     readingTime: "4 min read",
-    date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
+    date: "Oct 26, 2026",
   },
-
   {
     id: "ai-skills-everyone-should-learn-2026",
     title: "10 AI Skills Everyone Should Learn in 2026",
@@ -27,9 +26,8 @@ export const blogPosts: Article[] = [
     category: "AI & Technology",
     href: "/blog/ai-skills-everyone-should-learn-2026",
     readingTime: "5 min read",
-    date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
+    date: "Oct 25, 2026",
   },
-
   {
     id: "identify-ai-generated-scams-and-deepfake-videos",
     title: "How to Identify AI-Generated Scams and Deepfake Videos",
@@ -37,9 +35,8 @@ export const blogPosts: Article[] = [
     category: "Digital Safety",
     href: "/blog/identify-ai-generated-scams-and-deepfake-videos",
     readingTime: "5 min read",
-    date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
+    date: "Oct 23, 2026",
   },
-
   {
     id: "skills-that-improve-employability-2026",
     title: "7 Skills That Can Make You More Employable in 2026",
@@ -47,9 +44,8 @@ export const blogPosts: Article[] = [
     category: "Career & Skills",
     href: "/blog/skills-that-improve-employability-2026",
     readingTime: "2 min read",
-    date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
+    date: "Oct 21, 2026",
   },
-
   {
     id: "why-you-feel-busy-but-accomplish-nothing",
     title: "Why You Feel Busy All Day but Accomplish Nothing",
@@ -57,9 +53,8 @@ export const blogPosts: Article[] = [
     category: "Psychology & Productivity",
     href: "/blog/why-you-feel-busy-but-accomplish-nothing",
     readingTime: "4 min read",
-    date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
+    date: "Oct 20, 2026",
   },
-
   {
     id: "emergency-fund-how-much-to-save",
     title: "Emergency Fund Explained: How Much Money Should You Save?",
@@ -67,9 +62,8 @@ export const blogPosts: Article[] = [
     category: "Personal Finance",
     href: "/blog/emergency-fund-how-much-to-save",
     readingTime: "5 min read",
-    date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
+    date: "Oct 18, 2026",
   },
-
   {
     id: "build-resume-with-no-work-experience",
     title: "How to Build a Strong Resume With No Work Experience",
@@ -77,9 +71,8 @@ export const blogPosts: Article[] = [
     category: "Career & Skills",
     href: "/blog/build-resume-with-no-work-experience",
     readingTime: "5 min read",
-    date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
+    date: "Oct 16, 2026",
   },
-
   {
     id: "protect-personal-data-online",
     title: "10 Simple Ways to Protect Your Personal Data Online",
@@ -87,9 +80,8 @@ export const blogPosts: Article[] = [
     category: "Digital Safety",
     href: "/blog/protect-personal-data-online",
     readingTime: "6 min read",
-    date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
+    date: "Oct 14, 2026",
   },
-
   {
     id: "why-brain-prefers-short-videos-over-studying",
     title: "Why Your Brain Prefers Short Videos Over Studying",
@@ -97,9 +89,8 @@ export const blogPosts: Article[] = [
     category: "Psychology & Productivity",
     href: "/blog/why-brain-prefers-short-videos-over-studying",
     readingTime: "3 min read",
-    date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
+    date: "Oct 12, 2026",
   },
-
   {
     id: "learn-new-skills-faster-80-20-rule",
     title: "How to Learn Any New Skill Faster Using the 80/20 Rule",
@@ -107,9 +98,8 @@ export const blogPosts: Article[] = [
     category: "Education & Learning",
     href: "/blog/learn-new-skills-faster-80-20-rule",
     readingTime: "3 min read",
-    date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
+    date: "Oct 10, 2026",
   },
-
   {
     id: "practical-ways-to-save-money-every-month",
     title: "15 Practical Ways to Save Money Without Changing Your Lifestyle",
@@ -117,9 +107,8 @@ export const blogPosts: Article[] = [
     category: "Personal Finance",
     href: "/blog/practical-ways-to-save-money-every-month",
     readingTime: "2 min read",
-    date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
+    date: "Oct 8, 2026",
   },
-
   {
     id: "top-productivity-tools-2026",
     title: "Top Productivity Tools for 2026",

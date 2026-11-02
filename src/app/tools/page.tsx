@@ -1,29 +1,34 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { tools } from "@/data/tools";
 import { toolCategories } from "@/data/categories";
 import { getIcon } from "@/lib/icons";
 import { Card, CardContent } from "@/components/ui/card";
 
-
-
-
+export const metadata: Metadata = {
+  title: "All Free Online Tools | UtilitySpace",
+  description: "Browse our complete directory of free online tools for PDF processing, image editing, text formatting, and developer utilities. Fast, private, and client-side.",
+  alternates: {
+    canonical: "https://utilityspace.online/tools",
+  },
+};
 
 export default function ToolsIndex() {
   return (
     <div className="container mx-auto max-w-7xl px-4 py-12 md:py-16 min-h-[calc(100vh-theme(spacing.16)-theme(spacing.40))] bg-background">
       <header className="mb-12">
         <h1 className="font-heading text-4xl md:text-5xl font-bold tracking-tight text-foreground mb-4">
-          All Tools
+          All Free Online Tools
         </h1>
         <p className="text-xl text-secondary-text max-w-2xl">
-          A complete collection of everyday digital utilities to help you work faster.
+          A complete collection of everyday digital utilities to help you work faster, compress files, format text, and convert images safely.
         </p>
       </header>
 
       <section className="mb-16">
-        <h2 className="font-heading text-2xl font-bold mb-6">Categories</h2>
+        <h2 className="font-heading text-2xl font-bold mb-6">Browse by Category</h2>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-          {toolCategories.map(category => (
+          {toolCategories.map((category) => (
             <Link key={category.name} href={`/tools/${category.name.toLowerCase()}`} className="group block">
               <Card className="hover:border-primary/50 hover:shadow-md transition-all text-center h-full">
                 <CardContent className="p-4 flex flex-col items-center gap-3">
@@ -41,20 +46,22 @@ export default function ToolsIndex() {
       </section>
 
       <section>
-        <h2 className="font-heading text-2xl font-bold mb-6">Tools</h2>
+        <h2 className="font-heading text-2xl font-bold mb-6">All Available Utilities</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {tools.map(tool => (
+          {tools.map((tool) => (
             <Link key={tool.id} href={tool.href} className="group block">
               <Card className="h-full hover:border-primary/50 hover:shadow-md transition-all flex flex-col">
                 <CardContent className="p-6 flex flex-col h-full">
-                   <div className="mb-4 text-secondary-text group-hover:text-primary transition-colors">
-                      {getIcon(tool.icon || "", "w-8 h-8")}
-                   </div>
-                   <h3 className="font-heading font-semibold text-lg text-foreground mb-2 group-hover:text-primary transition-colors">
-                      {tool.title}
-                   </h3>
-                   <p className="text-sm text-secondary-text flex-1">{tool.description}</p>
-                   <span className="mt-4 text-xs font-semibold text-primary uppercase tracking-wider">{tool.category}</span>
+                  <div className="mb-4 text-secondary-text group-hover:text-primary transition-colors">
+                    {getIcon(tool.icon || "", "w-8 h-8")}
+                  </div>
+                  <h3 className="font-heading font-semibold text-lg text-foreground mb-2 group-hover:text-primary transition-colors">
+                    {tool.title}
+                  </h3>
+                  <p className="text-sm text-secondary-text flex-1">{tool.description}</p>
+                  <span className="mt-4 text-xs font-semibold text-primary uppercase tracking-wider">
+                    {tool.category}
+                  </span>
                 </CardContent>
               </Card>
             </Link>

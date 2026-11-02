@@ -1,90 +1,61 @@
-"use client";
+import type { Metadata } from "next";
+import { Mail, Clock, ShieldCheck } from "lucide-react";
+import { ContactForm } from "./contact-form";
 
-import { useState } from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Button } from "@/components/ui/button";
-import { CheckCircle2 } from "lucide-react";
+export const metadata: Metadata = {
+  title: "Contact Us | UtilitySpace",
+  description: "Get in touch with the UtilitySpace team. Send feedback, report tool bugs, or suggest new calculators and utilities.",
+  alternates: {
+    canonical: "https://utilityspace.online/contact",
+  },
+};
 
 export default function ContactPage() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (name && email && message) {
-      setSubmitted(true);
-    }
-  };
-
   return (
-    <div className="container mx-auto max-w-2xl px-4 py-12 md:py-16 min-h-[calc(100vh-theme(spacing.16)-theme(spacing.40))] bg-background">
+    <div className="container mx-auto max-w-4xl px-4 py-12 md:py-16 min-h-[calc(100vh-theme(spacing.16)-theme(spacing.40))] bg-background">
       <header className="mb-10 text-center">
-        <h1 className="font-heading text-4xl font-bold tracking-tight text-foreground mb-4">
-          Contact Us
+        <h1 className="font-heading text-3xl md:text-5xl font-extrabold tracking-tight text-foreground mb-4">
+          Contact UtilitySpace
         </h1>
-        <p className="text-lg text-secondary-text">
-          Have a question or a suggestion? We&apos;d love to hear from you.
+        <p className="text-lg text-secondary-text max-w-xl mx-auto">
+          Have a suggestion, found a bug in one of our tools, or want to request a new utility? We&apos;d love to hear from you.
         </p>
       </header>
 
-      {submitted ? (
-        <Card className="border-success/50 bg-success/5">
-          <CardContent className="p-8 text-center space-y-4">
-            <CheckCircle2 className="w-12 h-12 text-success mx-auto" />
-            <h2 className="font-heading text-2xl font-bold text-foreground">Message received!</h2>
-            <p className="text-secondary-text">
-              Thank you for reaching out. Please note that this is a placeholder response as backend integration is pending.
-            </p>
-            <Button variant="outline" onClick={() => setSubmitted(false)} className="mt-4">
-              Send another message
-            </Button>
-          </CardContent>
-        </Card>
-      ) : (
-        <Card className="shadow-md">
-          <CardContent className="p-6 md:p-8">
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="space-y-2">
-                <Label htmlFor="name">Name</Label>
-                <Input
-                  id="name"
-                  required
-                  placeholder="Your name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="email">Email address</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  required
-                  placeholder="you@example.com"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="message">Message</Label>
-                <textarea
-                  id="message"
-                  required
-                  className="flex w-full rounded-md border border-border bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-secondary-text focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary min-h-[150px] resize-y"
-                  placeholder="How can we help?"
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                />
-              </div>
-              <Button type="submit" className="w-full md:w-auto" size="lg">Send Message</Button>
-            </form>
-          </CardContent>
-        </Card>
-      )}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+        <div className="p-6 bg-card rounded-xl border border-border text-center flex flex-col items-center">
+          <div className="w-12 h-12 bg-primary/10 text-primary rounded-lg flex items-center justify-center mb-4">
+            <Mail className="w-6 h-6" />
+          </div>
+          <h3 className="font-heading font-semibold text-foreground mb-1">Direct Email</h3>
+          <p className="text-sm text-secondary-text mb-2">Write directly to our inbox</p>
+          <a href="mailto:contact@utilityspace.online" className="text-primary hover:underline font-medium text-sm">
+            contact@utilityspace.online
+          </a>
+        </div>
+
+        <div className="p-6 bg-card rounded-xl border border-border text-center flex flex-col items-center">
+          <div className="w-12 h-12 bg-primary/10 text-primary rounded-lg flex items-center justify-center mb-4">
+            <Clock className="w-6 h-6" />
+          </div>
+          <h3 className="font-heading font-semibold text-foreground mb-1">Response Time</h3>
+          <p className="text-sm text-secondary-text mb-2">We value your inquiries</p>
+          <span className="text-foreground font-medium text-sm">Typically 24–48 Hours</span>
+        </div>
+
+        <div className="p-6 bg-card rounded-xl border border-border text-center flex flex-col items-center">
+          <div className="w-12 h-12 bg-primary/10 text-primary rounded-lg flex items-center justify-center mb-4">
+            <ShieldCheck className="w-6 h-6" />
+          </div>
+          <h3 className="font-heading font-semibold text-foreground mb-1">Privacy Focused</h3>
+          <p className="text-sm text-secondary-text mb-2">Your information is safe</p>
+          <span className="text-foreground font-medium text-sm">Never shared or sold</span>
+        </div>
+      </div>
+
+      <div className="max-w-2xl mx-auto">
+        <ContactForm />
+      </div>
     </div>
   );
 }
