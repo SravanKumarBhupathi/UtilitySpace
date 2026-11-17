@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!post) return {};
 
   return {
-    title: `${post.title} | UtilitySpace Blog`,
+    title: post.title,
     description: post.description,
     alternates: {
       canonical: `https://utilityspace.online/blog/${post.id}`,

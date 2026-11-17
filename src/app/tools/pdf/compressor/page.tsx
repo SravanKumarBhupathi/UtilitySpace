@@ -3,7 +3,7 @@ import { ToolLayout } from "@/components/tool-layout";
 import { PDFCompressorTool } from "./pdf-compressor-tool";
 
 export const metadata: Metadata = {
-  title: "Compress PDF Files | UtilitySpace",
+  title: "Compress PDF Files",
   description: "Reduce PDF file sizes locally in your browser without uploading to a server.",
 };
 

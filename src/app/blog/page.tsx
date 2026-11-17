@@ -6,7 +6,7 @@ import { blogPosts } from "@/data/blog";
 import { BlogListClient } from "./client-list";
 
 export const metadata: Metadata = {
-  title: "Blog | Helpful Articles, Tips & Insights - UtilitySpace",
+  title: "Blog — Helpful Articles, Tips & Insights",
   description: "Explore useful articles, practical tips, and informative guides on UtilitySpace.",
   alternates: {
     canonical: "https://utilityspace.online/blog"

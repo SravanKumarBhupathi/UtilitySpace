@@ -3,7 +3,7 @@ import { ToolLayout } from "@/components/tool-layout";
 import { PDFMergerTool } from "./pdf-merger-tool";
 
 export const metadata: Metadata = {
-  title: "Merge PDF Files | UtilitySpace",
+  title: "Merge PDF Files",
   description: "Combine multiple PDF files into a single document easily and securely. Processing happens locally in your browser.",
 };
 

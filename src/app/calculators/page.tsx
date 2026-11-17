@@ -5,7 +5,7 @@ import { getIcon } from "@/lib/icons";
 import { Card, CardContent } from "@/components/ui/card";
 
 export const metadata: Metadata = {
-  title: "Free Online Calculators | Finance, Math, Date & Education | UtilitySpace",
+  title: "Free Online Calculators — Finance, Math, Date & Education",
   description: "Accurate and free online calculators for EMI, Compound Interest, GST, Percentages, Age, and Date Differences. Instant calculations with clear step-by-step logic.",
   alternates: {
     canonical: "https://utilityspace.online/calculators",
@@ -35,25 +35,43 @@ export default function CalculatorsIndex() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {calculators
                 .filter((c) => c.category === category)
-                .map((calc) => (
-                  <Link key={calc.id} href={calc.href} className="group block">
+                .map((calc) => {
+                  const isComingSoon = calc.status === "coming-soon";
+                  const CardInner = (
                     <Card className="h-full hover:border-primary/50 hover:shadow-md transition-all flex flex-col">
                       <CardContent className="p-6 flex items-start gap-4 h-full">
                         <div className="p-2.5 bg-muted text-secondary-foreground rounded-lg group-hover:bg-primary/10 group-hover:text-primary transition-colors shrink-0">
                           {getIcon(calc.icon || "", "w-6 h-6")}
                         </div>
-                        <div>
-                          <h3 className="font-heading font-semibold text-lg text-foreground mb-1 group-hover:text-primary transition-colors leading-tight">
-                            {calc.title}
-                          </h3>
+                        <div className="flex-1">
+                          <div className="flex items-center justify-between gap-2 mb-1">
+                            <h3 className="font-heading font-semibold text-lg text-foreground group-hover:text-primary transition-colors leading-tight">
+                              {calc.title}
+                            </h3>
+                            {isComingSoon && (
+                              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-muted text-muted-foreground uppercase tracking-wider shrink-0">
+                                Coming Soon
+                              </span>
+                            )}
+                          </div>
                           <p className="text-sm text-secondary-text leading-snug">
                             {calc.description}
                           </p>
                         </div>
                       </CardContent>
                     </Card>
-                  </Link>
-                ))}
+                  );
+
+                  return isComingSoon ? (
+                    <div key={calc.id} className="group block opacity-75 cursor-default">
+                      {CardInner}
+                    </div>
+                  ) : (
+                    <Link key={calc.id} href={calc.href} className="group block">
+                      {CardInner}
+                    </Link>
+                  );
+                })}
             </div>
           </section>
         ))}

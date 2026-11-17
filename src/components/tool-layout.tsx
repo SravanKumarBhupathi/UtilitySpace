@@ -117,9 +117,9 @@ export function ToolLayout({
       </header>
 
       {/* Main Interactive Tool Widget */}
-      <main className="mb-14">
+      <section className="mb-14" aria-label="Tool interactive area">
         {children}
-      </main>
+      </section>
 
       {/* Comprehensive Editorial & FAQ Section for SEO Indexation & AdSense */}
       <section className="space-y-12 border-t border-border pt-12">

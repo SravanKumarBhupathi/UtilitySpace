@@ -5,7 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Practical Guides & Tutorials | UtilitySpace",
+  title: "Practical Guides & Tutorials",
   description: "Explore practical step-by-step guides on PDF compression, image resizing, calculating percentages, and everyday tech workflows.",
   alternates: {
     canonical: "https://utilityspace.online/guides",

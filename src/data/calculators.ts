@@ -91,7 +91,7 @@ export const calculators: Item[] = [
     category: "Education",
     href: "/calculators/gpa",
     icon: "GraduationCap",
-    status: "coming-soon",
+    status: "active",
   },
   {
     id: "cgpa",
@@ -100,7 +100,7 @@ export const calculators: Item[] = [
     category: "Education",
     href: "/calculators/cgpa",
     icon: "GraduationCap",
-    status: "coming-soon",
+    status: "active",
   },
 
   {

@@ -29,7 +29,7 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${categoryInfo.name} Tools — Free Online Utilities | UtilitySpace`,
+    title: `${categoryInfo.name} Tools — Free Online Utilities`,
     description: `${categoryInfo.description} Fast, secure, and client-side browser tools on UtilitySpace.`,
     alternates: {
       canonical: `https://utilityspace.online/tools/${resolved.category.toLowerCase()}`,

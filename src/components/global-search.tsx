@@ -79,8 +79,8 @@ export function GlobalSearch() {
     const normalizedQuery = query.trim().toLowerCase();
 
     const allItems: Omit<SearchResult, "score">[] = [
-      ...tools.map(t => ({ ...t, category: t.category || "Tool", type: "Tools" as const })),
-      ...calculators.map(t => ({ ...t, category: t.category || "Calculator", type: "Calculators" as const })),
+      ...tools.filter(t => t.status !== "coming-soon").map(t => ({ ...t, category: t.category || "Tool", type: "Tools" as const })),
+      ...calculators.filter(t => t.status !== "coming-soon").map(t => ({ ...t, category: t.category || "Calculator", type: "Calculators" as const })),
       ...guides.map(t => ({ ...t, category: t.category || "Guide", type: "Guides" as const })),
       ...blogPosts.map(t => ({ ...t, category: t.category || "Blog", type: "Blog" as const })),
     ];

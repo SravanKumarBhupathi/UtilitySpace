@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Disclaimer | UtilitySpace",
+  title: "Disclaimer",
   description: "Read the official Disclaimer for UtilitySpace online tools, educational content, and financial calculators.",
   alternates: {
     canonical: "https://utilityspace.online/disclaimer",
@@ -18,7 +18,7 @@ export default function DisclaimerPage() {
         <p className="text-sm text-secondary-text">Last Updated: October 2026</p>
       </header>
 
-      <main className="prose prose-slate dark:prose-invert max-w-none text-secondary-text space-y-6 text-base leading-relaxed">
+      <article className="prose prose-slate dark:prose-invert max-w-none text-secondary-text space-y-6 text-base leading-relaxed">
         <p>
           The information, calculators, guides, and digital tools provided on <strong>UtilitySpace</strong> (https://utilityspace.online) are intended solely for general informational, educational, and computational assistance.
         </p>
@@ -48,7 +48,7 @@ export default function DisclaimerPage() {
             contact@utilityspace.online
           </a>.
         </p>
-      </main>
+      </article>
     </div>
   );
 }

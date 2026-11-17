@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Practical Guides | UtilitySpace",
+  title: "Practical Guides",
   description: "Explore practical guides and step-by-step instructions for everyday digital tools on UtilitySpace.",
   alternates: {
     canonical: "https://utilityspace.online/guides",

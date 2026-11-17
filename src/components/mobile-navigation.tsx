@@ -18,10 +18,8 @@ export function MobileNavigation() {
   const pathname = usePathname();
 
   React.useEffect(() => {
-    const handleRouteChange = () => setIsOpen(false);
-    window.addEventListener("popstate", handleRouteChange);
-    return () => window.removeEventListener("popstate", handleRouteChange);
-  }, []);
+    setIsOpen(false);
+  }, [pathname]);
 
   return (
     <div className="md:hidden">

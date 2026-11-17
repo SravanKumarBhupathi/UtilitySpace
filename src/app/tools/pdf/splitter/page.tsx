@@ -3,7 +3,7 @@ import { ToolLayout } from "@/components/tool-layout";
 import { PDFSplitterTool } from "./pdf-splitter-tool";
 
 export const metadata: Metadata = {
-  title: "Split PDF Files | UtilitySpace",
+  title: "Split PDF Files",
   description: "Split PDF files into separate pages or extract specific pages. Processing happens locally in your browser.",
 };
 

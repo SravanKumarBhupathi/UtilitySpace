@@ -6,7 +6,7 @@ import { getIcon } from "@/lib/icons";
 import { Card, CardContent } from "@/components/ui/card";
 
 export const metadata: Metadata = {
-  title: "All Free Online Tools | UtilitySpace",
+  title: "All Free Online Tools",
   description: "Browse our complete directory of free online tools for PDF processing, image editing, text formatting, and developer utilities. Fast, private, and client-side.",
   alternates: {
     canonical: "https://utilityspace.online/tools",

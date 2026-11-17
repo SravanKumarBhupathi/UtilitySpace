@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Terms of Use | UtilitySpace",
+  title: "Terms of Use",
   description: "Read the Terms of Use for UtilitySpace. Learn about usage guidelines for our free online tools, calculators, and guides.",
   alternates: {
     canonical: "https://utilityspace.online/terms",
@@ -18,7 +18,7 @@ export default function TermsPage() {
         <p className="text-sm text-secondary-text">Last Updated: October 2026</p>
       </header>
 
-      <main className="prose prose-slate dark:prose-invert max-w-none text-secondary-text space-y-6 text-base leading-relaxed">
+      <article className="prose prose-slate dark:prose-invert max-w-none text-secondary-text space-y-6 text-base leading-relaxed">
         <p>
           Welcome to <strong>UtilitySpace</strong>. By accessing or using our website, tools, calculators, and informational content, you agree to be bound by these Terms of Use. If you do not agree with any part of these terms, please discontinue using the site.
         </p>
@@ -63,7 +63,7 @@ export default function TermsPage() {
             contact@utilityspace.online
           </a>.
         </p>
-      </main>
+      </article>
     </div>
   );
 }

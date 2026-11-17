@@ -4,7 +4,7 @@ import { ArrowRight, Calculator, FileText, Image as ImageIcon, Type, Code } from
 import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
-  title: "About UtilitySpace.online | Free Online Tools & Calculators",
+  title: "About Us — Free Online Tools & Calculators",
   description: "UtilitySpace.online is a comprehensive collection of free online tools, practical calculators, and helpful guides designed to make your everyday digital tasks simpler and faster.",
   alternates: {
     canonical: "https://utilityspace.online/about"

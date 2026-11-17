@@ -3,7 +3,7 @@ import { Mail, Clock, ShieldCheck } from "lucide-react";
 import { ContactForm } from "./contact-form";
 
 export const metadata: Metadata = {
-  title: "Contact Us | UtilitySpace",
+  title: "Contact Us",
   description: "Get in touch with the UtilitySpace team. Send feedback, report tool bugs, or suggest new calculators and utilities.",
   alternates: {
     canonical: "https://utilityspace.online/contact",

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | UtilitySpace",
+  title: "Privacy Policy",
   description: "Learn how UtilitySpace handles user privacy, local client-side tool processing, cookies, and our third-party advertising policies including Google AdSense.",
   alternates: {
     canonical: "https://utilityspace.online/privacy",
@@ -21,7 +21,7 @@ export default function PrivacyPolicyPage() {
         </p>
       </header>
 
-      <main className="prose prose-slate dark:prose-invert max-w-none text-secondary-text space-y-6 text-base leading-relaxed">
+      <article className="prose prose-slate dark:prose-invert max-w-none text-secondary-text space-y-6 text-base leading-relaxed">
         <p>
           At <strong>UtilitySpace</strong> (accessible from{" "}
           <Link href="https://utilityspace.online" className="text-primary hover:underline">
@@ -151,7 +151,7 @@ export default function PrivacyPolicyPage() {
             contact@utilityspace.online
           </a>
         </p>
-      </main>
+      </article>
     </div>
   );
 }

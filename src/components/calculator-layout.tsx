@@ -108,9 +108,9 @@ export function CalculatorLayout({
       </header>
 
       {/* Main Interactive Calculator Area */}
-      <main className="mb-14">
+      <section className="mb-14" aria-label="Calculator interactive area">
         {children}
-      </main>
+      </section>
 
       {/* Editorial Content Section for AdSense and Search Indexing */}
       <section className="space-y-12 border-t border-border pt-12">

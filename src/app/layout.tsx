@@ -55,10 +55,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.variable} ${manrope.variable} font-sans min-h-screen flex flex-col bg-background text-foreground antialiased`}>
+      <body className={`${inter.variable} ${manrope.variable} font-sans min-h-screen flex flex-col bg-background text-foreground antialiased overflow-x-hidden`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <Header />
-          <main className="flex-1">
+          <main className="flex-1 overflow-x-hidden">
             {children}
           </main>
           <Footer />
