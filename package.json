@@ -6,8 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint",
-    "check-freshness": "ts-node scripts/freshness-monitor.ts"
+    "lint": "eslint"
   },
   "dependencies": {
     "@radix-ui/react-label": "^2.0.2",
