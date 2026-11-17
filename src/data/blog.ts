@@ -2,6 +2,15 @@ import { Article } from "./types";
 
 export const blogPosts: Article[] = [
   {
+    id: "vibe-coding-guide-tools-and-best-practices-2026",
+    title: "Vibe Coding in 2026: What It Is, Top Tools, and How to Build Software Safely",
+    description: "Discover what vibe coding means in 2026, explore top AI tools like Cursor and Claude Code, avoid critical pitfalls, and learn how to build production-ready apps.",
+    category: "AI & Technology",
+    href: "/blog/vibe-coding-guide-tools-and-best-practices-2026",
+    readingTime: "5 min read",
+    date: "Nov 17, 2026",
+  },
+  {
     id: "essential-skills-that-make-you-more-employable-2026",
     title: "10 Essential Skills That Make You More Employable in 2026",
     description: "Discover 10 important skills that can improve your employability in 2026, from communication and problem-solving to digital literacy and adaptability.",
