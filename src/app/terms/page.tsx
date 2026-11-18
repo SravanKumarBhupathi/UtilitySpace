@@ -41,22 +41,32 @@ export default function TermsPage() {
           Our calculators, converters, and analytical tools are provided for general educational, estimation, and informational purposes. While we rigorously test our mathematical and algorithmic implementations, UtilitySpace makes no express or implied warranty regarding 100% precision for critical legal, banking, medical, or academic certification purposes. Always cross-verify critical numbers with certified professionals.
         </p>
 
-        <h2 className="font-heading text-xl font-bold text-foreground mt-8 mb-4">4. Limitation of Liability</h2>
+        <h2 className="font-heading text-xl font-bold text-foreground mt-8 mb-4">4. Third-Party Advertisements & External Links</h2>
+        <p>
+          UtilitySpace features advertisements served dynamically by Google AdSense and other trusted advertising networks. Your correspondence or business dealings with advertisers found on or through our site are solely between you and the respective third party. UtilitySpace is not responsible or liable for any loss, damage, or claims incurred as a result of any such dealings.
+        </p>
+
+        <h2 className="font-heading text-xl font-bold text-foreground mt-8 mb-4">5. Prohibited Conduct & Invalid Traffic Prevention</h2>
+        <p>
+          Users agree to use UtilitySpace solely for lawful, personal, or legitimate professional tasks. You explicitly agree not to engage in automated scraping, data harvesting, bot traffic generation, or artificial interaction with advertisements. Any attempt to artificially inflate impressions or clicks through bots, automated scripts, reloaders, or coordinated click rings is strictly prohibited and constitutes a material violation of these Terms.
+        </p>
+
+        <h2 className="font-heading text-xl font-bold text-foreground mt-8 mb-4">6. Limitation of Liability</h2>
         <p>
           To the maximum extent permitted by applicable law, UtilitySpace and its operators shall not be liable for any direct, indirect, incidental, special, or consequential damages resulting from the use or inability to use our tools or reliance on any calculations.
         </p>
 
-        <h2 className="font-heading text-xl font-bold text-foreground mt-8 mb-4">5. Modifications to Services</h2>
+        <h2 className="font-heading text-xl font-bold text-foreground mt-8 mb-4">7. Modifications to Services</h2>
         <p>
           We reserve the right to modify, enhance, update, or discontinue any tool, calculator, or feature at any time without notice.
         </p>
 
-        <h2 className="font-heading text-xl font-bold text-foreground mt-8 mb-4">6. Governing Law</h2>
+        <h2 className="font-heading text-xl font-bold text-foreground mt-8 mb-4">8. Governing Law</h2>
         <p>
           These Terms shall be interpreted and governed in accordance with applicable laws, without regard to its conflict of law provisions.
         </p>
 
-        <h2 className="font-heading text-xl font-bold text-foreground mt-8 mb-4">7. Contact Information</h2>
+        <h2 className="font-heading text-xl font-bold text-foreground mt-8 mb-4">9. Contact Information</h2>
         <p>
           For questions regarding our Terms of Use, please reach out via email at{" "}
           <a href="mailto:contact@utilityspace.online" className="text-primary hover:underline">

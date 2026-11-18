@@ -36,8 +36,66 @@ export default function GuidePage({ params }: { params: { slug: string } }) {
     notFound();
   }
 
+  const guideSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: guide.title,
+    description: guide.description,
+    author: {
+      "@type": "Organization",
+      name: "UtilitySpace",
+      url: "https://utilityspace.online",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "UtilitySpace",
+      url: "https://utilityspace.online",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://utilityspace.online/globe.svg",
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `https://utilityspace.online/guides/${guide.id}`,
+    },
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://utilityspace.online",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Guides",
+        item: "https://utilityspace.online/guides",
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: guide.title,
+        item: `https://utilityspace.online/guides/${guide.id}`,
+      },
+    ],
+  };
+
   return (
     <div className="container mx-auto max-w-3xl px-4 py-8 md:py-12">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(guideSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <nav className="flex items-center space-x-1 text-sm text-secondary-text mb-8">
         <Link href="/guides" className="hover:text-primary transition-colors">
           Guides

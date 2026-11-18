@@ -39,6 +39,7 @@ export function Footer() {
             <Link href="/contact" className="text-sm text-secondary-text hover:text-primary transition-colors">Contact</Link>
             <Link href="/privacy" className="text-sm text-secondary-text hover:text-primary transition-colors">Privacy Policy</Link>
             <Link href="/terms" className="text-sm text-secondary-text hover:text-primary transition-colors">Terms of Service</Link>
+            <Link href="/disclaimer" className="text-sm text-secondary-text hover:text-primary transition-colors">Disclaimer</Link>
           </div>
 
         </div>

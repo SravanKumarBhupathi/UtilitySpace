@@ -47,8 +47,68 @@ export default function BlogPostPage({ params }: PageProps) {
      relatedArticles.push(...blogPosts.filter(p => p.id !== post.id).slice(0, 3));
   }
 
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.description,
+    datePublished: post.date,
+    dateModified: post.date,
+    author: {
+      "@type": "Organization",
+      name: "UtilitySpace Editorial Team",
+      url: "https://utilityspace.online",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "UtilitySpace",
+      url: "https://utilityspace.online",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://utilityspace.online/globe.svg",
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `https://utilityspace.online/blog/${post.id}`,
+    },
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://utilityspace.online",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Blog",
+        item: "https://utilityspace.online/blog",
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: post.title,
+        item: `https://utilityspace.online/blog/${post.id}`,
+      },
+    ],
+  };
+
   return (
     <div className="flex flex-col min-h-screen bg-background">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <div className="container mx-auto px-4 max-w-4xl py-8">
 
         {/* Breadcrumb Navigation */}

@@ -48,13 +48,14 @@ export default function RotatePdf() {
     setError(null);
 
     try {
-       const pages = pdfDoc.getPages();
+       const freshDoc = await PDFDocument.load(await file.arrayBuffer());
+       const pages = freshDoc.getPages();
        pages.forEach(page => {
           const currentRotation = page.getRotation().angle;
           page.setRotation(degrees(currentRotation + rotationAngle));
        });
 
-       const pdfBytes = await pdfDoc.save();
+       const pdfBytes = await freshDoc.save();
        const blob = new Blob([new Uint8Array(pdfBytes)], { type: "application/pdf" });
        const url = URL.createObjectURL(blob);
        setOutputUrl(url);

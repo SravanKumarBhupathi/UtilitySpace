@@ -17,7 +17,7 @@ export default function GSTCalculator() {
     const amt = parseFloat(amount);
     const gstRate = parseFloat(rate);
 
-    if (!isNaN(amt) && !isNaN(gstRate)) {
+    if (!isNaN(amt) && !isNaN(gstRate) && amt >= 0 && gstRate >= 0) {
       if (mode === "add") {
         const gstAmount = (amt * gstRate) / 100;
         const totalAmount = amt + gstAmount;

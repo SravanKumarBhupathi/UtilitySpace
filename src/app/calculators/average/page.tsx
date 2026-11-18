@@ -33,8 +33,8 @@ export default function AverageCalculator() {
     const sum = numbers.reduce((a, b) => a + b, 0);
     const count = numbers.length;
     const average = sum / count;
-    const min = Math.min(...numbers);
-    const max = Math.max(...numbers);
+    const min = numbers.reduce((acc, val) => Math.min(acc, val), numbers[0]);
+    const max = numbers.reduce((acc, val) => Math.max(acc, val), numbers[0]);
 
     setResult({ average, sum, count, min, max });
     setError("");

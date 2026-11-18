@@ -48,8 +48,9 @@ export default function AddPdfPageNumbers() {
     setError(null);
 
     try {
-       const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
-       const pages = pdfDoc.getPages();
+       const freshDoc = await PDFDocument.load(await file.arrayBuffer());
+       const font = await freshDoc.embedFont(StandardFonts.Helvetica);
+       const pages = freshDoc.getPages();
 
        pages.forEach((page, idx) => {
           const { width, height } = page.getSize();
@@ -83,7 +84,7 @@ export default function AddPdfPageNumbers() {
           });
        });
 
-       const pdfBytes = await pdfDoc.save();
+       const pdfBytes = await freshDoc.save();
        const blob = new Blob([new Uint8Array(pdfBytes)], { type: "application/pdf" });
        const url = URL.createObjectURL(blob);
        setOutputUrl(url);

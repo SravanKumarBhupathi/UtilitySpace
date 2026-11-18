@@ -151,13 +151,70 @@ export default function AboutPage() {
       {/* Section 5: Our Approach */}
       <section className="py-16 px-4 bg-background">
         <div className="container mx-auto max-w-3xl">
-          <h2 className="font-heading text-3xl font-bold tracking-tight text-foreground mb-6">Our Approach</h2>
+          <h2 className="font-heading text-3xl font-bold tracking-tight text-foreground mb-6">Our Approach & Privacy Guarantee</h2>
           <div className="prose prose-slate dark:prose-invert max-w-none text-lg text-secondary-text leading-relaxed space-y-4">
             <p>
-              We firmly believe that standard utilities shouldn&apos;t be cluttered with excessive advertising or confusing interfaces. Our design philosophy centers around <strong>simplicity</strong>, <strong>accessibility</strong>, and a <strong>clear user experience</strong>.
+              We firmly believe that standard utilities shouldn&apos;t be cluttered with excessive advertising or confusing interfaces. Our design philosophy centers around <strong>simplicity</strong>, <strong>accessibility</strong>, and a <strong>clean, fast user experience</strong>.
             </p>
             <p>
-              For tools that handle sensitive files (like PDF compressors or Image croppers), we process your data locally right in your browser utilizing HTML5 technologies. We never store files on our servers unnecessarily, ensuring practical usefulness paired with privacy. We are committed to continuous improvement, refining our tools so they work precisely when you need them.
+              For tools that handle sensitive files (such as PDF mergers, compressors, and image croppers), <strong>we process your data 100% locally in your web browser</strong> utilizing modern HTML5 File APIs and WebAssembly. <strong>We do not upload, transmit, or store your files on any remote server.</strong> All transformations occur entirely in your device&apos;s local volatile memory (RAM) and are permanently purged the moment you close the browser tab.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Editorial Standards & Accuracy Verification */}
+      <section className="py-16 px-4 bg-card border-y border-border">
+        <div className="container mx-auto max-w-3xl">
+          <h2 className="font-heading text-3xl font-bold tracking-tight text-foreground mb-6">
+            Editorial Standards & Calculation Verification
+          </h2>
+          <div className="prose prose-slate dark:prose-invert max-w-none text-lg text-secondary-text leading-relaxed space-y-4">
+            <p>
+              Trust is paramount when using online computational utilities. Every calculator on UtilitySpace is built on industry-standard mathematical algorithms and peer-reviewed formulas:
+            </p>
+            <ul className="list-disc pl-6 space-y-2 text-base">
+              <li><strong>Financial Calculators (EMI, Compound Interest, GST):</strong> Implemented strictly following standard banking amortizations and national tax formulas, audited against verified financial benchmarks.</li>
+              <li><strong>Educational Tools (GPA, CGPA, Attendance, Percentages):</strong> Structured around standardized academic credit weighting mechanisms with clear, configurable parameters.</li>
+              <li><strong>Developer & Text Utilities:</strong> Developed in compliance with official RFC specifications (e.g. RFC 4122 for UUIDs, standard UTF-8 parsing, and W3C web encoding guidelines).</li>
+              <li><strong>Continuous Review:</strong> Our guides and algorithms undergo periodic editorial reviews to reflect updated industry standards, browser capabilities, and user feedback.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* Monetization & Platform Sustainability */}
+      <section className="py-16 px-4 bg-background">
+        <div className="container mx-auto max-w-3xl">
+          <h2 className="font-heading text-3xl font-bold tracking-tight text-foreground mb-6">
+            Monetization & Free Access Transparency
+          </h2>
+          <div className="prose prose-slate dark:prose-invert max-w-none text-lg text-secondary-text leading-relaxed space-y-4">
+            <p>
+              UtilitySpace is committed to keeping all tools, calculators, and educational guides <strong>100% free</strong> and accessible without mandatory paywalls, subscription fees, or account registrations.
+            </p>
+            <p>
+              To support server infrastructure, engineering maintenance, and continuous feature development, we display non-intrusive programmatic advertisements via trusted advertising partners such as Google AdSense. We uphold a strict editorial wall: commercial advertisements have zero influence over our calculation logic, tool functionality, or informational guide recommendations.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Team & Publisher Information */}
+      <section className="py-16 px-4 bg-card border-y border-border">
+        <div className="container mx-auto max-w-3xl">
+          <h2 className="font-heading text-3xl font-bold tracking-tight text-foreground mb-6">
+            Who We Are
+          </h2>
+          <div className="prose prose-slate dark:prose-invert max-w-none text-lg text-secondary-text leading-relaxed space-y-4">
+            <p>
+              UtilitySpace.online is created and maintained by a dedicated team of full-stack software engineers, web performance enthusiasts, and technical writers committed to building a cleaner, safer, and more useful web.
+            </p>
+            <p>
+              Frustrated by bloated utility websites filled with misleading download buttons, server-side data retention risks, and intrusive popups, we set out to build a streamlined, client-first alternative. Have suggestions or want to inspect our computational methods? Reach out directly to our engineering team at{" "}
+              <a href="mailto:contact@utilityspace.online" className="text-primary hover:underline font-medium">
+                contact@utilityspace.online
+              </a>.
             </p>
           </div>
         </div>

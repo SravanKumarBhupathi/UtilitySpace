@@ -18,7 +18,14 @@ export default function EMICalculator() {
     const ratePerYear = parseFloat(interestRate);
     const tenureMonths = parseFloat(loanTenure) * 12;
 
-    if (!isNaN(principal) && !isNaN(ratePerYear) && !isNaN(tenureMonths) && ratePerYear > 0 && tenureMonths > 0) {
+    if (!isNaN(principal) && !isNaN(ratePerYear) && !isNaN(tenureMonths) && ratePerYear >= 0 && tenureMonths > 0) {
+      if (ratePerYear === 0) {
+        const emi = principal / tenureMonths;
+        const totalPayment = principal;
+        const totalInterest = 0;
+        setResult({ emi, totalInterest, totalPayment });
+        return;
+      }
       const ratePerMonth = ratePerYear / 12 / 100;
       const emi = (principal * ratePerMonth * Math.pow(1 + ratePerMonth, tenureMonths)) / (Math.pow(1 + ratePerMonth, tenureMonths) - 1);
       const totalPayment = emi * tenureMonths;

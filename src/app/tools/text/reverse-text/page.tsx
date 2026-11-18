@@ -18,7 +18,7 @@ export default function ReverseText() {
     }
 
     if (mode === "characters") {
-       setProcessedText(text.split('').reverse().join(''));
+       setProcessedText(Array.from(text).reverse().join(''));
     } else if (mode === "words") {
        const lines = text.split(/\r?\n/);
        const reversedLines = lines.map(line => line.split(/\s+/).reverse().join(' '));

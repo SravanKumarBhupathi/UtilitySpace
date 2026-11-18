@@ -41,6 +41,23 @@ export default function DisclaimerPage() {
           UtilitySpace processes file modifications (such as PDF merging/splitting, image resizing/compression, and text sorting) on your local device client-side. We do not store or inspect your private files. Users are advised to retain backup copies of original files before performing any transformation or compression.
         </p>
 
+        <h2 className="font-heading text-xl font-bold text-foreground mt-8 mb-4">
+          Third-Party Advertising & Endorsements
+        </h2>
+        <p>
+          UtilitySpace displays digital advertisements served dynamically by third-party advertising networks, including Google AdSense. The display of any advertisement does not constitute an endorsement, guarantee, representation, or warranty by UtilitySpace regarding the advertised products, services, claims, or businesses.
+        </p>
+        <p>
+          Our editorial guides, calculator code, and tool implementations remain completely independent of advertiser interests. We do not accept paid placement to skew calculator results or tool recommendations.
+        </p>
+
+        <h2 className="font-heading text-xl font-bold text-foreground mt-8 mb-4">
+          External Links
+        </h2>
+        <p>
+          Our website may contain links to external third-party websites or resources for informational context. UtilitySpace has no control over the content, security practices, or privacy policies of external sites and assumes no responsibility for third-party materials.
+        </p>
+
         <h2 className="font-heading text-xl font-bold text-foreground mt-8 mb-4">Contact</h2>
         <p>
           If you have any questions about this disclaimer, contact us at{" "}

@@ -64,6 +64,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/calculators/age',
     '/calculators/attendance',
     '/calculators/average',
+    '/calculators/bmi',
     '/calculators/cgpa',
     '/calculators/compound-interest',
     '/calculators/date-difference',

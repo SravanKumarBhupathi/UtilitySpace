@@ -18,7 +18,7 @@ export default function HtmlEntities() {
 
     if (mode === "encode") {
       // Basic HTML Entity Encoding
-      const encoded = text.replace(/[\u00A0-\u9999<>\&]/g, function(i) {
+      const encoded = text.replace(/[<>&"'\u00A0-\u9999]/g, function(i) {
          return '&#'+i.charCodeAt(0)+';';
       });
       setProcessedText(encoded);

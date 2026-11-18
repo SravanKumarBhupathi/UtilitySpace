@@ -48,6 +48,35 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://utilityspace.online/#organization",
+      name: "UtilitySpace",
+      url: "https://utilityspace.online",
+      logo: "https://utilityspace.online/globe.svg",
+      email: "contact@utilityspace.online",
+      description: "Free, private, and fast online tools, calculators, and practical guides for everyday digital tasks.",
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://utilityspace.online/#website",
+      url: "https://utilityspace.online",
+      name: "UtilitySpace",
+      publisher: {
+        "@id": "https://utilityspace.online/#organization",
+      },
+      potentialAction: {
+        "@type": "SearchAction",
+        target: "https://utilityspace.online/?q={search_term_string}",
+        "query-input": "required name=search_term_string",
+      },
+    },
+  ],
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -55,6 +84,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body className={`${inter.variable} ${manrope.variable} font-sans min-h-screen flex flex-col bg-background text-foreground antialiased overflow-x-hidden`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <Header />

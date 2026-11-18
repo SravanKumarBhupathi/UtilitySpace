@@ -26,11 +26,12 @@ export default function TimestampConverter() {
 
   const handleTimestampChange = (val: string) => {
     setTimestamp(val);
-    const ts = parseInt(val);
+    const ts = parseInt(val, 10);
     if (!isNaN(ts)) {
       // Determine if it's seconds or ms (rough heuristic)
       const isSeconds = val.length <= 10;
-      setParsedFromTs(new Date(isSeconds ? ts * 1000 : ts));
+      const d = new Date(isSeconds ? ts * 1000 : ts);
+      setParsedFromTs(!isNaN(d.getTime()) ? d : null);
     } else {
       setParsedFromTs(null);
     }

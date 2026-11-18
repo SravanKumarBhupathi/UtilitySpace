@@ -21,8 +21,10 @@ const calculate = () => {
       return;
     }
 
-    const d1 = new Date(dob);
-    const d2 = new Date(targetDate);
+    const [y1, m1, day1] = dob.split('-').map(Number);
+    const d1 = new Date(y1, m1 - 1, day1);
+    const [y2, m2, day2] = targetDate.split('-').map(Number);
+    const d2 = new Date(y2, m2 - 1, day2);
 
     if (isNaN(d1.getTime()) || isNaN(d2.getTime())) {
       setError("Please enter valid dates.");

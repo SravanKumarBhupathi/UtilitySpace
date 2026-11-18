@@ -52,13 +52,16 @@ export default function ImageCompressor() {
 
       const ctx = canvas.getContext("2d");
       if (ctx) {
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-
         let targetType = file.type;
         // Canvas compression quality only applies to image/jpeg or image/webp
         if (targetType === 'image/png' || targetType === 'image/gif') {
            targetType = 'image/jpeg';
+           // Fill with white background to prevent transparent PNG pixels from turning black
+           ctx.fillStyle = "#FFFFFF";
+           ctx.fillRect(0, 0, canvas.width, canvas.height);
         }
+
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
         canvas.toBlob((blob) => {
           if (blob) {

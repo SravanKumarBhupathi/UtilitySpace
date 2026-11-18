@@ -21,8 +21,10 @@ export default function DateDifferenceCalculator() {
       return;
     }
 
-    const d1 = new Date(startDate);
-    const d2 = new Date(endDate);
+    const [y1, m1, day1] = startDate.split('-').map(Number);
+    const d1 = new Date(y1, m1 - 1, day1);
+    const [y2, m2, day2] = endDate.split('-').map(Number);
+    const d2 = new Date(y2, m2 - 1, day2);
 
     if (isNaN(d1.getTime()) || isNaN(d2.getTime())) {
       setError("Please enter valid dates.");

@@ -55,10 +55,15 @@ export default function RemoveSpacesTool() {
     setText(lines.join('\n').trim());
   };
 
+  const removeAllSpaces = () => {
+    if (!text) return;
+    setText(text.replace(/\s+/g, ''));
+  };
+
   return (
     <ToolLayout
-      title="Clean Text"
-      description="Clean up text by removing extra spaces, empty lines, and duplicates."
+      title="Remove Spaces"
+      description="Clean up text by removing extra whitespace, all spaces, empty lines, and duplicate entries."
       category="Text"
     >
       <div className="text-center mb-6">
@@ -69,9 +74,14 @@ export default function RemoveSpacesTool() {
 
       <div className="space-y-6 max-w-4xl mx-auto">
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 bg-card border border-border p-4 rounded-xl shadow-sm">
-          <Button onClick={processText} variant="default" size="lg" disabled={!text} className="w-full md:w-auto">
-            <Wand2 className="w-4 h-4 mr-2" /> Clean Text
-          </Button>
+          <div className="flex flex-wrap gap-2 w-full md:w-auto">
+            <Button onClick={processText} variant="default" size="default" disabled={!text}>
+              <Wand2 className="w-4 h-4 mr-2" /> Clean Extra Spaces
+            </Button>
+            <Button onClick={removeAllSpaces} variant="outline" size="default" disabled={!text}>
+              Remove All Spaces
+            </Button>
+          </div>
 
           <div className="flex flex-wrap items-center justify-center gap-4">
             <div className="flex items-center gap-2">

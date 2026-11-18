@@ -42,13 +42,13 @@ export default function CaseConverter() {
   };
   const toCamelCase = () => {
     setText(text.replace(/(?:^\w|[A-Z]|\b\w|\s+)/g, (match, index) => {
-      if (+match === 0) return "";
+      if (match.trim() === "") return "";
       return index === 0 ? match.toLowerCase() : match.toUpperCase();
     }));
   };
   const toPascalCase = () => {
     setText(text.replace(/(?:^\w|[A-Z]|\b\w|\s+)/g, (match) => {
-      if (+match === 0) return "";
+      if (match.trim() === "") return "";
       return match.toUpperCase();
     }));
   };

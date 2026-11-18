@@ -82,14 +82,15 @@ export default function DeletePdfPages() {
           throw new Error("You cannot delete all pages from the PDF.");
        }
 
-       // Delete pages from end to start to avoid index shifting issues
+       // Load a fresh document copy for idempotent processing
+       const freshDoc = await PDFDocument.load(await file.arrayBuffer());
        const sortedToDelete = Array.from(toDelete).sort((a, b) => b - a);
        for (const pageNum of sortedToDelete) {
           // pdf-lib uses 0-based indexing
-          pdfDoc.removePage(pageNum - 1);
+          freshDoc.removePage(pageNum - 1);
        }
 
-       const pdfBytes = await pdfDoc.save();
+       const pdfBytes = await freshDoc.save();
        const blob = new Blob([new Uint8Array(pdfBytes)], { type: "application/pdf" });
        const url = URL.createObjectURL(blob);
        setOutputUrl(url);

@@ -57,46 +57,87 @@ export default function PrivacyPolicyPage() {
         </p>
 
         <h2 className="font-heading text-2xl font-bold text-foreground mt-8 mb-4">
-          4. Google DoubleClick DART Cookie & Third-Party Advertising Partners
+          4. Google AdSense, DoubleClick Cookies & Third-Party Advertising
         </h2>
         <p>
-          Google is one of our third-party vendors. It also uses cookies, known as DART cookies, to serve ads to our site visitors based upon their visit to <code>utilityspace.online</code> and other sites on the internet.
+          UtilitySpace partners with third-party advertising networks, including <strong>Google AdSense</strong>, to serve advertisements when you visit our website. These companies may use cookies, web beacons, and related tracking technologies to measure advertising effectiveness and serve relevant advertisements based on your prior visits to this and other websites across the Internet.
         </p>
-        <div className="p-4 bg-muted/60 rounded-lg border border-border space-y-3">
-          <p className="font-semibold text-foreground">Important AdSense Disclosures:</p>
+        <div className="p-5 bg-muted/60 rounded-xl border border-border space-y-4 my-4">
+          <p className="font-semibold text-foreground text-base">Mandatory Google AdSense Disclosures & Opt-Out Options:</p>
           <ul className="list-disc pl-6 space-y-2 text-sm">
             <li>
               Third-party vendors, including <strong>Google</strong>, use cookies to serve ads based on a user&apos;s prior visits to our website or other websites on the internet.
             </li>
             <li>
-              Google&apos;s use of advertising cookies enables it and its partners to serve ads to users based on their visits to our site and/or other sites on the Internet.
+              Google&apos;s use of advertising cookies enables it and its partners to serve ads to our users based on their visits to our site and/or other sites on the Internet.
             </li>
             <li>
-              Users may opt out of personalized advertising by visiting{" "}
+              Users may manage or opt out of personalized advertising by visiting{" "}
               <a
-                href="https://www.google.com/settings/ads"
+                href="https://myadcenter.google.com/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-primary hover:underline font-medium"
               >
-                Google Ads Settings (https://www.google.com/settings/ads)
-              </a>
-              .
+                Google My Ad Center (https://myadcenter.google.com/)
+              </a>{" "}
+              and{" "}
+              <a
+                href="https://adssettings.google.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary hover:underline font-medium"
+              >
+                Google Ads Settings (https://adssettings.google.com)
+              </a>.
             </li>
             <li>
-              Alternatively, you can opt out of a third-party vendor&apos;s use of cookies for personalized advertising by visiting{" "}
+              Users located in the United States may opt out of third-party vendor cookies for personalized advertising through the{" "}
               <a
                 href="https://www.aboutads.info/choices/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-primary hover:underline font-medium"
               >
-                www.aboutads.info/choices/
-              </a>
-              .
+                Digital Advertising Alliance (DAA) WebChoices Tool (www.aboutads.info/choices)
+              </a>{" "}
+              or the{" "}
+              <a
+                href="https://optout.networkadvertising.org/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary hover:underline font-medium"
+              >
+                Network Advertising Initiative (NAI) Opt-Out Tool
+              </a>.
+            </li>
+            <li>
+              Users located in the European Economic Area (EEA), United Kingdom, or Switzerland may manage their cookie preferences through the{" "}
+              <a
+                href="https://www.youronlinechoices.eu/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary hover:underline font-medium"
+              >
+                European Interactive Digital Advertising Alliance (EDAA) Consumer Choice Portal
+              </a>.
             </li>
           </ul>
         </div>
+
+        <h3 className="font-heading text-xl font-bold text-foreground mt-6 mb-3">
+          Consent Management Platform (CMP) & EU User Consent Policy
+        </h3>
+        <p>
+          In compliance with Google&apos;s EU User Consent Policy and the IAB Europe Transparency and Consent Framework (TCF v2.2), visitors from the EEA, UK, and Switzerland are presented with a Google-certified Consent Management Platform (CMP) banner upon their first visit. You may accept, reject, or customize the usage of cookies for personalized advertising and analytics at any time through our on-site cookie settings.
+        </p>
+
+        <h3 className="font-heading text-xl font-bold text-foreground mt-6 mb-3">
+          Browser Local Storage vs. Cookies
+        </h3>
+        <p>
+          UtilitySpace makes minimal use of browser <code>localStorage</code> solely to remember client-side preferences (such as your Dark/Light mode theme preference and recent calculator inputs). This data remains strictly on your local device, is never transmitted to our servers or third parties, and can be cleared at any time via your browser settings.
+        </p>
 
         <h2 className="font-heading text-2xl font-bold text-foreground mt-8 mb-4">
           5. Third-Party Privacy Policies

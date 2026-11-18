@@ -135,5 +135,15 @@ export const calculators: Item[] = [
     href: "/calculators/exam-percentage",
     icon: "GraduationCap",
   },
+  {
+    id: "bmi",
+    title: "BMI Calculator",
+    description: "Calculate Body Mass Index and healthy weight range.",
+    category: "Health & Everyday",
+    href: "/calculators/bmi",
+    icon: "Heart",
+    isPopular: true,
+    status: "active",
+  },
 
 ];

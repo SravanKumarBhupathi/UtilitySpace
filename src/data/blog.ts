@@ -47,15 +47,6 @@ export const blogPosts: Article[] = [
     date: "Oct 23, 2026",
   },
   {
-    id: "skills-that-improve-employability-2026",
-    title: "7 Skills That Can Make You More Employable in 2026",
-    description: "Degrees matter, but practical abilities also influence career opportunities. Explore seven valuable skills that students and professionals can develop to improve their workplace readiness.",
-    category: "Career & Skills",
-    href: "/blog/skills-that-improve-employability-2026",
-    readingTime: "2 min read",
-    date: "Oct 21, 2026",
-  },
-  {
     id: "why-you-feel-busy-but-accomplish-nothing",
     title: "Why You Feel Busy All Day but Accomplish Nothing",
     description: "Always busy but still feel unproductive? Discover why task switching, distractions, poor planning and procrastination affect your productivity, and how to fix them.",
@@ -108,15 +99,6 @@ export const blogPosts: Article[] = [
     href: "/blog/learn-new-skills-faster-80-20-rule",
     readingTime: "3 min read",
     date: "Oct 10, 2026",
-  },
-  {
-    id: "practical-ways-to-save-money-every-month",
-    title: "15 Practical Ways to Save Money Without Changing Your Lifestyle",
-    description: "Saving money does not always require major sacrifices. Small changes to spending, subscriptions, shopping habits, and financial planning can make everyday expenses easier to manage.",
-    category: "Personal Finance",
-    href: "/blog/practical-ways-to-save-money-every-month",
-    readingTime: "2 min read",
-    date: "Oct 8, 2026",
   },
   {
     id: "top-productivity-tools-2026",
