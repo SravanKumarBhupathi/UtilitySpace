@@ -43,10 +43,37 @@ export default function EMICalculator() {
     setResult(null);
   };
 
+  const howToSteps = [
+    "Enter the total principal loan amount you wish to borrow (e.g. for a home, car, or personal loan).",
+    "Enter the annual interest rate offered by your bank or lender (e.g. 8.5% or 0% for promotional financing).",
+    "Enter the loan tenure in years (e.g. 5 for a car loan, 20 or 30 for a mortgage).",
+    "Click 'Calculate EMI' to see your monthly installment, total interest payable, and total overall loan repayment.",
+  ];
+
+  const faqs = [
+    {
+      question: "What is an EMI?",
+      answer: "An Equated Monthly Installment (EMI) is a fixed payment amount made by a borrower to a lender at a specified date each calendar month. EMIs apply to both interest and principal each month until the loan is fully paid off.",
+    },
+    {
+      question: "How does loan tenure affect total interest paid?",
+      answer: "A longer loan tenure reduces your monthly EMI amount, but significantly increases the total cumulative interest you pay over the life of the loan. A shorter tenure increases monthly payments but saves thousands in interest.",
+    },
+    {
+      question: "Can I use this for 0% interest financing schemes?",
+      answer: "Yes. Our EMI calculator fully supports 0% interest financing, calculating the exact monthly installment as Principal divided by total tenure months.",
+    },
+  ];
+
+  const formulaExplanation = "EMI = [P x R x (1+R)^N] / [(1+R)^N - 1], where P is Principal loan amount, R is monthly interest rate (Annual rate / 12 / 100), and N is the total number of monthly installments.";
+
   return (
     <CalculatorLayout
       title="EMI Calculator"
       description="Calculate Equated Monthly Installments for loans."
+      howToSteps={howToSteps}
+      faqs={faqs}
+      formulaExplanation={formulaExplanation}
     >
       <Card className="shadow-md">
         <CardContent className="p-6 md:p-8">

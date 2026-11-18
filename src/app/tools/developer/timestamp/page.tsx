@@ -18,7 +18,6 @@ export default function TimestampConverter() {
   const [parsedFromDate, setParsedFromDate] = useState<number | null>(null);
 
   useEffect(() => {
-
     setCurrentTime(Math.floor(Date.now() / 1000));
     const timer = setInterval(() => setCurrentTime(Math.floor(Date.now() / 1000)), 1000);
     return () => clearInterval(timer);
@@ -51,14 +50,44 @@ export default function TimestampConverter() {
     navigator.clipboard.writeText(text);
   };
 
+  const howToSteps = [
+    "To convert a timestamp to a date: enter a Unix timestamp in seconds (10 digits) or milliseconds (13 digits) into the 'Timestamp to Date' box, or click 'Now' to use the current moment.",
+    "The tool will instantly parse the number and display your Local Time, universal UTC Time, and standard ISO 8601 string.",
+    "To convert a date to a timestamp: enter an ISO date, RFC string, or calendar date/time into the 'Date to Timestamp' field.",
+    "Instantly view and copy the calculated Epoch time in either seconds or milliseconds using the one-click copy buttons.",
+  ];
+
+  const faqs = [
+    {
+      question: "What is Unix Epoch time?",
+      answer: "Unix Epoch time (or POSIX timestamp) represents the total number of seconds that have elapsed since 00:00:00 UTC on January 1, 1970, not counting leap seconds. It is a universal, timezone-independent standard used across computer operating systems, databases, cloud servers, and APIs to store and synchronize time.",
+    },
+    {
+      question: "What will happen in the Year 2038 (Y2038 bug)?",
+      answer: "Legacy computing systems that store Unix timestamps as 32-bit signed integers will overflow on January 19, 2038 at 03:14:07 UTC (reaching the maximum value of 2,147,483,647 seconds). Upon overflowing, the integer wraps to a negative value, causing systems to misinterpret the date as December 13, 1901. Modern 64-bit systems eliminate this issue, extending the timestamp capability to over 292 billion years.",
+    },
+    {
+      question: "How do local timezones affect Unix timestamps?",
+      answer: "A Unix timestamp is identical worldwide at any specific instant because it is based on UTC. Timezones only affect how that universal timestamp is formatted into a human-readable string on a specific device (e.g., UTC vs. EST vs. IST). This converter displays both your device's local timezone and UTC simultaneously for easy debugging.",
+    },
+    {
+      question: "How do I distinguish between seconds and milliseconds timestamps?",
+      answer: "Standard Unix timestamps in seconds are typically 10 digits long (e.g., 1704067200 for year 2024). JavaScript timestamps and high-precision APIs use milliseconds, which are 13 digits long (e.g., 1704067200000). This converter automatically detects and handles both formats seamlessly.",
+    },
+  ];
+
+  const aboutText = "UtilitySpace Timestamp Converter provides fast, accurate bi-directional conversions between Unix Epoch timestamps and human-readable calendar dates. Whether you are debugging backend database records, analyzing server log files, or constructing API request payloads, this in-browser converter handles both 10-digit second and 13-digit millisecond timestamps with live UTC, local timezone, and ISO 8601 breakdowns.";
+
   return (
     <ToolLayout
       title="Timestamp Converter"
       description="Convert Unix timestamps to readable dates and vice-versa."
       category="Developer"
+      howToSteps={howToSteps}
+      faqs={faqs}
+      aboutText={aboutText}
     >
       <div className="space-y-8">
-
         {/* Current Time Widget */}
         <div className="flex items-center justify-center p-6 bg-primary/5 rounded-xl border border-primary/20">
           <div className="text-center">

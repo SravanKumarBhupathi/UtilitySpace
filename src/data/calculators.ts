@@ -65,6 +65,16 @@ export const calculators: Item[] = [
     status: "active",
   },
   {
+    id: "mortgage",
+    title: "Mortgage Calculator",
+    description: "Calculate monthly mortgage payments, interest, taxes, and view complete amortization schedule.",
+    category: "Financial",
+    href: "/calculators/mortgage",
+    icon: "Home",
+    status: "active",
+    isPopular: true,
+  },
+  {
     id: "emi",
     title: "EMI Calculator",
     description: "Calculate Equated Monthly Installments for loans.",

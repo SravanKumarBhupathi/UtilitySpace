@@ -107,11 +107,36 @@ export default function ImageCompressor() {
 
   const savings = file && compressedBlob ? ((file.size - compressedBlob.size) / file.size) * 100 : 0;
 
+  const howToSteps = [
+    "Upload your JPG, PNG, or WebP photo by clicking the upload zone or dragging and dropping.",
+    "Adjust the compression quality slider (70% - 80% is the sweet spot for web use).",
+    "Click 'Compress Image' to render the optimized file in real time.",
+    "Compare the original vs. compressed file size and percentage saved, then click 'Download'.",
+  ];
+
+  const faqs = [
+    {
+      question: "How does image compression work?",
+      answer: "Image compression removes invisible color redundancies and applies discrete cosine transform (DCT) math to reduce byte size while preserving high visual quality.",
+    },
+    {
+      question: "What happens to transparent PNG images?",
+      answer: "Because standard JPEG compression does not support transparency, transparent areas are automatically rendered over a clean white background to prevent dark square artifacts.",
+    },
+    {
+      question: "Are my photos uploaded to a cloud server?",
+      answer: "No. The entire compression process takes place locally inside your browser's HTML5 Canvas. Your photos never leave your computer or phone.",
+    },
+  ];
+
   return (
     <ToolLayout
       title="Image Compressor"
       description="Reduce image file size efficiently in your browser."
       category="Images"
+      howToSteps={howToSteps}
+      faqs={faqs}
+      aboutText="UtilitySpace Image Compressor allows you to shrink photographic image file sizes by 60% to 80% with virtually no perceived loss in quality. Perfect for optimizing blog illustrations, email attachments, and government application photos."
     >
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="space-y-6">

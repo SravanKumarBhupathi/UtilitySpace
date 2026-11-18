@@ -7,32 +7,42 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Copy, CheckCircle2 } from "lucide-react";
 
+const STOP_WORDS = new Set([
+  "a", "an", "the", "and", "or", "but", "in", "on", "at", "to", "for", "of", "with", "by", "from", "up", "about", "into", "over", "after"
+]);
+
 export default function SlugGeneratorTool() {
   const [input, setInput] = useState("");
   const [slug, setSlug] = useState("");
   const [separator, setSeparator] = useState<"-" | "_">("-");
+  const [filterStopWords, setFilterStopWords] = useState(false);
   const [copied, setCopied] = useState(false);
 
-  useEffect(() => {
-    generateSlug(input, separator);
-  }, [input, separator]);
-
-  const generateSlug = (text: string, sep: string) => {
-    if (!text) {
+  const generateSlug = (text: string, sep: string, removeStops: boolean) => {
+    if (!text.trim()) {
       setSlug("");
       return;
     }
-    const result = text
+    let words = text
       .toLowerCase()
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, "") // remove accents
       .replace(/[^\w\s-]/g, "") // remove non-word chars
       .trim()
-      .replace(/\s+/g, sep) // replace spaces with separator
-      .replace(new RegExp(`\\${sep}+`, "g"), sep); // remove multiple separators
+      .split(/\s+/);
 
+    if (removeStops) {
+      const filtered = words.filter((w) => !STOP_WORDS.has(w));
+      words = filtered.length > 0 ? filtered : words;
+    }
+
+    const result = words.join(sep).replace(new RegExp(`\\${sep}+`, "g"), sep);
     setSlug(result);
   };
+
+  useEffect(() => {
+    generateSlug(input, separator, filterStopWords);
+  }, [input, separator, filterStopWords]);
 
   const copyToClipboard = async () => {
     if (!slug) return;
@@ -51,11 +61,42 @@ export default function SlugGeneratorTool() {
     setCopied(false);
   };
 
+  const howToSteps = [
+    "Enter your article title, blog headline, or phrase into the 'Original Text' field.",
+    "Configure your word separator preference: hyphens (standard for SEO URLs: this-is-a-slug) or underscores (this_is_a_slug).",
+    "Toggle the stop-word filter if you want to automatically strip common filler words (like 'a', 'the', 'in', 'and') for cleaner URLs.",
+    "Click the 'Copy' button to copy your sanitized, URL-friendly slug to your clipboard for instant publishing in your CMS or codebase.",
+  ];
+
+  const faqs = [
+    {
+      question: "What is a URL slug?",
+      answer: "A URL slug is the human-readable, hyphenated portion at the end of a web address that identifies a particular post or webpage. For example, in 'https://example.com/blog/best-javascript-frameworks', the slug is 'best-javascript-frameworks'.",
+    },
+    {
+      question: "Why are clean slugs crucial for SEO?",
+      answer: "Search engine algorithms like Google use keywords in URLs to gauge topic relevance and index pages accurately. Clean, concise slugs without special characters improve search rankings and drastically enhance user trust and click-through rates (CTR) on Search Engine Result Pages (SERPs) and social media feeds.",
+    },
+    {
+      question: "How are special characters, emojis, and accented letters handled?",
+      answer: "Our slug generator employs Unicode Normalization Form D (NFD) to decompose and strip accents (e.g., converting 'café' to 'cafe' or 'mañana' to 'manana'). Emojis, punctuation marks, brackets, and non-alphanumeric characters are automatically removed according to RFC 3986 URI guidelines.",
+    },
+    {
+      question: "Should I use hyphens or underscores for URL slugs?",
+      answer: "Google and major search engines officially recommend using hyphens (-) rather than underscores (_) to separate words in URLs. Search engine crawlers treat hyphens as natural word spaces, whereas underscores may be treated as joiners, merging two words into one.",
+    },
+  ];
+
+  const aboutText = "UtilitySpace Slug Generator is an SEO-friendly URL slug generation tool built for content creators, bloggers, software developers, and marketers. Convert any title or heading into a clean, lowercase, keyword-rich permalink formatted according to web standards in real time.";
+
   return (
     <ToolLayout
       title="Slug Generator"
       description="Convert any string into a clean, URL-friendly slug instantly."
       category="Text"
+      howToSteps={howToSteps}
+      faqs={faqs}
+      aboutText={aboutText}
     >
       <div className="text-center mb-6">
         <p className="text-sm text-secondary-text bg-muted/50 inline-block px-3 py-1 rounded-full border border-border">
@@ -75,7 +116,7 @@ export default function SlugGeneratorTool() {
           />
         </div>
 
-        <div className="flex gap-6 items-center">
+        <div className="flex flex-wrap gap-6 items-center">
           <label className="flex items-center gap-2 cursor-pointer">
             <input
               type="radio"
@@ -95,6 +136,15 @@ export default function SlugGeneratorTool() {
               className="accent-primary w-4 h-4"
             />
             <span className="text-sm font-medium">Underscores (this_is_a_slug)</span>
+          </label>
+          <label className="flex items-center gap-2 cursor-pointer">
+            <input
+              type="checkbox"
+              checked={filterStopWords}
+              onChange={(e) => setFilterStopWords(e.target.checked)}
+              className="accent-primary w-4 h-4 rounded"
+            />
+            <span className="text-sm font-medium">Remove stop words (a, the, in...)</span>
           </label>
 
           <Button onClick={clear} variant="ghost" className="text-secondary-text ml-auto" disabled={!input}>Clear</Button>

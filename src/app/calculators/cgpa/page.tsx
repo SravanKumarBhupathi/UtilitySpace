@@ -98,10 +98,37 @@ export default function CGPACalculator() {
     setError(null);
   };
 
+  const howToSteps = [
+    "Enter each semester's SGPA (Semester Grade Point Average) or GPA.",
+    "Enter the total credit hours registered or completed in that semester.",
+    "Add more semesters using 'Add Semester' or adjust the existing entries.",
+    "Click 'Calculate CGPA' to view your cumulative grade point average and equivalent percentage conversions.",
+  ];
+
+  const faqs = [
+    {
+      question: "How do you convert CGPA to percentage?",
+      answer: "For a 10-point scale (common in CBSE and Indian universities), the standard formula is Percentage = CGPA x 9.5. For a 4.0 scale (common in US universities), the conversion is Percentage = (CGPA / 4.0) x 100.",
+    },
+    {
+      question: "Why can't I just take the simple average of my semester GPAs?",
+      answer: "If semesters have different total credit weights (e.g. 24 credits in Semester 2 vs. 18 credits in Semester 1), a semester with more credits has a proportionally higher impact on your cumulative academic standing. A weighted calculation is required.",
+    },
+    {
+      question: "Is this calculator suitable for college and university grading systems?",
+      answer: "Yes. Whether your university operates on a 4.0 or 10.0 scale, the weighted credit formula accurately computes your exact cumulative performance.",
+    },
+  ];
+
+  const formulaExplanation = "CGPA = Sum(Semester GPA x Semester Credits) / Sum(Total Semester Credits).";
+
   return (
     <CalculatorLayout
       title="CGPA Calculator"
       description="Calculate your overall Cumulative Grade Point Average (CGPA) and convert your score to an estimated percentage."
+      howToSteps={howToSteps}
+      faqs={faqs}
+      formulaExplanation={formulaExplanation}
     >
       <div className="space-y-6">
         <Card className="shadow-md">

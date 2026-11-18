@@ -54,10 +54,38 @@ export default function CompoundInterestCalculator() {
     setError(null);
   };
 
+  const howToSteps = [
+    "Enter your initial deposit or starting investment amount (Principal).",
+    "Enter the expected annual interest rate percentage (e.g. 7% for index funds or 5% for high-yield savings).",
+    "Specify the investment duration in years.",
+    "Select your compounding frequency (Annually, Semi-Annually, Quarterly, Monthly, or Daily).",
+    "Click 'Calculate' to see your ending portfolio value and total compound interest earned.",
+  ];
+
+  const faqs = [
+    {
+      question: "What is compound interest?",
+      answer: "Compound interest is the interest calculated on both the initial principal and the accumulated interest from previous periods. Often called 'interest on interest', it causes your money to grow exponentially faster over long periods.",
+    },
+    {
+      question: "How does compounding frequency affect my returns?",
+      answer: "The more frequently interest is compounded (e.g. monthly or daily vs. annually), the greater your total return, because earned interest begins generating its own return sooner.",
+    },
+    {
+      question: "What is the Rule of 72?",
+      answer: "The Rule of 72 is a quick mental math shortcut: divide 72 by your annual interest rate to estimate how many years it will take to double your investment. For example, at an 8% return, money doubles in approximately 9 years (72 / 8).",
+    },
+  ];
+
+  const formulaExplanation = "A = P(1 + r/n)^(nt), where A is the future value of the investment, P is the principal investment amount, r is the annual interest rate in decimal, n is the compounding frequency per year, and t is the time in years.";
+
   return (
     <CalculatorLayout
       title="Compound Interest Calculator"
       description="Determine the future value of an investment or loan where interest is compounded."
+      howToSteps={howToSteps}
+      faqs={faqs}
+      formulaExplanation={formulaExplanation}
     >
       <Card className="shadow-md">
         <CardContent className="p-6 md:p-8">

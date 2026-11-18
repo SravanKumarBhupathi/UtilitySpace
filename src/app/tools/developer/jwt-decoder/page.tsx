@@ -3,19 +3,21 @@
 import { useState } from "react";
 import { ToolLayout } from "@/components/tool-layout";
 import { Button } from "@/components/ui/button";
-import { Copy, Trash2, ShieldAlert } from "lucide-react";
+import { Copy, Trash2, ShieldAlert, KeyRound } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function JwtDecoder() {
   const [token, setToken] = useState("");
   const [header, setHeader] = useState("");
   const [payload, setPayload] = useState("");
+  const [signature, setSignature] = useState("");
   const [error, setError] = useState<string | null>(null);
 
   const decodeJWT = (t: string) => {
     setError(null);
     setHeader("");
     setPayload("");
+    setSignature("");
 
     if (!t.trim()) return;
 
@@ -39,8 +41,9 @@ export default function JwtDecoder() {
 
       setHeader(JSON.stringify(JSON.parse(decodedHeader), null, 2));
       setPayload(JSON.stringify(JSON.parse(decodedPayload), null, 2));
+      setSignature(parts[2]);
 
-    } catch (e: any) {
+    } catch (e: unknown) {
       setError("Failed to decode token. Ensure it is a valid Base64URL encoded JWT.");
     }
   };
@@ -49,6 +52,7 @@ export default function JwtDecoder() {
     setToken("");
     setHeader("");
     setPayload("");
+    setSignature("");
     setError(null);
   };
 
@@ -56,16 +60,49 @@ export default function JwtDecoder() {
     if (text) navigator.clipboard.writeText(text);
   };
 
+  const howToSteps = [
+    "Paste your JSON Web Token (JWT) into the Encoded Token input box above.",
+    "The tool instantly parses and separates the token into its three distinct parts: Header, Payload, and Signature.",
+    "Inspect the decoded Header to verify the signing algorithm (e.g., HS256, RS256, ES256) and token type.",
+    "Review the decoded Payload claims such as expiration time (exp), issued-at timestamp (iat), subject (sub), issuer (iss), and custom user claims.",
+    "Examine the signature status to verify that the cryptographic signature segment is properly formatted.",
+    "Click the copy button on any section to export the formatted JSON claims directly to your clipboard.",
+  ];
+
+  const faqs = [
+    {
+      question: "Is decoding a JWT secure on UtilitySpace?",
+      answer: "Yes, completely secure. All JWT decoding is performed 100% locally inside your browser using client-side JavaScript. Your token, authorization headers, and session credentials are never transmitted over the internet, sent to remote servers, or stored in any database.",
+    },
+    {
+      question: "What is the difference between decoding and verifying a JWT?",
+      answer: "Decoding a JWT simply converts the Base64URL-encoded Header and Payload strings back into readable JSON text—anyone who has the token can decode it without a secret key. Verifying a JWT, in contrast, requires cryptographically validating the third segment (the signature) against a secret key (HMAC) or public key (RSA/ECDSA) to confirm that the token was issued by a trusted party and has not been altered in transit.",
+    },
+    {
+      question: "Why shouldn't sensitive secrets or passwords be stored in JWT payloads?",
+      answer: "Standard JSON Web Tokens (JWS) are digitally signed, not encrypted. Because the payload is merely Base64URL encoded, anyone who intercepts or accesses the token can easily decode and read all claims inside. Storing sensitive data like user passwords, private encryption keys, or credit card information in a JWT payload exposes that data to severe security risks.",
+    },
+    {
+      question: "What do standard JWT claims like exp, iat, sub, and iss mean?",
+      answer: "Under the RFC 7519 standard: 'exp' (Expiration Time) specifies the Unix timestamp after which the token must not be accepted; 'iat' (Issued At) denotes when the token was generated; 'sub' (Subject) identifies the principal or user ID; and 'iss' (Issuer) identifies the authentication server or authority that issued the token.",
+    },
+  ];
+
+  const aboutText = "UtilitySpace JWT Decoder is a lightweight, secure developer tool for inspecting JSON Web Tokens (RFC 7519) in real time. Because all parsing happens entirely client-side without network requests, you can safely inspect authorization headers, check token expiration, and debug claims without compromising confidential tokens or user privacy.";
+
   return (
     <ToolLayout
       title="JWT Decoder"
       description="Decode JSON Web Tokens (JWT) instantly in your browser."
       category="Developer"
+      howToSteps={howToSteps}
+      faqs={faqs}
+      aboutText={aboutText}
     >
       <div className="space-y-6">
          <div className="bg-amber-500/10 border border-amber-500/20 p-4 rounded-xl flex items-start gap-3 text-amber-700 dark:text-amber-400 text-sm">
            <ShieldAlert className="w-5 h-5 shrink-0 mt-0.5" />
-           <p><strong>Security Note:</strong> This tool only decodes the Base64 payload. It <em>does not</em> verify the token signature or validate its authenticity. Never share sensitive tokens.</p>
+           <p><strong>Security Note:</strong> This tool decodes the Base64URL payload for local inspection. It <em>does not</em> verify the token signature against a secret key. All operations run strictly on your device.</p>
          </div>
 
          <div className="space-y-3">
@@ -122,6 +159,28 @@ export default function JwtDecoder() {
                </CardContent>
             </Card>
          </div>
+
+         {signature && (
+           <Card className="shadow-sm">
+             <CardHeader className="py-4 border-b border-border bg-muted/20 flex flex-row items-center justify-between">
+               <div className="flex items-center gap-2">
+                 <KeyRound className="w-4 h-4 text-purple-600 dark:text-purple-400" />
+                 <CardTitle className="text-base text-secondary-text uppercase tracking-wider">Signature Status</CardTitle>
+               </div>
+               <Button variant="ghost" size="icon" onClick={() => handleCopy(signature)} disabled={!signature} className="h-8 w-8">
+                 <Copy className="w-4 h-4" />
+               </Button>
+             </CardHeader>
+             <CardContent className="p-4 space-y-2">
+               <div className="font-mono text-xs text-purple-600 dark:text-purple-400 break-all p-3 bg-muted/30 rounded border border-border">
+                 {signature}
+               </div>
+               <p className="text-xs text-secondary-text">
+                 The 256/384/512-bit signature segment is present. Full cryptographic verification requires your server&apos;s signing secret or public certificate.
+               </p>
+             </CardContent>
+           </Card>
+         )}
       </div>
     </ToolLayout>
   );

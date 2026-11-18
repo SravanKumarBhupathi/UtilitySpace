@@ -106,10 +106,36 @@ export default function BMICalculator() {
     setError(null);
   };
 
+  const howToSteps = [
+    "Select your preferred measurement units: Metric (centimeters & kilograms) or Imperial (feet, inches & pounds).",
+    "Enter your accurate height and current body weight.",
+    "Click 'Calculate BMI' to see your score, your official WHO weight category, and your personalized healthy weight target range.",
+  ];
+
+  const faqs = [
+    {
+      question: "What is a healthy BMI according to the World Health Organization?",
+      answer: "For adults, the WHO categorizes a BMI between 18.5 and 24.9 as Normal / Healthy weight. Less than 18.5 is considered Underweight, 25.0 to 29.9 is Overweight, and 30.0 or higher is classified as Obese.",
+    },
+    {
+      question: "Does BMI distinguish between muscle mass and body fat?",
+      answer: "No. BMI is a screening ratio of total body mass to height. It does not measure body composition directly. Athletes and bodybuilders with high muscle density may score in the 'overweight' range despite having low body fat.",
+    },
+    {
+      question: "Is this calculator suitable for children and teenagers?",
+      answer: "This calculator uses adult WHO criteria. For children and adolescents aged 2 to 19, pediatricians use BMI-for-age percentiles because body composition changes rapidly as youth grow.",
+    },
+  ];
+
+  const formulaExplanation = "Metric Formula: BMI = weight (kg) / [height (m)]². Imperial Formula: BMI = 703 x weight (lbs) / [height (in)]².";
+
   return (
     <CalculatorLayout
       title="BMI Calculator"
       description="Calculate your Body Mass Index (BMI) and discover your healthy weight range based on World Health Organization (WHO) standards."
+      howToSteps={howToSteps}
+      faqs={faqs}
+      formulaExplanation={formulaExplanation}
     >
       <div className="space-y-6">
         <Card className="shadow-md">

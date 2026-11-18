@@ -2,6 +2,42 @@ import { Article } from "./types";
 
 export const blogPosts: Article[] = [
   {
+    id: "jwt-debugging-guide-security-best-practices",
+    title: "How to Debug and Verify JSON Web Tokens (JWT) Securely in 2026",
+    description: "Deep dive into JWT anatomy (Header, Payload, Signature), common vulnerabilities (algorithm confusion none, weak HMAC secrets, key exposure), debugging tools, expired token handling, and security best practices.",
+    category: "AI & Technology",
+    href: "/blog/jwt-debugging-guide-security-best-practices",
+    readingTime: "6 min read",
+    date: "Nov 18, 2026",
+  },
+  {
+    id: "unix-epoch-timestamp-guide-conversions-and-timezones",
+    title: "Unix Epoch Timestamp Explained: How Time Works in Computing & How to Convert It",
+    description: "Explanation of Unix time (seconds since Jan 1, 1970 UTC), Year 2038 problem (32-bit integer overflow), millisecond vs second timestamps, timezone conversion math, ISO 8601 formatting, and code snippets in JavaScript/Python.",
+    category: "AI & Technology",
+    href: "/blog/unix-epoch-timestamp-guide-conversions-and-timezones",
+    readingTime: "5 min read",
+    date: "Nov 18, 2026",
+  },
+  {
+    id: "cgpa-to-percentage-conversion-guide",
+    title: "How to Convert CGPA to Percentage: Formulas for CBSE, VTU, Mumbai University & 4.0 Scale",
+    description: "Complete breakdown of conversion formulas across major educational boards: CBSE 10th & 12th (multiplier 9.5), engineering universities (VTU, Mumbai University, Anna University, SPPU), US 4.0 GPA scale, pitfalls, and step-by-step examples with tables.",
+    category: "Career & Skills",
+    href: "/blog/cgpa-to-percentage-conversion-guide",
+    readingTime: "6 min read",
+    date: "Nov 18, 2026",
+  },
+  {
+    id: "how-to-compress-pdf-for-government-and-job-portals",
+    title: "How to Compress a PDF to 100KB, 200KB, or 500KB for Government Portals & Job Applications",
+    description: "Step-by-step tutorial on how to hit strict file size limits (100KB, 200KB, 500KB) on UPSC, SSC, state recruitment, and college application portals without losing text clarity.",
+    category: "AI & Technology",
+    href: "/blog/how-to-compress-pdf-for-government-and-job-portals",
+    readingTime: "6 min read",
+    date: "Nov 18, 2026",
+  },
+  {
     id: "vibe-coding-guide-tools-and-best-practices-2026",
     title: "Vibe Coding in 2026: What It Is, Top Tools, and How to Build Software Safely",
     description: "Discover what vibe coding means in 2026, explore top AI tools like Cursor and Claude Code, avoid critical pitfalls, and learn how to build production-ready apps.",

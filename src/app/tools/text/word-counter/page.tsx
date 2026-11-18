@@ -41,11 +41,36 @@ export default function WordCounter() {
     setCopied(false);
   };
 
+  const howToSteps = [
+    "Type or paste your text directly into the main text input area above.",
+    "Real-time metrics instantly display total words, character count (with & without spaces), sentences, and paragraphs.",
+    "Review your estimated reading time (calculated at an average 200 words per minute).",
+    "Click 'Copy' to retrieve your text or 'Clear' to start fresh for a new document.",
+  ];
+
+  const faqs = [
+    {
+      question: "How does this word counter calculate hyphenated words and emojis?",
+      answer: "Our algorithm uses Unicode-aware regex matching (\\p{L}\\p{N}_-) to accurately treat hyphenated words as single lexical units while ensuring compound emoji sequences are counted as single characters rather than surrogate pairs.",
+    },
+    {
+      question: "What is the difference between character count with and without spaces?",
+      answer: "Character count with spaces includes all whitespace, tabs, and line breaks—this is the standard enforced by social media (such as Twitter/X 280-char limit). Character count without spaces measures pure textual characters, which is ideal for academic density analysis.",
+    },
+    {
+      question: "Is my text saved or sent to any server?",
+      answer: "No. Everything runs strictly inside your local browser memory using client-side JavaScript. Your confidential essays, articles, and personal writing never leave your device.",
+    },
+  ];
+
   return (
     <ToolLayout
       title="Word Counter"
       description="Count words, characters, sentences, and paragraphs in your text."
       category="Text"
+      howToSteps={howToSteps}
+      faqs={faqs}
+      aboutText="UtilitySpace Word Counter is an essential text analysis tool for students, copywriters, researchers, and developers. It provides instant, accurate feedback on word count, character density, sentence structure, and estimated reading time with zero server uploads."
     >
       <div className="text-center mb-6">
         <p className="text-sm text-secondary-text bg-muted/50 inline-block px-3 py-1 rounded-full border border-border">

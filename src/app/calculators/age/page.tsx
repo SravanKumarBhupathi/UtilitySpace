@@ -69,10 +69,36 @@ const reset = () => {
     setError(null);
   };
 
+  const howToSteps = [
+    "Select your Date of Birth using the calendar date picker.",
+    "The 'Age At Date' defaults to today, but you can select any past or future reference date (useful for exam eligibility deadlines).",
+    "Click 'Calculate Age' to see your precise chronological age in exact years, months, and days.",
+  ];
+
+  const faqs = [
+    {
+      question: "How does this calculator account for leap years and varying month lengths?",
+      answer: "Our algorithm accurately handles Gregorian leap years (February 29) and dynamically determines the exact number of calendar days in each preceding month, preventing common timezone-shift errors.",
+    },
+    {
+      question: "Can I calculate my age on an upcoming exam cut-off date?",
+      answer: "Yes. Simply change the 'Age At Date' to the examination eligibility deadline (e.g., January 1 or August 1 of the testing year) to verify whether you fall within the mandatory age window.",
+    },
+    {
+      question: "Is my birthdate saved anywhere?",
+      answer: "No. Calculations execute strictly inside your local browser. Your personal dates and identity information are never logged or transmitted.",
+    },
+  ];
+
+  const formulaExplanation = "Chronological age is calculated by decomposing both the birthdate and target date into local year, month, and day components, sequentially subtracting days (borrowing previous month length when needed) and months (borrowing 12 months from years when needed).";
+
   return (
     <CalculatorLayout
       title="Age Calculator"
       description="Calculate exact age in years, months, and days."
+      howToSteps={howToSteps}
+      faqs={faqs}
+      formulaExplanation={formulaExplanation}
     >
       <Card className="shadow-md">
         <CardContent className="p-6 md:p-8">

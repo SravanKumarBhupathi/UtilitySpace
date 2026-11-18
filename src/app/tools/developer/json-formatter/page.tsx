@@ -50,11 +50,36 @@ export default function JsonFormatter() {
     setErrorMessage("");
   };
 
+  const howToSteps = [
+    "Paste your raw, minified, or unformatted JSON text into the main editor area.",
+    "Click 'Beautify' to indent and structure the data with 2 spaces for optimal human readability.",
+    "Click 'Minify' if you want to compact the JSON into a single line for production payloads or network transmission.",
+    "If errors exist, inspect the red validation banner highlighting the exact syntax failure (e.g. trailing comma or missing quotes).",
+  ];
+
+  const faqs = [
+    {
+      question: "Why does my JSON fail validation?",
+      answer: "Common JSON syntax errors include: using single quotes ('') instead of double quotes (\"\"), trailing commas after the last array item or object property, unquoted keys, and including JavaScript comments (// or /* */) which are invalid in RFC 8259 JSON.",
+    },
+    {
+      question: "Are my proprietary API keys or tokens safe?",
+      answer: "Yes, 100%. Formatting occurs entirely in your browser using native JavaScript JSON parsing. No data is ever uploaded or transmitted across the internet.",
+    },
+    {
+      question: "Can this tool handle large JSON files?",
+      answer: "Yes, this tool can comfortably format JSON payloads of several megabytes depending on your device's available browser memory.",
+    },
+  ];
+
   return (
     <ToolLayout
       title="JSON Formatter"
       description="Beautify, format, and validate JSON data."
       category="Developer"
+      howToSteps={howToSteps}
+      faqs={faqs}
+      aboutText="UtilitySpace JSON Formatter & Validator is an indispensable utility for software engineers, QA testers, and data analysts. It transforms messy or minified JSON into clean, indented, and verified data structures in milliseconds without compromising data privacy."
     >
       <div className="space-y-6">
         <div className="flex flex-wrap items-center justify-between gap-4">

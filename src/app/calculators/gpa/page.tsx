@@ -105,10 +105,38 @@ export default function GPACalculator() {
     setError(null);
   };
 
+  const howToSteps = [
+    "Enter your course names or subject titles.",
+    "Select your letter grade (A+, A, B+, B, etc.) or corresponding grade points (4.0 scale).",
+    "Enter the number of credit hours assigned to each course.",
+    "Add more courses using 'Add Course' if needed, or remove unneeded subjects.",
+    "Click 'Calculate GPA' to determine your weighted semester Grade Point Average.",
+  ];
+
+  const faqs = [
+    {
+      question: "How is a weighted GPA calculated?",
+      answer: "Each course's grade points are multiplied by its credit hours to determine Quality Points. Total quality points are then divided by the total credit hours taken.",
+    },
+    {
+      question: "What is the standard 4.0 GPA grade point scale?",
+      answer: "Standard US college scale: A = 4.0, A- = 3.7, B+ = 3.3, B = 3.0, B- = 2.7, C+ = 2.3, C = 2.0, C- = 1.7, D = 1.0, and F = 0.0.",
+    },
+    {
+      question: "What is the difference between GPA and CGPA?",
+      answer: "GPA measures performance across a single academic term or semester. CGPA (Cumulative Grade Point Average) measures your overall cumulative academic standing across all semesters combined.",
+    },
+  ];
+
+  const formulaExplanation = "Semester GPA = Sum(Course Grade Points x Course Credit Hours) / Sum(Course Credit Hours).";
+
   return (
     <CalculatorLayout
       title="GPA Calculator"
       description="Calculate your semester Grade Point Average (GPA) using your course grades and credit hours."
+      howToSteps={howToSteps}
+      faqs={faqs}
+      formulaExplanation={formulaExplanation}
     >
       <div className="space-y-6">
         <Card className="shadow-md">

@@ -251,8 +251,38 @@ export const tools: Item[] = [
     icon: "CalendarDays",
     status: "active",
   },
+  {
+    id: "qr-code-generator",
+    title: "QR Code Generator",
+    description: "Generate custom QR codes for URLs, WiFi, contact cards, and text.",
+    category: "Developer",
+    href: "/tools/developer/qr-code-generator",
+    icon: "QrCode",
+    status: "active",
+    isPopular: true,
+  },
+  {
+    id: "password-generator",
+    title: "Password Generator",
+    description: "Generate cryptographically secure, random passwords and passphrases.",
+    category: "Developer",
+    href: "/tools/developer/password-generator",
+    icon: "Lock",
+    status: "active",
+    isPopular: true,
+  },
 
   // PDF
+  {
+    id: "image-to-pdf",
+    title: "Image to PDF",
+    description: "Convert JPG, PNG, and WebP images to customizable PDF documents.",
+    category: "PDF",
+    href: "/tools/pdf/image-to-pdf",
+    icon: "FileImage",
+    status: "active",
+    isPopular: true,
+  },
   {
     id: "add-pdf-page-numbers",
     title: "Add Page Numbers",
