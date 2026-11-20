@@ -2,6 +2,15 @@ import { Article } from "./types";
 
 export const blogPosts: Article[] = [
   {
+    id: "how-to-setup-for-gta-6-from-scratch-costs-and-monetization-guide",
+    title: "How to Set Up for GTA 6 From Scratch: Complete PS5 Hardware Guide, Total Costs, and Monetization Playbook",
+    description: "The complete beginner-to-pro setup guide for Grand Theft Auto VI: console comparisons (PS5 vs PS5 Pro), 4K displays, SSD expansions, itemized cost tiers ($600 to $2,000+), and actionable monetization strategies to earn money from GTA 6.",
+    category: "AI & Technology",
+    href: "/blog/how-to-setup-for-gta-6-from-scratch-costs-and-monetization-guide",
+    readingTime: "9 min read",
+    date: "Nov 20, 2026",
+  },
+  {
     id: "gta-6-release-date-vice-city-map-gameplay-guide",
     title: "Grand Theft Auto VI (GTA 6): Release Date, Vice City Map, Gameplay Overhaul, and Everything We Know",
     description: "An in-depth guide to GTA 6: release date windows, Vice City and Leonida map scale, dual protagonists Lucia and Jason, revolutionary RAGE engine physics, and next-gen gameplay features.",
