@@ -2,6 +2,15 @@ import { Article } from "./types";
 
 export const blogPosts: Article[] = [
   {
+    id: "gta-6-release-date-vice-city-map-gameplay-guide",
+    title: "Grand Theft Auto VI (GTA 6): Release Date, Vice City Map, Gameplay Overhaul, and Everything We Know",
+    description: "An in-depth guide to GTA 6: release date windows, Vice City and Leonida map scale, dual protagonists Lucia and Jason, revolutionary RAGE engine physics, and next-gen gameplay features.",
+    category: "AI & Technology",
+    href: "/blog/gta-6-release-date-vice-city-map-gameplay-guide",
+    readingTime: "8 min read",
+    date: "Nov 20, 2026",
+  },
+  {
     id: "jwt-debugging-guide-security-best-practices",
     title: "How to Debug and Verify JSON Web Tokens (JWT) Securely in 2026",
     description: "Deep dive into JWT anatomy (Header, Payload, Signature), common vulnerabilities (algorithm confusion none, weak HMAC secrets, key exposure), debugging tools, expired token handling, and security best practices.",
