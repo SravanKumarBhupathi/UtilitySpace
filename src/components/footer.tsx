@@ -20,6 +20,8 @@ export function Footer() {
           <div className="flex flex-col space-y-3">
             <h4 className="font-heading font-semibold text-foreground">Tools</h4>
             <Link href="/tools" className="text-sm text-secondary-text hover:text-primary transition-colors">All Tools</Link>
+            <Link href="/exam-tools" className="text-sm text-secondary-text hover:text-primary transition-colors">Exam Tools</Link>
+            <Link href="/exam-tools/studio" className="text-sm text-secondary-text hover:text-primary transition-colors">Custom Document Studio</Link>
             <Link href="/tools/pdf" className="text-sm text-secondary-text hover:text-primary transition-colors">PDF Tools</Link>
             <Link href="/tools/images" className="text-sm text-secondary-text hover:text-primary transition-colors">Image Tools</Link>
             <Link href="/tools/text" className="text-sm text-secondary-text hover:text-primary transition-colors">Text Tools</Link>

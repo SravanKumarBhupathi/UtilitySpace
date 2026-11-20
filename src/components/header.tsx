@@ -8,6 +8,7 @@ import { GlobalSearch } from "./global-search";
 
 const navLinks = [
   { href: "/tools", label: "Tools" },
+  { href: "/exam-tools", label: "Exam Tools" },
   { href: "/calculators", label: "Calculators" },
   { href: "/guides", label: "Guides" },
   { href: "/blog", label: "Blog" },

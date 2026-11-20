@@ -2,6 +2,7 @@ import { MetadataRoute } from 'next';
 import { guides } from '@/data/guides';
 import { blogPosts } from '@/data/blog';
 import { toolCategories } from '@/data/categories';
+import { EXAM_CATEGORIES, EXAM_DATABASE, categoryToSlug } from '@/lib/data/exams';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://utilityspace.online';
@@ -118,10 +119,35 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
+  const examCoreRoutes = ['/exam-tools', '/exam-tools/studio'];
+  const examCoreEntries = examCoreRoutes.map((route) => ({
+    url: `${baseUrl}${route}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.9,
+  }));
+
+  const examCategoryEntries = EXAM_CATEGORIES.map((cat) => ({
+    url: `${baseUrl}/exam-tools/${categoryToSlug(cat)}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.8,
+  }));
+
+  const examSpecificEntries = EXAM_DATABASE.map((exam) => ({
+    url: `${baseUrl}/exam-tools/${categoryToSlug(exam.category)}/${exam.slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.8,
+  }));
+
   return [
     ...coreSitemapEntries,
     ...categoryEntries,
     ...toolEntries,
+    ...examCoreEntries,
+    ...examCategoryEntries,
+    ...examSpecificEntries,
     ...guideEntries,
     ...blogEntries,
   ];

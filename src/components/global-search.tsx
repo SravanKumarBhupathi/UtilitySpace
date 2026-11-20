@@ -8,6 +8,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import commandScore from "command-score";
 import { tools, calculators, guides, blogPosts } from "@/data";
+import { EXAM_DATABASE, categoryToSlug } from "@/lib/data/exams";
 
 type SearchResult = {
   id: string;
@@ -15,7 +16,7 @@ type SearchResult = {
   description: string;
   href: string;
   category: string;
-  type: "Tools" | "Calculators" | "Guides" | "Blog";
+  type: "Tools" | "Calculators" | "Guides" | "Blog" | "Exam Tools";
   score: number;
 };
 
@@ -79,6 +80,30 @@ export function GlobalSearch() {
     const normalizedQuery = query.trim().toLowerCase();
 
     const allItems: Omit<SearchResult, "score">[] = [
+      {
+        id: "exam-tools-landing",
+        title: "Exam Tools – Photo & Signature Preparation",
+        description: "Officially verified photo, signature, and document preparation tools for competitive exams.",
+        href: "/exam-tools",
+        category: "Exam Tools",
+        type: "Exam Tools" as const,
+      },
+      {
+        id: "exam-tools-studio",
+        title: "Custom Document Studio (Photo & Signature)",
+        description: "Resize, crop, and compress passport photos and signatures to custom mm, cm, px, and KB limits.",
+        href: "/exam-tools/studio",
+        category: "Exam Tools",
+        type: "Exam Tools" as const,
+      },
+      ...EXAM_DATABASE.filter(e => e.active).map(e => ({
+        id: `exam-${e.id}`,
+        title: `${e.name} Photo & Signature Resizer (${e.recruitmentCycle})`,
+        description: `${e.organization} verified document specifications.`,
+        href: `/exam-tools/${categoryToSlug(e.category)}/${e.slug}`,
+        category: e.category,
+        type: "Exam Tools" as const,
+      })),
       ...tools.filter(t => t.status !== "coming-soon").map(t => ({ ...t, category: t.category || "Tool", type: "Tools" as const })),
       ...calculators.filter(t => t.status !== "coming-soon").map(t => ({ ...t, category: t.category || "Calculator", type: "Calculators" as const })),
       ...guides.map(t => ({ ...t, category: t.category || "Guide", type: "Guides" as const })),

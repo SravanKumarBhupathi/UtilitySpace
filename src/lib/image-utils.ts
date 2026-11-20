@@ -301,3 +301,208 @@ export async function enhanceSignature(sourceUrl: string, contrast: number = 1.0
     }, 'image/jpeg', 0.95);
   });
 }
+
+/**
+ * Converts a dimensional measurement (cm, mm, inch, px) to pixels at given DPI.
+ */
+export function convertUnitToPx(
+  value: number,
+  unit: 'px' | 'cm' | 'mm' | 'inch',
+  dpi: number = 200
+): number {
+  if (unit === 'px') return Math.round(value);
+  if (unit === 'inch') return Math.round(value * dpi);
+  if (unit === 'cm') return Math.round((value / 2.54) * dpi);
+  if (unit === 'mm') return Math.round((value / 25.4) * dpi);
+  return Math.round(value);
+}
+
+/**
+ * Embeds an image blob into a single-page PDF document using pdf-lib.
+ */
+export async function imageBlobToPdfBlob(imageBlob: Blob): Promise<Blob> {
+  const { PDFDocument } = await import('pdf-lib');
+  const pdfDoc = await PDFDocument.create();
+  const imageBytes = await imageBlob.arrayBuffer();
+
+  let embeddedImage;
+  if (imageBlob.type === 'image/png') {
+    embeddedImage = await pdfDoc.embedPng(imageBytes);
+  } else {
+    // Treat webp or jpeg as jpg (or re-encode if needed)
+    embeddedImage = await pdfDoc.embedJpg(imageBytes);
+  }
+
+  const page = pdfDoc.addPage([embeddedImage.width, embeddedImage.height]);
+  page.drawImage(embeddedImage, {
+    x: 0,
+    y: 0,
+    width: embeddedImage.width,
+    height: embeddedImage.height,
+  });
+
+  const pdfBytes = await pdfDoc.save();
+  return new Blob([pdfBytes as any], { type: 'application/pdf' });
+}
+
+export type ValidationStatus = 'PASS' | 'FAIL' | 'MANUAL_REVIEW';
+
+export interface ValidationItem {
+  key: string;
+  label: string;
+  status: ValidationStatus;
+  message: string;
+  expected?: string;
+  actual?: string;
+}
+
+export interface ValidationReport {
+  overallStatus: ValidationStatus;
+  items: ValidationItem[];
+  canDownload: boolean;
+}
+
+export function validateDocumentAgainstRequirements(params: {
+  sizeKB: number;
+  width: number;
+  height: number;
+  format: string;
+  minKB?: number;
+  maxKB?: number;
+  expectedWidth?: number | null;
+  expectedHeight?: number | null;
+  expectedFormats?: string[];
+  backgroundInstruction?: string | null;
+  nameRequired?: boolean;
+  dateRequired?: boolean;
+  hasNameOverlay?: boolean;
+  hasDateOverlay?: boolean;
+  isSignature?: boolean;
+}): ValidationReport {
+  const items: ValidationItem[] = [];
+
+  // 1. File Size Check
+  const minKB = params.minKB ?? 0;
+  const maxKB = params.maxKB ?? 0;
+  if (maxKB > 0) {
+    const isSizeOk = params.sizeKB >= minKB && params.sizeKB <= maxKB;
+    items.push({
+      key: 'size',
+      label: 'File Size (KB)',
+      status: isSizeOk ? 'PASS' : 'FAIL',
+      message: isSizeOk
+        ? `File size (${params.sizeKB.toFixed(1)} KB) is within the required ${minKB} KB – ${maxKB} KB range.`
+        : `File size (${params.sizeKB.toFixed(1)} KB) is outside the permitted ${minKB} KB – ${maxKB} KB limit.`,
+      expected: `${minKB}–${maxKB} KB`,
+      actual: `${params.sizeKB.toFixed(1)} KB`,
+    });
+  } else {
+    items.push({
+      key: 'size',
+      label: 'File Size (KB)',
+      status: 'PASS',
+      message: `File size is ${params.sizeKB.toFixed(1)} KB.`,
+      actual: `${params.sizeKB.toFixed(1)} KB`,
+    });
+  }
+
+  // 2. Dimensions Check
+  if (params.expectedWidth && params.expectedHeight) {
+    const widthTolerance = 2; // +/- 2px tolerance
+    const heightTolerance = 2;
+    const isWidthOk = Math.abs(params.width - params.expectedWidth) <= widthTolerance;
+    const isHeightOk = Math.abs(params.height - params.expectedHeight) <= heightTolerance;
+    const isDimOk = isWidthOk && isHeightOk;
+
+    items.push({
+      key: 'dimensions',
+      label: 'Dimensions (W × H)',
+      status: isDimOk ? 'PASS' : 'FAIL',
+      message: isDimOk
+        ? `Dimensions match required ${params.expectedWidth} × ${params.expectedHeight} px.`
+        : `Dimensions (${params.width} × ${params.height} px) do not match expected ${params.expectedWidth} × ${params.expectedHeight} px.`,
+      expected: `${params.expectedWidth} × ${params.expectedHeight} px`,
+      actual: `${params.width} × ${params.height} px`,
+    });
+  } else {
+    items.push({
+      key: 'dimensions',
+      label: 'Dimensions (W × H)',
+      status: 'PASS',
+      message: `Current resolution: ${params.width} × ${params.height} px.`,
+      actual: `${params.width} × ${params.height} px`,
+    });
+  }
+
+  // 3. Format Check
+  if (params.expectedFormats && params.expectedFormats.length > 0) {
+    const formatNorm = params.format.toLowerCase().replace('image/', '');
+    const isFormatOk = params.expectedFormats.some((fmt) => {
+      const f = fmt.toLowerCase();
+      if (f === 'jpg' || f === 'jpeg') return formatNorm === 'jpeg' || formatNorm === 'jpg';
+      return formatNorm === f;
+    });
+
+    items.push({
+      key: 'format',
+      label: 'File Format',
+      status: isFormatOk ? 'PASS' : 'FAIL',
+      message: isFormatOk
+        ? `Format (${formatNorm.toUpperCase()}) matches official requirements.`
+        : `Format (${formatNorm.toUpperCase()}) is not in accepted list: ${params.expectedFormats.join(', ').toUpperCase()}.`,
+      expected: params.expectedFormats.join(', ').toUpperCase(),
+      actual: formatNorm.toUpperCase(),
+    });
+  }
+
+  // 4. Name & Date Overlay Check (if required by exam like UPSC)
+  if (params.nameRequired || params.dateRequired) {
+    const hasBoth = Boolean(params.hasNameOverlay && params.hasDateOverlay);
+    items.push({
+      key: 'name_date',
+      label: 'Name & Date Stamp',
+      status: hasBoth ? 'PASS' : 'MANUAL_REVIEW',
+      message: hasBoth
+        ? 'Name and Date caption strip is added to the bottom of the photo.'
+        : 'Official notification requires candidate name and date of photo capture printed at the bottom. Please ensure they are added.',
+      expected: 'Printed at bottom of photo',
+      actual: hasBoth ? 'Applied' : 'Not applied or incomplete',
+    });
+  }
+
+  // 5. Visual Manual Review items (background, readability, spectacles)
+  if (params.isSignature) {
+    items.push({
+      key: 'signature_legibility',
+      label: 'Signature Contrast & Legibility',
+      status: 'MANUAL_REVIEW',
+      message:
+        'Visually confirm the signature is dark, legible, signed with running handwriting on plain white paper, and not signed in block/capital letters.',
+    });
+  } else {
+    items.push({
+      key: 'background_appearance',
+      label: 'Background & Facial Clarity',
+      status: 'MANUAL_REVIEW',
+      message: params.backgroundInstruction
+        ? `Visually confirm: "${params.backgroundInstruction}". Face must be straight, clear, and without caps, sunglasses, or heavy glare.`
+        : 'Visually confirm face is clearly visible with light/plain background, eyes open, and no shadow on face.',
+    });
+  }
+
+  const hasFails = items.some((i) => i.status === 'FAIL');
+  const hasReviews = items.some((i) => i.status === 'MANUAL_REVIEW');
+
+  let overallStatus: ValidationStatus = 'PASS';
+  if (hasFails) {
+    overallStatus = 'FAIL';
+  } else if (hasReviews) {
+    overallStatus = 'MANUAL_REVIEW';
+  }
+
+  return {
+    overallStatus,
+    items,
+    canDownload: true, // User can still download even if warning, but UI shows clear warning
+  };
+}
