@@ -766,5 +766,124 @@ export const guideContent: Record<string, { html: string; relatedTool?: { href: 
         </div>
       </div>
     `
+  },
+  'how-to-prepare-exam-documents-photo-signature': {
+    relatedTool: { href: "/exam-tools/studio", label: "Open Exam Tools Studio" },
+    html: `
+      <h2>Why Recruitment Portals Reject Thousands of Applications Every Year</h2>
+      <p>Every recruitment cycle across major examination bodies—including the <strong>Staff Selection Commission (SSC)</strong>, <strong>Railway Recruitment Boards (RRB)</strong>, <strong>Institute of Banking Personnel Selection (IBPS)</strong>, <strong>State Bank of India (SBI)</strong>, and <strong>Union Public Service Commission (UPSC)</strong>—sees tens of thousands of candidate applications summarily rejected during scrutiny.</p>
+      <p>Official post-scrutiny notices consistently reveal that <strong>over 70% of rejections stem from non-compliant photographs and signatures</strong>, rather than eligibility or educational discrepancies. Common grounds for rejection include:</p>
+      <ul>
+        <li><strong>Incorrect Pixel Dimensions & Aspect Ratio:</strong> Uploading photos distorted by forced stretching or non-standard aspect ratios that cause server-side automated validation scripts to fail.</li>
+        <li><strong>Strict File Size Violations:</strong> Failing to hit narrow byte windows (such as photos needing to be strictly between 20.0 KB and 50.0 KB, or signatures strictly between 10.0 KB and 20.0 KB). Portals reject any file even 100 bytes outside the designated limits.</li>
+        <li><strong>Poor Background & Lighting:</strong> Using patterned backgrounds, colored wallpapers, selfies with tilted head angles, dark flash shadows, or glare on eyeglasses.</li>
+        <li><strong>Faint or Smudged Signatures:</strong> Signing on ruled, lined, or notebook paper with light ballpoint ink, or casting camera shadows across the paper when snapping a mobile phone picture.</li>
+        <li><strong>Confusing Live Capture vs Upload Rules:</strong> Modern recruitment portals (such as SSC CGL and CHSL) now mandate live webcam/mobile camera capture during registration, while still requiring separate scanned signatures.</li>
+      </ul>
+
+      <h2>Official Requirements Breakdown by Exam Category (2026 Standards)</h2>
+      <p>Before preparing your files, verify the exact parameters enforced by your target recruitment board:</p>
+
+      <div class="overflow-x-auto my-6">
+        <table class="w-full text-left border-collapse border border-border text-sm">
+          <thead>
+            <tr class="bg-muted">
+              <th class="p-3 border border-border">Recruitment Board</th>
+              <th class="p-3 border border-border">Photo Dimensions & Size</th>
+              <th class="p-3 border border-border">Signature Dimensions & Size</th>
+              <th class="p-3 border border-border">Key Portal Rules</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="p-3 border border-border font-medium">SSC (CGL, CHSL, MTS, GD)</td>
+              <td class="p-3 border border-border">Live Web Capture (or 3.5 × 4.5 cm / 20–50 KB where specified)</td>
+              <td class="p-3 border border-border">4.0 × 2.0 cm (10–20 KB, ~140 × 60 px)</td>
+              <td class="p-3 border border-border">Live camera requires plain white background, open eyes, no spectacles/cap. Signature must be on unruled white paper.</td>
+            </tr>
+            <tr>
+              <td class="p-3 border border-border font-medium">RRB (NTPC, Group D, ALP, Tech)</td>
+              <td class="p-3 border border-border">35 × 45 mm (30–70 KB, 320 × 240 px min)</td>
+              <td class="p-3 border border-border">50 × 20 mm (30–70 KB, 160 × 560 px)</td>
+              <td class="p-3 border border-border">Color passport photo taken against a plain light/white background. Running handwriting only (capital/block signatures rejected).</td>
+            </tr>
+            <tr>
+              <td class="p-3 border border-border font-medium">Banking (IBPS PO/Clerk, SBI PO)</td>
+              <td class="p-3 border border-border">4.5 × 3.5 cm (20–50 KB, 200 × 230 px)</td>
+              <td class="p-3 border border-border">140 × 60 px (10–20 KB)</td>
+              <td class="p-3 border border-border">Black ink preferred for signatures. Left thumb impression (240 × 240 px, 20–50 KB) also required on white paper.</td>
+            </tr>
+            <tr>
+              <td class="p-3 border border-border font-medium">UPSC (CSE, NDA, CDS)</td>
+              <td class="p-3 border border-border">350 × 350 px to 1000 × 1000 px (20–300 KB)</td>
+              <td class="p-3 border border-border">350 × 350 px to 1000 × 1000 px (20–300 KB)</td>
+              <td class="p-3 border border-border">1:1 square aspect ratio. Candidate face must occupy at least 3/4ths (75%) of the photograph area. Candidate name and date on photo are optional unless specified in cycle.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Understanding Dimension Math: Centimeters vs Millimeters vs Pixels</h2>
+      <p>Application instructions frequently list dimensions in centimeters (cm) or millimeters (mm), but digital image software operates in pixels (px). The bridge between the two is <strong>DPI (Dots Per Inch)</strong>:</p>
+      
+      <div class="p-4 bg-muted/50 rounded-lg border border-border font-mono text-xs my-4 space-y-1">
+        <p>Formula: Pixels = (Centimeters / 2.54) × DPI</p>
+        <p>Standard Passport Photo (3.5 cm × 4.5 cm at 200 DPI):</p>
+        <p>• Width:  (3.5 / 2.54) × 200 ≈ 276 pixels</p>
+        <p>• Height: (4.5 / 2.54) × 200 ≈ 354 pixels</p>
+        <p>Standard Signature (4.0 cm × 2.0 cm at 200 DPI):</p>
+        <p>• Width:  (4.0 / 2.54) × 200 ≈ 315 pixels</p>
+        <p>• Height: (2.0 / 2.54) × 200 ≈ 157 pixels</p>
+      </div>
+      <p>Using 200 to 300 DPI ensures crisp edge rendering and legible pen strokes when verification officers zoom in to authenticate signatures.</p>
+
+      <h2>Step-by-Step: Preparing Documents with UtilitySpace Exam Tools Studio</h2>
+      <p>You can format, resize, enhance, and compress your exam documents locally in your browser using our dedicated, privacy-first <strong>Exam Tools Studio</strong> without uploading your sensitive personal photos to any remote server:</p>
+
+      <ol class="space-y-3">
+        <li><strong>Step 1: Open the Preset or Custom Studio</strong><br />
+        Visit <a href="/exam-tools" class="text-primary hover:underline">Exam Tools</a> and choose your exact recruitment cycle (e.g. SSC CGL, RRB NTPC, IBPS PO) to automatically load verified dimensions, file size constraints, and format requirements. Or open the <a href="/exam-tools/studio" class="text-primary hover:underline">Custom Document Studio</a> for full manual control.</li>
+        
+        <li><strong>Step 2: Upload Your Source Image</strong><br />
+        Select your raw photograph or mobile phone picture of your signature. Our client-side image parser immediately inspects original dimensions, format, and raw file size in kilobytes.</li>
+        
+        <li><strong>Step 3: Crop & Maintain Exact Aspect Ratio</strong><br />
+        Use the interactive crop box to frame your head and shoulders (for photos) or crop out excess blank paper around your signature. Lock the preset aspect ratio to prevent face distortion or unnatural stretching.</li>
+        
+        <li><strong>Step 4: Signature Enhancement (One-Click Cleanup)</strong><br />
+        If you are preparing a signature, toggle the <strong>Signature Enhancement</strong> filter. This algorithm automatically boosts contrast, cleans greyish mobile camera shadows, and converts the background to pure, clean white while preserving delicate ink strokes.</li>
+        
+        <li><strong>Step 5: Target Size Compression</strong><br />
+        Specify your portal's required KB range (e.g., Min: 20 KB, Max: 50 KB). Our dual binary-search compression engine dynamically calculates the optimal JPEG quality factor, ensuring the output lands squarely within portal limits with high visual fidelity.</li>
+        
+        <li><strong>Step 6: Instant Local Download</strong><br />
+        Click Download to save the prepared JPG. Inspect the downloaded file in your operating system to confirm dimensions and file size match your recruitment notification requirements.</li>
+      </ol>
+
+      <h2>Top 5 Practical Tips to Prevent Rejection</h2>
+      <ul>
+        <li><strong>Never Sign in Capital (BLOCK) Letters:</strong> Examination guidelines strictly mandate running cursive or standard handwriting for signatures. Signatures in full capital letters are disqualified by automated scanners.</li>
+        <li><strong>Use Black or Dark Blue Ballpoint Pen:</strong> Avoid gel pens, fountain pens, or light sketch markers. Gel ink often smudges on paper, creating fuzzy bleeding edges when digitized.</li>
+        <li><strong>Avoid Eyeglasses & Accessories:</strong> Even if you wear spectacles daily, glare on lenses frequently conceals eye pupils, triggering automated biometric rejection. Remove sunglasses, hats, caps, and heavy scarves before taking your photograph.</li>
+        <li><strong>Face-to-Frame Ratio:</strong> Ensure your face occupies 60% to 75% of the total photograph area. Keep both ears visibly exposed, shoulders centered, and look directly into the camera lens with a neutral expression.</li>
+        <li><strong>Retain Identical Physical Photos:</strong> Print at least 8 to 12 physical copies of the exact digital photograph uploaded during registration. Many commissions require you to produce identical physical copies during Document Verification (DV) and exam hall entry.</li>
+      </ul>
+
+      <h2>Frequently Asked Questions</h2>
+      <div class="space-y-4 my-6">
+        <div>
+          <p class="font-semibold text-foreground">Can I use a mobile phone selfie as my exam photo?</p>
+          <p class="text-muted-foreground text-sm">Selfies taken from hand-held arm length usually suffer from focal distortion (wide-angle fisheye effect) and tilted shoulder angles. It is best to have someone else photograph you from 5 to 6 feet away against a plain white wall under bright, diffuse lighting.</p>
+        </div>
+        <div>
+          <p class="font-semibold text-foreground">What if my signature file is 21 KB when the portal limit is 20 KB?</p>
+          <p class="text-muted-foreground text-sm">Government portal servers enforce strict binary comparison (e.g., 20.00 KB = 20,480 bytes). Even a single byte over the limit results in an immediate upload error. Always compress to safely sit around 15–18 KB.</p>
+        </div>
+        <div>
+          <p class="font-semibold text-foreground">Are my uploaded documents stored on UtilitySpace servers?</p>
+          <p class="text-muted-foreground text-sm">No. UtilitySpace executes all image cropping, enhancement, and compression 100% locally in your client web browser using HTML5 Canvas and WebAssembly. Your personal photos and signatures are never uploaded, logged, or transmitted anywhere.</p>
+        </div>
+      </div>
+    `
   }
 };

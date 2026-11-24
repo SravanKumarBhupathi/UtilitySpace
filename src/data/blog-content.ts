@@ -1,4 +1,341 @@
 export const blogContent: Record<string, { html: string; heroImage: string; imageAlt: string; relatedIds: string[] }> = {
+  "deepseek-r1-reasoning-models-architecture-and-local-guide": {
+    heroImage: "/images/blog/deepseek-r1-reasoning-ai-architecture.jpg",
+    imageAlt: "Futuristic 3D neural network logic pathways visualizing DeepSeek-R1 chain-of-thought reasoning and tokens",
+    relatedIds: [
+      "vibe-coding-guide-tools-and-best-practices-2026",
+      "jwt-debugging-guide-security-best-practices",
+      "ai-skills-everyone-should-learn-2026",
+    ],
+    html: `
+<figure class="my-8">
+  <img 
+    src="/images/blog/deepseek-r1-reasoning-ai-architecture.jpg" 
+    alt="Futuristic glowing neural network nodes and crystalline logic pathways illustrating DeepSeek-R1 chain-of-thought reasoning tokens" 
+    class="w-full h-auto rounded-2xl shadow-md border border-border"
+  />
+  <figcaption class="text-xs text-center text-muted-foreground mt-2.5">
+    The test-time compute paradigm: DeepSeek-R1 generates internal chain-of-thought reasoning tokens to verify logic, backtrack from errors, and solve complex problems before producing the final response.
+  </figcaption>
+</figure>
+
+<h2>The Earthquake in Artificial Intelligence: Breaking the Proprietary Moat</h2>
+<p>In early 2025, a sudden paradigm shift shook the global technology sector and sent reverberations through financial markets: a nimble research lab named <strong>DeepSeek</strong> released <strong>DeepSeek-R1</strong>, an open-weights reasoning model that matched the performance of OpenAI's flagship closed model, <em>o1</em>, across competitive programming, higher-level mathematics, and complex logical synthesis.</p>
+<p>What caught the industry off guard was not merely that an open-weight model had caught up with proprietary frontier labs. It was the staggering economic efficiency: while leading Western frontier models cost hundreds of millions of dollars to train across tens of thousands of power-hungry GPUs, DeepSeek trained their foundational base model (DeepSeek-V3) for roughly <strong>$6 million in direct compute</strong>, and then trained R1 using an innovative <strong>reinforcement learning (RL)</strong> paradigm without requiring massive human-annotated datasets.</p>
+<p>Furthermore, DeepSeek did something unprecedented for a frontier reasoning system: they open-sourced the full model weights under the permissive <strong>MIT License</strong>, published the complete architectural research paper, and released a family of <strong>distilled models</strong> ranging from 1.5B to 70B parameters that anyone can download and run privately on a consumer laptop or desktop PC.</p>
+<p>In this comprehensive guide, we dissect how DeepSeek-R1 works under the hood, how test-time reasoning tokens differ from traditional chatbots, what architectural innovations like <strong>Multi-Head Latent Attention (MLA)</strong> and <strong>Group Relative Policy Optimization (GRPO)</strong> mean, and how you can run distilled R1 models 100% locally on your own machine without sending your data to any cloud server.</p>
+
+<h2>Standard LLMs vs. Reasoning Models: The Test-Time Compute Revolution</h2>
+<p>To appreciate why DeepSeek-R1 represents a generational leap, we must first understand the fundamental limitation of traditional conversational LLMs like GPT-4, Claude 3.5 Sonnet, or Llama 3.</p>
+
+<h3>1. System 1 vs. System 2 Thinking</h3>
+<p>In cognitive psychology, Nobel laureate Daniel Kahneman described two modes of thought:</p>
+<ul>
+  <li><strong>System 1 (Fast & Intuitive):</strong> Instantaneous pattern matching. When asked <em>"What is 2 + 2?"</em> or <em>"What is the capital of France?"</em>, your brain answers immediately without active computation.</li>
+  <li><strong>System 2 (Slow & Deliberative):</strong> Structured, sequential problem-solving. When asked to evaluate <em>"What is 27 × 84?"</em> or debug a race condition in a multi-threaded C++ program, you must pause, break the problem into sub-steps, check intermediary results, and verify logic.</li>
+</ul>
+<p>Traditional language models are pure System 1 engines. They predict the next token based strictly on statistical probabilities computed from preceding tokens. When asked a complex multi-step math or coding challenge, a standard LLM is forced to output its answer in a single forward pass. If it makes a subtle miscalculation on token 5, every subsequent token is poisoned by that error.</p>
+
+<h3>2. The Test-Time Compute Paradigm</h3>
+<p>Reasoning models like DeepSeek-R1 and OpenAI o1 introduce <strong>Test-Time Compute</strong> (or inference-time scaling). Instead of answering immediately, the model spends computational budget <em>thinking</em> before it gives you the final answer.</p>
+<p>When you prompt DeepSeek-R1, it generates an internal, explicit <strong>Chain-of-Thought (CoT)</strong> wrapped inside <code>&lt;think&gt;</code> and <code>&lt;/think&gt;</code> tags. Inside this thinking space, the model behaves like an expert engineer:</p>
+<ul>
+  <li>It drafts hypotheses and tests edge cases.</li>
+  <li>It spots flaws in its own reasoning and explicitly backtracks (<em>"Wait, that would cause an off-by-one error. Let me reconsider the array boundary..."</em>).</li>
+  <li>It verifies intermediate arithmetic calculations.</li>
+  <li>Only after reaching a verified logical consensus does it close the thinking block and present the polished solution.</li>
+</ul>
+
+<div class="p-5 rounded-2xl bg-muted/40 border border-border my-6">
+  <h4 class="font-semibold text-sm text-foreground mb-2 flex items-center gap-2">
+    💡 Why Chain-of-Thought Unlocks "Aha Moments"
+  </h4>
+  <p class="text-xs text-secondary-text leading-relaxed">
+    In traditional fine-tuning, models are trained to mimic human writing style. In DeepSeek-R1's reinforcement learning pipeline, the model discovered reflection strategies autonomously. Without any human prompting, the model learned to re-evaluate tricky steps, reread the user's prompt, and self-correct when an intermediate derivation didn't make mathematical sense.
+  </p>
+</div>
+
+<h2>DeepSeek-R1 Architecture: How It Achieved Frontier Intelligence on a Budget</h2>
+<p>The technical elegance of DeepSeek-R1 lies in its architectural efficiency. While other frontier labs simply scaled cluster sizes, DeepSeek redesigned the underlying mechanics of memory, attention, and reward training.</p>
+
+<h3>1. The Foundation: DeepSeek-V3 Mixture of Experts (MoE)</h3>
+<p>DeepSeek-R1 is built upon <strong>DeepSeek-V3</strong>, a sparse Mixture-of-Experts architecture containing <strong>671 billion total parameters</strong>. However, for any individual token generated, only <strong>37 billion parameters are actively engaged</strong>.</p>
+<p>By routing tokens through specialized expert sub-networks, the model achieves the broad world knowledge of a 671B behemoth while maintaining the inference speed and memory footprint of a much smaller 37B dense model. This makes hosting and querying the full model dramatically more cost-effective.</p>
+
+<h3>2. Multi-Head Latent Attention (MLA)</h3>
+<p>In standard transformer architectures, the <strong>Key-Value (KV) cache</strong> stores attention states for past tokens. When generating long chains of thought (which can easily exceed 8,000 or 16,000 tokens of internal reasoning), the KV cache swells and quickly hits the GPU memory bandwidth wall.</p>
+<p>DeepSeek solved this with <strong>Multi-Head Latent Attention (MLA)</strong>. MLA uses low-rank mathematical projections to compress the Key-Value states into a compact latent vector space during inference. This shrinks KV cache memory consumption by up to <strong>93%</strong> compared to traditional Multi-Head Attention (MHA), allowing DeepSeek-R1 to maintain massive reasoning horizons without choking GPU VRAM.</p>
+
+<h3>3. DeepSeek-R1-Zero: Pure Reinforcement Learning Without Human Demonstrations</h3>
+<p>To test whether reasoning could emerge without human guidance, DeepSeek first created <strong>DeepSeek-R1-Zero</strong>. They took the raw base model and trained it purely via <strong>Large-Scale Reinforcement Learning (RL)</strong> on verifiable tasks (math proofs and unit-tested code).</p>
+<p>There was no Supervised Fine-Tuning (SFT) phase and no human annotators rating responses. The model was simply rewarded when its final code passed test cases or when its math answer was correct, and penalized when it failed. Remarkably, over thousands of RL iterations, the model naturally developed long Chain-of-Thought reasoning, verification checks, and self-correction completely on its own.</p>
+
+<h3>4. Group Relative Policy Optimization (GRPO)</h3>
+<p>Traditional reinforcement learning in AI relies on <strong>PPO (Proximal Policy Optimization)</strong>, which requires training two separate neural networks at the same time: the primary policy model and a <em>critic model</em> (of equivalent size) that evaluates whether a step was good or bad. Running a 671B critic alongside a 671B policy model doubles memory and compute demands.</p>
+<p>DeepSeek bypassed this with <strong>GRPO (Group Relative Policy Optimization)</strong>. Instead of maintaining a critic model, GRPO generates a group of outputs (e.g., 4 or 8 candidate answers) for each prompt. It calculates the average reward of the group and updates the model based on how each individual output performed relative to the group benchmark. This eliminated the critic model entirely, cutting training memory overhead by more than 50%.</p>
+
+<h3>5. The Final DeepSeek-R1 Pipeline: Fixing R1-Zero's Flaws</h3>
+<p>While R1-Zero was brilliant at math, it had major usability issues: it would mix languages (e.g., explaining an English question in a blend of Chinese and English), repeat itself endlessly, and format outputs unpredictably.</p>
+<p>To build the production-ready <strong>DeepSeek-R1</strong>, researchers introduced a refined four-stage pipeline:</p>
+<ol>
+  <li><strong>Cold-Start Data Collection:</strong> Curating a small, high-quality dataset of several thousand long-form, human-readable reasoning examples with clear <code>&lt;think&gt;</code> formatting to seed the model.</li>
+  <li><strong>Reasoning-Oriented RL:</strong> Applying GRPO reinforcement learning to boost mathematical and programming accuracy while enforcing language consistency.</li>
+  <li><strong>Rejection Sampling & SFT:</strong> Generating synthetic reasoning paths, filtering only the correct ones, and blending them with general creative writing and factual instruction datasets.</li>
+  <li><strong>General Preference RL:</strong> Aligning the model with human preferences for helpfulness, tone, safety, and conciseness.</li>
+</ol>
+
+<h2>Benchmark Showdown: DeepSeek-R1 vs. Proprietary Giants</h2>
+<p>The benchmark results published by DeepSeek and independently validated across global universities and open-source benchmarks confirmed that open weights could match the best closed systems in the world:</p>
+
+<div class="overflow-x-auto my-6">
+  <table class="w-full text-left border-collapse border border-border text-sm">
+    <thead>
+      <tr class="bg-muted">
+        <th class="p-3 border border-border font-semibold">Benchmark Domain</th>
+        <th class="p-3 border border-border font-semibold">DeepSeek-R1 (671B)</th>
+        <th class="p-3 border border-border font-semibold">OpenAI o1 (Closed)</th>
+        <th class="p-3 border border-border font-semibold">Claude 3.5 Sonnet</th>
+        <th class="p-3 border border-border font-semibold">DeepSeek-R1-Distill-32B</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="p-3 border border-border font-medium"><strong>AIME 2024</strong> (Invitational Math)</td>
+        <td class="p-3 border border-border"><strong>79.8%</strong></td>
+        <td class="p-3 border border-border">79.2%</td>
+        <td class="p-3 border border-border">16.0%</td>
+        <td class="p-3 border border-border">72.6%</td>
+      </tr>
+      <tr>
+        <td class="p-3 border border-border font-medium"><strong>MATH-500</strong> (Advanced High School/College Math)</td>
+        <td class="p-3 border border-border"><strong>97.3%</strong></td>
+        <td class="p-3 border border-border">96.4%</td>
+        <td class="p-3 border border-border">78.3%</td>
+        <td class="p-3 border border-border">94.3%</td>
+      </tr>
+      <tr>
+        <td class="p-3 border border-border font-medium"><strong>Codeforces Percentile</strong> (Competitive Coding)</td>
+        <td class="p-3 border border-border"><strong>96.3%</strong></td>
+        <td class="p-3 border border-border">96.6%</td>
+        <td class="p-3 border border-border">77.2%</td>
+        <td class="p-3 border border-border">90.6%</td>
+      </tr>
+      <tr>
+        <td class="p-3 border border-border font-medium"><strong>SWE-bench Verified</strong> (Real-World GitHub Bugs)</td>
+        <td class="p-3 border border-border"><strong>49.2%</strong></td>
+        <td class="p-3 border border-border">48.9%</td>
+        <td class="p-3 border border-border">49.0%</td>
+        <td class="p-3 border border-border">41.8%</td>
+      </tr>
+      <tr>
+        <td class="p-3 border border-border font-medium"><strong>MMLU</strong> (General Multidisciplinary Knowledge)</td>
+        <td class="p-3 border border-border"><strong>90.8%</strong></td>
+        <td class="p-3 border border-border">91.8%</td>
+        <td class="p-3 border border-border">88.3%</td>
+        <td class="p-3 border border-border">87.4%</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<p class="text-xs text-secondary-text italic mt-2">
+  Notice the rightmost column: DeepSeek-R1-Distill-32B scores 72.6% on AIME and 94.3% on MATH-500, crushing non-reasoning frontier models while being small enough to run on a single consumer GPU!
+</p>
+
+<h2>The Distillation Revolution: Frontier Logic on Consumer Hardware</h2>
+<p>While running the full 671B model requires an enterprise multi-GPU server (approx. 8× H100 GPUs or 4× RTX 6000 Ada GPUs), DeepSeek performed a masterstroke for the developer community: <strong>Model Distillation</strong>.</p>
+<p>Instead of running expensive reinforcement learning on small models from scratch, DeepSeek used the 671B R1 model to generate <strong>800,000 curated reasoning traces</strong> across diverse logic, programming, and mathematical prompts. They then fine-tuned established open-source architectures on this data:</p>
+<ul>
+  <li><strong>DeepSeek-R1-Distill-Qwen:</strong> 1.5B, 7B, 14B, and 32B variants.</li>
+  <li><strong>DeepSeek-R1-Distill-Llama:</strong> 8B and 70B variants.</li>
+</ul>
+<p>The results were startling: <strong>DeepSeek-R1-Distill-Qwen-32B</strong> outperformed OpenAI's previous-generation GPT-4o across virtually all math and coding benchmarks, while <strong>DeepSeek-R1-Distill-Qwen-14B</strong> beat Llama 3.3 70B on mathematical reasoning despite having less than a quarter of the parameter count.</p>
+
+<figure class="my-8">
+  <img 
+    src="/images/blog/local-ai-developer-workspace.jpg" 
+    alt="Clean modern software engineer workstation running private local AI models with dark-mode terminal and GPU metrics" 
+    class="w-full h-auto rounded-2xl shadow-md border border-border"
+  />
+  <figcaption class="text-xs text-center text-muted-foreground mt-2.5">
+    Running distilled reasoning models locally: full intellectual property privacy, zero API costs, and lightning-fast offline inference on modern consumer hardware.
+  </figcaption>
+</figure>
+
+<h2>How to Run DeepSeek-R1 Locally (Step-by-Step Guide)</h2>
+<p>Running a reasoning model on your own hardware means <strong>total privacy</strong>. Your source code, proprietary financial spreadsheets, sensitive legal documents, and personal notes never leave your local machine.</p>
+
+<h3>Step 1: Determine Your Hardware Tier</h3>
+<p>Check your system specifications to choose the right distilled model size:</p>
+
+<div class="overflow-x-auto my-6">
+  <table class="w-full text-left border-collapse border border-border text-sm">
+    <thead>
+      <tr class="bg-muted">
+        <th class="p-3 border border-border font-semibold">Model Variant</th>
+        <th class="p-3 border border-border font-semibold">Minimum System RAM / VRAM</th>
+        <th class="p-3 border border-border font-semibold">Recommended Hardware</th>
+        <th class="p-3 border border-border font-semibold">Target Use Case</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="p-3 border border-border font-medium"><code>deepseek-r1:1.5b</code></td>
+        <td class="p-3 border border-border">4 GB RAM</td>
+        <td class="p-3 border border-border">Any standard laptop, MacBook Air, Raspberry Pi 5</td>
+        <td class="p-3 border border-border">Edge devices, lightweight scripting, mobile testing</td>
+      </tr>
+      <tr>
+        <td class="p-3 border border-border font-medium"><code>deepseek-r1:7b</code> / <code>8b</code></td>
+        <td class="p-3 border border-border">8 GB VRAM or 16 GB Unified RAM</td>
+        <td class="p-3 border border-border">RTX 3060/4060, Apple M1/M2/M3/M4 (16GB RAM)</td>
+        <td class="p-3 border border-border"><strong>Best for general developers</strong>: snappy coding, debugging, and text analysis</td>
+      </tr>
+      <tr>
+        <td class="p-3 border border-border font-medium"><code>deepseek-r1:14b</code></td>
+        <td class="p-3 border border-border">12 GB VRAM or 16 GB Unified RAM</td>
+        <td class="p-3 border border-border">RTX 3060 12GB / RTX 4070, Apple Mac (18GB+ RAM)</td>
+        <td class="p-3 border border-border">High-tier math, algorithmic problem solving, comprehensive code reviews</td>
+      </tr>
+      <tr>
+        <td class="p-3 border border-border font-medium"><code>deepseek-r1:32b</code></td>
+        <td class="p-3 border border-border">20 GB VRAM or 32 GB Unified RAM</td>
+        <td class="p-3 border border-border">RTX 3090 / 4090 (24GB), Apple Mac (36GB+ RAM)</td>
+        <td class="p-3 border border-border"><strong>Frontier-grade performance</strong> rivaling GPT-4o and o1-mini locally</td>
+      </tr>
+      <tr>
+        <td class="p-3 border border-border font-medium"><code>deepseek-r1:70b</code></td>
+        <td class="p-3 border border-border">48 GB VRAM or 64 GB Unified RAM</td>
+        <td class="p-3 border border-border">Dual RTX 3090/4090, Apple Mac Studio (64GB+ RAM)</td>
+        <td class="p-3 border border-border">Enterprise-grade reasoning, large codebase refactoring, advanced research</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<h3>Step 2: Install Ollama (The Fastest CLI Setup)</h3>
+<p><a href="https://ollama.com" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline font-medium">Ollama</a> is the easiest tool for running open-source models across Windows, macOS, and Linux.</p>
+<ol>
+  <li>Download and install Ollama from the official website.</li>
+  <li>Open your terminal or PowerShell and run the 8B or 14B model directly:</li>
+</ol>
+
+<pre class="bg-muted p-4 rounded-xl text-xs font-mono overflow-x-auto my-4 text-foreground">
+# For standard 8GB-16GB machines (Great balance of speed & quality):
+ollama run deepseek-r1:8b
+
+# For 16GB-32GB machines or Apple Silicon Macs (Exceptional reasoning):
+ollama run deepseek-r1:14b
+
+# For powerful 24GB VRAM workstations:
+ollama run deepseek-r1:32b
+</pre>
+
+<p>Ollama will automatically download the quantized GGUF weights, load the model onto your GPU/CPU, and open an interactive prompt. You will immediately see the model thinking inside <code>&lt;think&gt;</code> blocks before printing answers!</p>
+
+<h3>Step 3: Setup LM Studio (For a Clean Visual GUI)</h3>
+<p>If you prefer a rich chat interface with sliders for temperature, system prompts, and context window customization, use <strong>LM Studio</strong>:</p>
+<ol>
+  <li>Download and install <a href="https://lmstudio.ai" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline font-medium">LM Studio</a>.</li>
+  <li>In the search tab, search for <code>deepseek-r1</code>.</li>
+  <li>Select your preferred model (e.g., <code>DeepSeek-R1-Distill-Qwen-14B-GGUF</code>).</li>
+  <li>Choose the <strong>Q4_K_M</strong> quantization level (the optimal sweet spot between memory consumption and accuracy).</li>
+  <li>Click <strong>Download</strong> and open the chat window. Under model presets, enable GPU offloading to maximize token-generation speed.</li>
+</ol>
+
+<h2>How to Prompt Reasoning Models: The 4 Rules You Must Unlearn</h2>
+<p>Because reasoning models think deliberatively, prompting them like standard chatbots will actually <strong>degrade their output quality</strong>. Keep these four golden rules in mind:</p>
+
+<h3>1. Do NOT Use Few-Shot Examples</h3>
+<p>With older models like GPT-3.5 or Llama 2, developers relied on "few-shot prompting" (giving 2–3 examples of input and expected output). With reasoning models, providing few-shot examples constrains the model's exploratory chain of thought, forcing it to mimic the structure of your examples rather than solving the problem from first principles. Keep prompts zero-shot.</p>
+
+<h3>2. Specify the Goal, Not the Intermediate Steps</h3>
+<p>Do not micro-manage the model with instructions like <em>"First calculate X, then compare Y, then format as Z"</em>. Instead, clearly define the problem constraints, input data, and final desired format. Let the model's internal RL reasoning loop plan its own derivation path.</p>
+
+<h3>3. Set Temperature to 0.5 – 0.7</h3>
+<p>DeepSeek's official research team recommends a temperature between <strong>0.5 and 0.7</strong> (with <strong>0.6</strong> being optimal). Setting temperature to 0.0 (greedy decoding) can cause reasoning models to loop indefinitely inside repetitive thinking chains, while setting it above 0.8 introduces hallucinations during mathematical derivations.</p>
+
+<h3>4. Enforce Structured Output Outside the Thinking Space</h3>
+<p>If you need structured JSON, YAML, or Markdown tables, explicitly tell the model: <em>"After your reasoning phase, provide the final answer strictly in valid JSON matching this schema."</em> DeepSeek-R1 will conduct its messy reasoning inside <code>&lt;think&gt;</code> and output clean, parseable JSON in the final answer block.</p>
+
+<h2>Real-World Developer Use Cases for DeepSeek-R1</h2>
+<p>Where does a reasoning model shine compared to everyday conversational AI?</p>
+<ul>
+  <li><strong>Hard Algorithmic Problems:</strong> Synthesizing dynamic programming algorithms, graph traversal optimizations, and complex data structures where edge cases typically break naive code.</li>
+  <li><strong>Security Code Audits & Vulnerability Analysis:</strong> R1 excels at walking through execution paths to find subtle buffer overflows, race conditions, and authentication bypasses (see our <a href="/blog/jwt-debugging-guide-security-best-practices" class="text-primary hover:underline font-medium">JWT security and debugging guide</a>).</li>
+  <li><strong>Refactoring Legacy Codebases:</strong> Tracing through hundreds of lines of legacy spaghetti code to isolate memory leaks and propose modern asynchronous patterns.</li>
+  <li><strong>Complex Math & Scientific Modeling:</strong> Proving algebraic theorems, solving differential equations, and verifying quantitative financial risk models.</li>
+</ul>
+
+<h2>Frequently Asked Questions (FAQs)</h2>
+
+<div class="space-y-4 my-8">
+  <div class="border border-border rounded-2xl bg-card p-5">
+    <h3 class="font-semibold text-sm text-foreground mb-1">
+      Is DeepSeek-R1 truly open source?
+    </h3>
+    <p class="text-xs text-secondary-text leading-relaxed">
+      Yes. DeepSeek-R1 and its distilled variants are released under the <strong>MIT License</strong>. You can run, modify, fine-tune, host commercially, and integrate the weights into proprietary products with zero royalty fees or licensing restrictions.
+    </p>
+  </div>
+
+  <div class="border border-border rounded-2xl bg-card p-5">
+    <h3 class="font-semibold text-sm text-foreground mb-1">
+      How can a small 14B or 32B model beat older 70B models?
+    </h3>
+    <p class="text-xs text-secondary-text leading-relaxed">
+      Because parameter size only measures storage capacity for memorized knowledge. Reasoning accuracy depends on the quality of the training signals and test-time compute. By fine-tuning smaller architectures on 800,000 verified reasoning traces produced by the 671B model, the smaller models learned the discipline of logical derivation without needing hundreds of billions of unhelpful parameters.
+    </p>
+  </div>
+
+  <div class="border border-border rounded-2xl bg-card p-5">
+    <h3 class="font-semibold text-sm text-foreground mb-1">
+      Does running DeepSeek-R1 locally cost any money?
+    </h3>
+    <p class="text-xs text-secondary-text leading-relaxed">
+      No. Running DeepSeek-R1 via Ollama or LM Studio on your personal computer is 100% free with zero API subscriptions, credit limits, or token billing. The only cost is your machine's standard electricity consumption.
+    </p>
+  </div>
+
+  <div class="border border-border rounded-2xl bg-card p-5">
+    <h3 class="font-semibold text-sm text-foreground mb-1">
+      Can I hide the &lt;think&gt; reasoning block in UI applications?
+    </h3>
+    <p class="text-xs text-secondary-text leading-relaxed">
+      Yes. In Ollama and LM Studio, the interface automatically collapses the thinking process into an expandable accordion drawer. In your own API scripts, you can simply use a regular expression (or our <a href="/tools/developer/regex-tester" class="text-primary hover:underline font-medium">Regex Tester</a>) to strip everything between <code>&lt;think&gt;</code> and <code>&lt;/think&gt;</code> tags before displaying the final response to end users.
+    </p>
+  </div>
+
+  <div class="border border-border rounded-2xl bg-card p-5">
+    <h3 class="font-semibold text-sm text-foreground mb-1">
+      What is the difference between DeepSeek-V3 and DeepSeek-R1?
+    </h3>
+    <p class="text-xs text-secondary-text leading-relaxed">
+      DeepSeek-V3 is the general-purpose foundational model (equivalent to GPT-4o or Claude 3.5 Sonnet) designed for high-speed conversation and general tasks. DeepSeek-R1 takes the DeepSeek-V3 base and trains it extensively with reinforcement learning to specialize in deliberative System 2 reasoning, mathematics, and complex software engineering.
+    </p>
+  </div>
+</div>
+
+<h2>Related Tools & Guides on UtilitySpace</h2>
+<p>Explore our free developer utilities and guides to complement your modern AI engineering stack:</p>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-4 my-6">
+  <a href="/blog/vibe-coding-guide-tools-and-best-practices-2026" class="p-4 rounded-xl border border-border bg-card hover:border-primary/50 transition-all flex flex-col">
+    <span class="font-semibold text-xs text-primary mb-1">Guide</span>
+    <h4 class="font-semibold text-sm text-foreground mb-1">Vibe Coding in 2026</h4>
+    <p class="text-xs text-secondary-text">How AI code assistants and agentic IDEs are reshaping modern software engineering.</p>
+  </a>
+  <a href="/tools/developer/json-formatter" class="p-4 rounded-xl border border-border bg-card hover:border-primary/50 transition-all flex flex-col">
+    <span class="font-semibold text-xs text-primary mb-1">Developer Tool</span>
+    <h4 class="font-semibold text-sm text-foreground mb-1">JSON Formatter & Validator</h4>
+    <p class="text-xs text-secondary-text">Format, validate, and clean up complex structured JSON outputs generated by AI models.</p>
+  </a>
+  <a href="/tools/developer/regex-tester" class="p-4 rounded-xl border border-border bg-card hover:border-primary/50 transition-all flex flex-col">
+    <span class="font-semibold text-xs text-primary mb-1">Developer Tool</span>
+    <h4 class="font-semibold text-sm text-foreground mb-1">Regex Tester & Debugger</h4>
+    <p class="text-xs text-secondary-text">Test regular expressions to extract thinking blocks, code snippets, and metadata from LLM streams.</p>
+  </a>
+</div>
+`
+  },
   "how-to-setup-for-gta-6-from-scratch-costs-and-monetization-guide": {
     heroImage: "/images/blog/gta-6-gaming-setup-guide.jpg",
     imageAlt: "Complete PlayStation 5 gaming setup for GTA 6 with 4K display and ambient neon lighting",

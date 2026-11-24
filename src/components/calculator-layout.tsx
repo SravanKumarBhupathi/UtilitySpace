@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import Link from "next/link";
 import { ChevronRight, CheckCircle2, ShieldCheck, Zap, HelpCircle } from "lucide-react";
+import { AdSenseAd } from "@/components/adsense-ad";
 
 interface FAQItem {
   question: string;
@@ -188,6 +189,8 @@ export function CalculatorLayout({
             ))}
           </div>
         </div>
+
+        <AdSenseAd slot="calculator-footer-ad" className="mt-10" />
       </section>
     </div>
   );

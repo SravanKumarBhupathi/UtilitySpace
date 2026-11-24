@@ -2,6 +2,15 @@ import { Article } from "./types";
 
 export const blogPosts: Article[] = [
   {
+    id: "deepseek-r1-reasoning-models-architecture-and-local-guide",
+    title: "DeepSeek-R1 Explained: Architecture, Reasoning Tokens, Distilled Models, and How to Run Locally in 2026",
+    description: "A comprehensive deep-dive into DeepSeek-R1: how pure Reinforcement Learning (GRPO) unlocked emergent reasoning, Multi-Head Latent Attention (MLA), distilled open-weights (1.5B to 70B), benchmarks vs OpenAI o1, and a step-by-step tutorial to run it privately on your own computer.",
+    category: "AI & Technology",
+    href: "/blog/deepseek-r1-reasoning-models-architecture-and-local-guide",
+    readingTime: "10 min read",
+    date: "Nov 21, 2026",
+  },
+  {
     id: "how-to-setup-for-gta-6-from-scratch-costs-and-monetization-guide",
     title: "How to Set Up for GTA 6 From Scratch: Complete PS5 Hardware Guide, Total Costs, and Monetization Playbook",
     description: "The complete beginner-to-pro setup guide for Grand Theft Auto VI: console comparisons (PS5 vs PS5 Pro), 4K displays, SSD expansions, itemized cost tiers ($600 to $2,000+), and actionable monetization strategies to earn money from GTA 6.",

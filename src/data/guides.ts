@@ -71,4 +71,11 @@ export const guides: Item[] = [
     category: "Math",
     href: "/guides/how-to-calculate-percentage",
   },
+  {
+    id: "how-to-prepare-exam-documents-photo-signature",
+    title: "How to Prepare Photos, Signatures & Documents for Government Exams",
+    description: "A complete guide to resizing, formatting, and compressing passport photos and signatures to match strict recruitment guidelines for SSC, RRB, Banking, and UPSC portals.",
+    category: "Images",
+    href: "/guides/how-to-prepare-exam-documents-photo-signature",
+  },
 ];

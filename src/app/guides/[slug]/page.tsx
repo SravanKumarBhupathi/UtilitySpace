@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ChevronRight, ArrowRight } from "lucide-react";
 import { guides } from "@/data/guides";
 import { guideContent } from "@/data/guide-content";
+import { AdSenseAd } from "@/components/adsense-ad";
 
 export function generateStaticParams() {
   return guides.map((guide) => {
@@ -121,6 +122,8 @@ export default function GuidePage({ params }: { params: { slug: string } }) {
       <article className="prose prose-slate dark:prose-invert prose-headings:font-heading prose-headings:font-bold prose-a:text-primary max-w-none text-foreground/90">
         <div dangerouslySetInnerHTML={{ __html: content.html }} />
       </article>
+
+      <AdSenseAd slot="guide-article-footer" className="my-8" />
 
       {content.relatedTool && (
         <div className="mt-12 pt-8 border-t border-border">

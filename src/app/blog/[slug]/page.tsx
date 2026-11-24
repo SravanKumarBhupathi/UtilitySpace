@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Clock, ChevronRight, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { AdSenseAd } from "@/components/adsense-ad";
 import { blogPosts } from "@/data/blog";
 import { blogContent } from "@/data/blog-content";
 
@@ -146,6 +147,7 @@ export default function BlogPostPage({ params }: PageProps) {
               className="prose prose-slate dark:prose-invert prose-lg max-w-none prose-headings:font-heading prose-headings:font-bold prose-a:text-primary hover:prose-a:underline prose-img:rounded-xl"
               dangerouslySetInnerHTML={{ __html: typeof content === "string" ? content : content.html }}
             />
+            <AdSenseAd slot="blog-article-footer" className="mt-8" />
           </div>
 
         </article>
