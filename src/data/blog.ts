@@ -2,6 +2,15 @@ import { Article } from "./types";
 
 export const blogPosts: Article[] = [
   {
+    id: "why-the-first-100k-is-the-hardest-math-of-compounding-guide",
+    title: "The First $100,000 Is the Hardest: The Mathematical Truth of Compounding, the Crossover Point, and How to Build Wealth in 2026",
+    description: "An in-depth financial breakdown of Charlie Munger's famous $100,000 rule: why the first $100k requires 7.8 years of brutal effort, why the second $100k arrives in just 3.2 years, the mathematics of the 'Crossover Point', the 4-phase wealth engine, and interactive simulation formulas.",
+    category: "Personal Finance",
+    href: "/blog/why-the-first-100k-is-the-hardest-math-of-compounding-guide",
+    readingTime: "9 min read",
+    date: "Nov 24, 2026",
+  },
+  {
     id: "deepseek-r1-reasoning-models-architecture-and-local-guide",
     title: "DeepSeek-R1 Explained: Architecture, Reasoning Tokens, Distilled Models, and How to Run Locally in 2026",
     description: "A comprehensive deep-dive into DeepSeek-R1: how pure Reinforcement Learning (GRPO) unlocked emergent reasoning, Multi-Head Latent Attention (MLA), distilled open-weights (1.5B to 70B), benchmarks vs OpenAI o1, and a step-by-step tutorial to run it privately on your own computer.",
