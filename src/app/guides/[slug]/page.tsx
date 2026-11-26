@@ -25,6 +25,9 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   return {
     title: guide.title,
     description: guide.description,
+    alternates: {
+      canonical: `https://utilityspace.online/guides/${slug}`,
+    },
   };
 }
 

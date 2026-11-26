@@ -78,4 +78,32 @@ export const guides: Item[] = [
     category: "Images",
     href: "/guides/how-to-prepare-exam-documents-photo-signature",
   },
+  {
+    id: "how-to-build-a-zero-based-monthly-budget",
+    title: "How to Build a Zero-Based Monthly Budget (With 50/30/20 Comparison)",
+    description: "Learn how to give every dollar a job, track fixed vs. variable expenses, cut silent leaks, and choose the right budgeting framework for your income.",
+    category: "Personal Finance",
+    href: "/guides/how-to-build-a-zero-based-monthly-budget",
+  },
+  {
+    id: "how-to-secure-your-digital-life-2fa-passkeys-and-backups",
+    title: "How to Secure Your Digital Life: Passkeys, 2FA & the 3-2-1 Backup Rule",
+    description: "Protect your email, bank accounts, and personal files against phishing, SIM swapping, and ransomware using modern passkeys, hardware/app 2FA, and redundant backups.",
+    category: "Digital Safety",
+    href: "/guides/how-to-secure-your-digital-life-2fa-passkeys-and-backups",
+  },
+  {
+    id: "how-to-negotiate-your-salary-and-job-offer",
+    title: "How to Negotiate a Job Offer and Salary Raise (With Word-for-Word Scripts)",
+    description: "Practical tactics, market research methods, total compensation evaluation, and copy-paste email scripts to negotiate higher pay with confidence.",
+    category: "Career & Skills",
+    href: "/guides/how-to-negotiate-your-salary-and-job-offer",
+  },
+  {
+    id: "evidence-based-sleep-and-focus-protocol",
+    title: "How to Fix Your Sleep Schedule and Deep Focus Using Circadian Science",
+    description: "An actionable daily protocol covering morning light, caffeine half-life timing, 90-minute ultradian focus blocks, and evening wind-down habits.",
+    category: "Productivity & Health",
+    href: "/guides/evidence-based-sleep-and-focus-protocol",
+  },
 ];

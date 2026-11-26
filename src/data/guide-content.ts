@@ -885,5 +885,235 @@ export const guideContent: Record<string, { html: string; relatedTool?: { href: 
         </div>
       </div>
     `
+  },
+  'how-to-build-a-zero-based-monthly-budget': {
+    relatedTool: { href: "/calculators/salary", label: "Calculate Your Monthly Take-Home Pay" },
+    html: `
+      <h2>What Is Zero-Based Budgeting?</h2>
+      <p>Most people treat a budget like a rearview mirror: they check their bank statement at the end of the month and wonder where their paycheck went. <strong>Zero-based budgeting (ZBB)</strong> flips that script. Before the month begins, you assign every single dollar of your net take-home income to a specific job—expenses, debt payments, savings, investments, or guilt-free fun—until <strong>Income − Allocations = $0</strong>.</p>
+      <p>Zero-based budgeting does <em>not</em> mean spending your bank account down to zero. It means giving every dollar an intentional destination so nothing leaks away unnoticed into impulse purchases or forgotten subscriptions.</p>
+
+      <h2>Budgeting Frameworks Compared</h2>
+      <div class="overflow-x-auto my-6">
+        <table class="w-full text-left border-collapse border border-border text-sm">
+          <thead>
+            <tr class="bg-muted">
+              <th class="p-3 border border-border">Method</th>
+              <th class="p-3 border border-border">How It Works</th>
+              <th class="p-3 border border-border">Best For</th>
+              <th class="p-3 border border-border">Effort Level</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="p-3 border border-border font-medium">Zero-Based Budgeting</td>
+              <td class="p-3 border border-border">Every dollar of net income is assigned to a category until $0 remains unassigned.</td>
+              <td class="p-3 border border-border">Paying off debt fast, tight cash flow, maximizing savings rate</td>
+              <td class="p-3 border border-border">Moderate (15 min/week)</td>
+            </tr>
+            <tr>
+              <td class="p-3 border border-border font-medium">50 / 30 / 20 Rule</td>
+              <td class="p-3 border border-border">50% Needs, 30% Wants, 20% Savings &amp; Debt Extra Payments.</td>
+              <td class="p-3 border border-border">Beginners wanting simple guardrails without line-item tracking</td>
+              <td class="p-3 border border-border">Low</td>
+            </tr>
+            <tr>
+              <td class="p-3 border border-border font-medium">Pay-Yourself-First</td>
+              <td class="p-3 border border-border">Automate savings/investing on payday; spend whatever remains freely.</td>
+              <td class="p-3 border border-border">High earners with stable expenses who hate spreadsheets</td>
+              <td class="p-3 border border-border">Very Low</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Step-by-Step: Building Your Monthly Plan in 20 Minutes</h2>
+      <ol class="space-y-3">
+        <li><strong>Step 1: Start With Real Net Take-Home Pay</strong><br />
+        Never budget from gross salary. Use your actual post-tax paycheck deposits (or estimate with our <a href="/calculators/salary" class="text-primary hover:underline">Salary &amp; Take-Home Pay Calculator</a>). If your income is irregular or freelance-based, build your baseline budget around your lowest-earning month over the past year.</li>
+        <li><strong>Step 2: List Fixed Essentials First</strong><br />
+        Lock in non-negotiable monthly obligations: rent/mortgage, utilities, insurance, minimum loan payments, internet, and groceries.</li>
+        <li><strong>Step 3: Create "Sinking Funds" for Irregular Expenses</strong><br />
+        Car maintenance, annual insurance renewals, holiday travel, and medical copays are not emergencies—they are predictable irregular expenses. Divide their annual cost by 12 and fund a dedicated monthly line item so they never derail your month.</li>
+        <li><strong>Step 4: Fund Savings &amp; Investments Before Discretionary Wants</strong><br />
+        Allocate your emergency reserve, <a href="/calculators/sip" class="text-primary hover:underline">monthly SIP or index fund investments</a>, and extra debt principal next.</li>
+        <li><strong>Step 5: Assign Guilt-Free Fun Money</strong><br />
+        Give yourself a realistic dining-out, coffee, and entertainment allowance. Budgets fail when they rely on unrealistic deprivation.</li>
+      </ol>
+
+      <h2>Frequently Asked Questions</h2>
+      <div class="space-y-4 my-6">
+        <div>
+          <p class="font-semibold text-foreground">What if I overspend in one category mid-month?</p>
+          <p class="text-muted-foreground text-sm">You simply move money from a lower-priority category (like dining out or shopping) to cover the overage. A budget is a living plan, not a rigid prison.</p>
+        </div>
+        <div>
+          <p class="font-semibold text-foreground">Should my emergency fund count toward the $0 remainder?</p>
+          <p class="text-muted-foreground text-sm">Yes. Transferring $300 into your High-Yield Savings Account counts as an allocation—meaning those dollars now have the job of protecting your financial stability.</p>
+        </div>
+      </div>
+    `
+  },
+  'how-to-secure-your-digital-life-2fa-passkeys-and-backups': {
+    relatedTool: { href: "/tools/developer/password-generator", label: "Generate Strong Passwords" },
+    html: `
+      <h2>Why "Strong Passwords" Alone No Longer Protect You</h2>
+      <p>Even a 16-character random password fails if you reuse it across websites or enter it into a convincing phishing link. Modern account takeovers rely on credential stuffing (testing leaked password databases across banks and email), SIM-swapping attacks on SMS codes, and infostealer malware.</p>
+      <p>Securing your digital identity requires three layered defenses: <strong>unique credentials</strong>, <strong>phishing-resistant authentication</strong>, and <strong>offline-resilient backups</strong>.</p>
+
+      <h2>Authentication Tiers: From Weakest to Unbreakable</h2>
+      <div class="overflow-x-auto my-6">
+        <table class="w-full text-left border-collapse border border-border text-sm">
+          <thead>
+            <tr class="bg-muted">
+              <th class="p-3 border border-border">Security Method</th>
+              <th class="p-3 border border-border">Phishing Resistant?</th>
+              <th class="p-3 border border-border">Main Vulnerability</th>
+              <th class="p-3 border border-border">Recommendation</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="p-3 border border-border font-medium">Reused Passwords</td>
+              <td class="p-3 border border-border">No</td>
+              <td class="p-3 border border-border">One data breach exposes every account you own</td>
+              <td class="p-3 border border-border">Eliminate immediately</td>
+            </tr>
+            <tr>
+              <td class="p-3 border border-border font-medium">SMS Text 2FA</td>
+              <td class="p-3 border border-border">No</td>
+              <td class="p-3 border border-border">SIM swapping &amp; carrier social engineering</td>
+              <td class="p-3 border border-border">Use only if no better option exists</td>
+            </tr>
+            <tr>
+              <td class="p-3 border border-border font-medium">Authenticator App (TOTP)</td>
+              <td class="p-3 border border-border">Partial</td>
+              <td class="p-3 border border-border">Real-time phishing proxies if you type codes on fake sites</td>
+              <td class="p-3 border border-border">Strong baseline for all major accounts</td>
+            </tr>
+            <tr>
+              <td class="p-3 border border-border font-medium">Passkeys / Hardware Keys</td>
+              <td class="p-3 border border-border">Yes</td>
+              <td class="p-3 border border-border">Cryptographically bound to the real domain; cannot be phished</td>
+              <td class="p-3 border border-border">Gold standard—enable wherever supported</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Your 30-Minute Digital Security Checklist</h2>
+      <ol class="space-y-3">
+        <li><strong>Lock Down Your Primary Email First:</strong> Your email is the master key to password resets for banking, cloud storage, and social accounts. Give it a unique 20+ character passphrase generated locally with our <a href="/tools/developer/password-generator" class="text-primary hover:underline">Password Generator</a> and enable Passkeys or App-based 2FA.</li>
+        <li><strong>Adopt a Dedicated Password Manager:</strong> Use Bitwarden, 1Password, or Apple Passwords so you never have to remember unique credentials—only one strong master passphrase.</li>
+        <li><strong>Switch Banks &amp; Carriers Away From SMS:</strong> Set a carrier transfer PIN with your mobile provider to block unauthorized SIM ports, and switch financial logins to authenticator apps or passkeys whenever offered.</li>
+        <li><strong>Follow the 3-2-1 Backup Rule for Irreplaceable Files:</strong> Keep <strong>3</strong> copies of important documents and family photos, on <strong>2</strong> different media types (e.g., laptop SSD + external drive), with <strong>1</strong> copy stored off-site (encrypted cloud backup or a drive at a trusted relative's home) to survive theft, fire, or ransomware.</li>
+      </ol>
+
+      <h2>Frequently Asked Questions</h2>
+      <div class="space-y-4 my-6">
+        <div>
+          <p class="font-semibold text-foreground">What happens if I lose my phone with my authenticator app?</p>
+          <p class="text-muted-foreground text-sm">Always save the one-time emergency recovery codes provided when enabling 2FA—either printed in a safe place or stored in an encrypted vault—and use an authenticator that supports encrypted cloud backup.</p>
+        </div>
+        <div>
+          <p class="font-semibold text-foreground">Are passkeys safe if someone steals my unlocked phone?</p>
+          <p class="text-muted-foreground text-sm">Passkeys require biometric verification (Face ID, Touch ID, fingerprint) or your device PIN before signing in, adding hardware-level protection on top of your screen lock.</p>
+        </div>
+      </div>
+    `
+  },
+  'how-to-negotiate-your-salary-and-job-offer': {
+    relatedTool: { href: "/calculators/salary", label: "Compare Offers in Salary Calculator" },
+    html: `
+      <h2>Why Negotiating Your Offer Is Standard Professional Practice</h2>
+      <p>Many candidates hesitate to negotiate because they fear the offer will be rescinded. In reality, by the time a company extends a written offer, they have already invested weeks of recruiting hours and rejected dozens of other applicants. Hiring managers expect a polite, data-backed counteroffer—and a single 10-minute conversation often yields 5% to 15% more base pay, compounding across every future raise and bonus.</p>
+
+      <h2>The 4 Rules of Offer Negotiation</h2>
+      <ul>
+        <li><strong>Never Negotiate Before Receiving a Written Offer:</strong> During early screening calls, if asked for salary expectations, deflect politely: <em>"I'd love to learn more about the scope of the role first, and I'm confident we can find a number within your budgeted range if there's a strong mutual fit."</em></li>
+        <li><strong>Evaluate Total Compensation, Not Just Base Pay:</strong> Compare base salary, sign-on bonus, annual performance bonus, equity/RSUs, health insurance premiums, and retirement matching. Run both offers through our <a href="/calculators/salary" class="text-primary hover:underline">Salary &amp; Take-Home Pay Calculator</a> to see real monthly cash flow.</li>
+        <li><strong>Anchor on Market Data &amp; Impact, Not Personal Expenses:</strong> Employers pay for market value and the problems you solve—not your rent increase. Cite verified compensation bands (Levels.fyi, Glassdoor, LinkedIn Salary) and specific skills you bring.</li>
+        <li><strong>Always Maintain Warmth &amp; Enthusiasm:</strong> Frame the conversation collaboratively: you are excited to join, and you want the package to reflect the scope of responsibilities.</li>
+      </ul>
+
+      <h2>Copy-Paste Counteroffer Email Script</h2>
+      <div class="p-4 bg-muted/50 rounded-lg border border-border text-sm my-4 space-y-2 leading-relaxed">
+        <p><strong>Subject:</strong> Thank you &amp; [Role Title] Offer — [Your Name]</p>
+        <p>Hi [Hiring Manager / Recruiter Name],</p>
+        <p>Thank you so much for extending the offer for the [Role Title] position! I really enjoyed speaking with the team and am genuinely excited about the work ahead on [mention specific project or goal].</p>
+        <p>After reviewing the full compensation package alongside market benchmarks for similar [Role Title] roles in [City/Remote] and considering my background in [key skill/achievement], I was hoping we could explore adjusting the base salary from [$X] to [$Y] (or adding a [$Z] sign-on bonus).</p>
+        <p>I am very enthusiastic about joining [Company Name] and contributing immediately. Please let me know if there is flexibility to get closer to that range.</p>
+        <p>Best regards,<br />[Your Name]</p>
+      </div>
+
+      <h2>What If the Base Salary Is Strictly Capped?</h2>
+      <p>If the company cannot budge on base pay due to rigid internal pay bands, negotiate high-value alternatives:</p>
+      <ul>
+        <li><strong>One-Time Sign-On Bonus:</strong> Often comes from a separate recruiting budget and is much easier for HR to approve.</li>
+        <li><strong>Guaranteed 6-Month Performance Review:</strong> Written commitment to revisit compensation after hitting defined 6-month milestones.</li>
+        <li><strong>Additional PTO, Remote Flexibility, or Learning Stipend:</strong> Extra paid days off or a home-office/certification budget carry real financial value.</li>
+      </ul>
+    `
+  },
+  'evidence-based-sleep-and-focus-protocol': {
+    relatedTool: { href: "/calculators/calorie", label: "Check Daily Energy Needs" },
+    html: `
+      <h2>Why Willpower Fails When Your Biology Is Misaligned</h2>
+      <p>Brain fog, afternoon energy crashes, and 1:00 AM insomnia are rarely character flaws—they are usually timing mismatches in your circadian rhythm and adenosine sleep pressure. Fixing just four daily anchor habits dramatically improves both deep daytime focus and restorative sleep without needing complex supplements.</p>
+
+      <h2>The Daily Circadian &amp; Focus Protocol</h2>
+      <div class="overflow-x-auto my-6">
+        <table class="w-full text-left border-collapse border border-border text-sm">
+          <thead>
+            <tr class="bg-muted">
+              <th class="p-3 border border-border">Time Window</th>
+              <th class="p-3 border border-border">Action</th>
+              <th class="p-3 border border-border">Biological Mechanism</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="p-3 border border-border font-medium">First 30–60 Min Awake</td>
+              <td class="p-3 border border-border">Get 10–15 min of outdoor sunlight (even on cloudy days, not through glass).</td>
+              <td class="p-3 border border-border">Triggers morning cortisol pulse and sets a ~16-hour countdown timer for evening melatonin release.</td>
+            </tr>
+            <tr>
+              <td class="p-3 border border-border font-medium">Morning Deep Work</td>
+              <td class="p-3 border border-border">Work in 90-minute ultradian blocks with phone in another room, followed by 15 min rest.</td>
+              <td class="p-3 border border-border">Aligns with natural human 90-minute alertness cycles; prevents context-switching fatigue.</td>
+            </tr>
+            <tr>
+              <td class="p-3 border border-border font-medium">8–10 Hours Before Bed</td>
+              <td class="p-3 border border-border">Hard cutoff for all caffeine (coffee, energy drinks, strong tea).</td>
+              <td class="p-3 border border-border">Caffeine has a ~5–6 hour half-life; late caffeine blocks deep slow-wave sleep even if you fall asleep fine.</td>
+            </tr>
+            <tr>
+              <td class="p-3 border border-border font-medium">60 Min Before Bed</td>
+              <td class="p-3 border border-border">Dim overhead lights, enable warm night shift on screens, cool bedroom to ~18–20°C (65–68°F).</td>
+              <td class="p-3 border border-border">Core body temperature must drop ~1°C to initiate and sustain deep sleep.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>How to Structure 90-Minute Deep Focus Blocks</h2>
+      <ol class="space-y-3">
+        <li><strong>Define One Clear Output:</strong> Before starting a timer, write down the exact deliverable (e.g., "Draft project proposal section 1–3" rather than "Work on project").</li>
+        <li><strong>Batch Shallow Tasks Separately:</strong> Check email, Slack, and notifications only during designated 20-minute windows after a focus block—never continuously in the background.</li>
+        <li><strong>True Non-Screen Rest Between Blocks:</strong> Scrolling social media during a break keeps your visual cortex and dopamine pathways overstimulated. Walk, stretch, hydrate, or look out a window for 10 minutes instead.</li>
+      </ol>
+
+      <h2>Frequently Asked Questions</h2>
+      <div class="space-y-4 my-6">
+        <div>
+          <p class="font-semibold text-foreground">Can I catch up on lost sleep over the weekend?</p>
+          <p class="text-muted-foreground text-sm">Sleeping in 3+ hours late on Saturday and Sunday creates "social jetlag," shifting your circadian clock so Sunday night insomnia worsens. Keeping wake times within a consistent 60-minute window all week works far better.</p>
+        </div>
+        <div>
+          <p class="font-semibold text-foreground">Why do I crash at 2:00 PM even after sleeping 7 hours?</p>
+          <p class="text-muted-foreground text-sm">Drinking coffee immediately upon waking masks residual adenosine; when the caffeine wears off around 2 PM, all that un-cleared sleep pressure hits at once alongside a natural post-lunch circadian dip. Delaying your first coffee by 60–90 minutes after waking often eliminates the afternoon crash.</p>
+        </div>
+      </div>
+    `
   }
 };

@@ -5,8 +5,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Practical Guides & Tutorials",
-  description: "Explore practical step-by-step guides on PDF compression, image resizing, calculating percentages, and everyday tech workflows.",
+  title: "Practical Guides & Playbooks",
+  description: "Explore practical step-by-step guides on personal finance, digital security, career negotiation, productivity, document preparation, and everyday tech workflows.",
   alternates: {
     canonical: "https://utilityspace.online/guides",
   },
@@ -17,10 +17,10 @@ export default function GuidesIndex() {
     <div className="container mx-auto max-w-5xl px-4 py-12 md:py-16 min-h-[calc(100vh-theme(spacing.16)-theme(spacing.40))] bg-background">
       <header className="mb-12">
         <h1 className="font-heading text-4xl md:text-5xl font-bold tracking-tight text-foreground mb-4">
-          Practical Guides & Tutorials
+          Practical Guides & Playbooks
         </h1>
         <p className="text-xl text-secondary-text max-w-2xl">
-          Simple explanations, detailed tutorials, and step-by-step instructions for everyday digital tasks.
+          Actionable, step-by-step playbooks for personal finance, digital safety, career growth, productivity, and everyday digital tasks.
         </p>
       </header>
 
