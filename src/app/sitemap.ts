@@ -85,6 +85,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/calculators/percentage-change',
     '/calculators/profit-loss',
     '/calculators/simple-interest',
+    '/calculators/sip',
+    '/calculators/salary',
+    '/calculators/calorie',
+    '/calculators/tip-split',
   ];
 
   const coreSitemapEntries = staticCoreRoutes.map((route) => ({
