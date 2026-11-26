@@ -271,6 +271,36 @@ export const tools: Item[] = [
     status: "active",
     isPopular: true,
   },
+  {
+    id: "barcode-generator",
+    title: "Barcode Generator",
+    description: "Create high-resolution 1D linear barcodes (Code 128, EAN-13, UPC-A, Code 39) with vector SVG & PNG download.",
+    category: "Developer",
+    href: "/tools/developer/barcode-generator",
+    icon: "Barcode",
+    status: "active",
+    isPopular: true,
+  },
+  {
+    id: "csv-json-converter",
+    title: "CSV to JSON Converter",
+    description: "Convert CSV spreadsheets to JSON arrays and JSON to CSV with live data table preview and custom delimiters.",
+    category: "Developer",
+    href: "/tools/developer/csv-json-converter",
+    icon: "FileSpreadsheet",
+    status: "active",
+    isPopular: true,
+  },
+  {
+    id: "color-converter",
+    title: "Color Studio & Contrast",
+    description: "Convert HEX, RGB, HSL, HSV, and CMYK color codes, generate harmonious palettes, and audit WCAG 2.1 accessibility contrast.",
+    category: "Developer",
+    href: "/tools/developer/color-converter",
+    icon: "Palette",
+    status: "active",
+    isPopular: true,
+  },
 
   // PDF
   {

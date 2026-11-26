@@ -3,7 +3,7 @@ import { tools, toolCategories } from "@/data";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
-import { FileText, Image as ImageIcon, Type, Code, GraduationCap, Files } from "lucide-react";
+import { FileText, Image as ImageIcon, Type, Code, GraduationCap, Files, Barcode, FileSpreadsheet, Palette, QrCode, Lock } from "lucide-react";
 import { ChevronRight } from "lucide-react";
 
 export function generateStaticParams() {
@@ -50,6 +50,11 @@ const getIcon = (name: string, className?: string) => {
     GraduationCap: <GraduationCap className={className} />,
     Files: <Files className={className} />,
     Minimize: <FileText className={className} />,
+    Barcode: <Barcode className={className} />,
+    FileSpreadsheet: <FileSpreadsheet className={className} />,
+    Palette: <Palette className={className} />,
+    QrCode: <QrCode className={className} />,
+    Lock: <Lock className={className} />,
   };
   return icons[name] || <FileText className={className} />;
 };
